@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStart = new System.Windows.Forms.TabPage();
             this.labelConfigState = new System.Windows.Forms.Label();
@@ -346,9 +347,9 @@
             this.labelAuthor.AutoSize = true;
             this.labelAuthor.Location = new System.Drawing.Point(4, 409);
             this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(197, 12);
+            this.labelAuthor.Size = new System.Drawing.Size(239, 12);
             this.labelAuthor.TabIndex = 0;
-            this.labelAuthor.Text = "谷雨同学制作 guyutongxue@163.com";
+            this.labelAuthor.Text = "v1.0.0 谷雨同学制作 guyutongxue@163.com";
             // 
             // Form1
             // 
@@ -357,6 +358,7 @@
             this.ClientSize = new System.Drawing.Size(350, 474);
             this.Controls.Add(this.tabControlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "VS Code C++配置工具";
             this.Load += new System.EventHandler(this.Form1_Load);
