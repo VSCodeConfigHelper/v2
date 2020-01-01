@@ -54,6 +54,9 @@
             this.textBoxMinGWPath = new System.Windows.Forms.TextBox();
             this.buttonViewMinGW = new System.Windows.Forms.Button();
             this.tabPageHelp = new System.Windows.Forms.TabPage();
+            this.linkLabelManual = new System.Windows.Forms.LinkLabel();
+            this.labelFAQ = new System.Windows.Forms.Label();
+            this.labelManual = new System.Windows.Forms.Label();
             this.textBoxHelp = new System.Windows.Forms.TextBox();
             this.labelAuthor = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -136,9 +139,9 @@
             // buttonViewWorkspace
             // 
             this.buttonViewWorkspace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonViewWorkspace.Location = new System.Drawing.Point(239, 327);
+            this.buttonViewWorkspace.Location = new System.Drawing.Point(237, 327);
             this.buttonViewWorkspace.Name = "buttonViewWorkspace";
-            this.buttonViewWorkspace.Size = new System.Drawing.Size(73, 21);
+            this.buttonViewWorkspace.Size = new System.Drawing.Size(75, 21);
             this.buttonViewWorkspace.TabIndex = 20;
             this.buttonViewWorkspace.Text = "浏览...";
             this.buttonViewWorkspace.UseVisualStyleBackColor = true;
@@ -150,7 +153,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxWorkspacePath.Location = new System.Drawing.Point(5, 327);
             this.textBoxWorkspacePath.Name = "textBoxWorkspacePath";
-            this.textBoxWorkspacePath.Size = new System.Drawing.Size(228, 21);
+            this.textBoxWorkspacePath.Size = new System.Drawing.Size(226, 21);
             this.textBoxWorkspacePath.TabIndex = 19;
             // 
             // labelWorkspaceHint
@@ -299,16 +302,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxMinGWPath.Location = new System.Drawing.Point(5, 94);
             this.textBoxMinGWPath.Name = "textBoxMinGWPath";
-            this.textBoxMinGWPath.Size = new System.Drawing.Size(228, 21);
+            this.textBoxMinGWPath.Size = new System.Drawing.Size(226, 21);
             this.textBoxMinGWPath.TabIndex = 1;
             this.textBoxMinGWPath.TextChanged += new System.EventHandler(this.TextBoxMinGWPath_TextChanged);
             // 
             // buttonViewMinGW
             // 
             this.buttonViewMinGW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonViewMinGW.Location = new System.Drawing.Point(239, 94);
+            this.buttonViewMinGW.Location = new System.Drawing.Point(237, 93);
             this.buttonViewMinGW.Name = "buttonViewMinGW";
-            this.buttonViewMinGW.Size = new System.Drawing.Size(73, 21);
+            this.buttonViewMinGW.Size = new System.Drawing.Size(75, 21);
             this.buttonViewMinGW.TabIndex = 0;
             this.buttonViewMinGW.Text = "浏览...";
             this.buttonViewMinGW.UseVisualStyleBackColor = true;
@@ -316,6 +319,9 @@
             // 
             // tabPageHelp
             // 
+            this.tabPageHelp.Controls.Add(this.linkLabelManual);
+            this.tabPageHelp.Controls.Add(this.labelFAQ);
+            this.tabPageHelp.Controls.Add(this.labelManual);
             this.tabPageHelp.Controls.Add(this.textBoxHelp);
             this.tabPageHelp.Controls.Add(this.labelAuthor);
             this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
@@ -326,6 +332,35 @@
             this.tabPageHelp.Text = "帮助";
             this.tabPageHelp.UseVisualStyleBackColor = true;
             // 
+            // linkLabelManual
+            // 
+            this.linkLabelManual.AutoSize = true;
+            this.linkLabelManual.Location = new System.Drawing.Point(127, 3);
+            this.linkLabelManual.Name = "linkLabelManual";
+            this.linkLabelManual.Size = new System.Drawing.Size(29, 12);
+            this.linkLabelManual.TabIndex = 4;
+            this.linkLabelManual.TabStop = true;
+            this.linkLabelManual.Text = "此处";
+            this.linkLabelManual.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelManual_LinkClicked);
+            // 
+            // labelFAQ
+            // 
+            this.labelFAQ.AutoSize = true;
+            this.labelFAQ.Location = new System.Drawing.Point(6, 26);
+            this.labelFAQ.Name = "labelFAQ";
+            this.labelFAQ.Size = new System.Drawing.Size(95, 12);
+            this.labelFAQ.TabIndex = 3;
+            this.labelFAQ.Text = "常见问题（FAQ）";
+            // 
+            // labelManual
+            // 
+            this.labelManual.AutoSize = true;
+            this.labelManual.Location = new System.Drawing.Point(6, 3);
+            this.labelManual.Name = "labelManual";
+            this.labelManual.Size = new System.Drawing.Size(125, 12);
+            this.labelManual.TabIndex = 2;
+            this.labelManual.Text = "更详细的使用方法参见";
+            // 
             // textBoxHelp
             // 
             this.textBoxHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -333,12 +368,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxHelp.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxHelp.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxHelp.Location = new System.Drawing.Point(6, 6);
+            this.textBoxHelp.Location = new System.Drawing.Point(6, 41);
             this.textBoxHelp.Multiline = true;
             this.textBoxHelp.Name = "textBoxHelp";
             this.textBoxHelp.ReadOnly = true;
             this.textBoxHelp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxHelp.Size = new System.Drawing.Size(306, 400);
+            this.textBoxHelp.Size = new System.Drawing.Size(306, 365);
             this.textBoxHelp.TabIndex = 1;
             // 
             // labelAuthor
@@ -347,9 +382,9 @@
             this.labelAuthor.AutoSize = true;
             this.labelAuthor.Location = new System.Drawing.Point(4, 409);
             this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(239, 12);
+            this.labelAuthor.Size = new System.Drawing.Size(275, 12);
             this.labelAuthor.TabIndex = 0;
-            this.labelAuthor.Text = "v1.0.0 谷雨同学制作 guyutongxue@163.com";
+            this.labelAuthor.Text = "v1.0.0-beta2 谷雨同学制作 guyutongxue@163.com";
             // 
             // Form1
             // 
@@ -401,6 +436,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelAuthor;
         private System.Windows.Forms.TextBox textBoxHelp;
+        private System.Windows.Forms.LinkLabel linkLabelManual;
+        private System.Windows.Forms.Label labelFAQ;
+        private System.Windows.Forms.Label labelManual;
     }
 }
 

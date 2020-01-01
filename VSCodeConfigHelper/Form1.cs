@@ -80,7 +80,7 @@ namespace VSCodeConfigHelper
         private void ButtonViewMinGW_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.OK || result == DialogResult.Yes)
+            if (result == DialogResult.OK )
             {
                 textBoxMinGWPath.Text = folderBrowserDialog1.SelectedPath;
             }
@@ -90,7 +90,7 @@ namespace VSCodeConfigHelper
         private void TextBoxMinGWPath_TextChanged(object sender, EventArgs e)
         {
             isMinGWOk = false;
-            if (textBoxMinGWPath.Text != string.Empty)
+            if (!string.IsNullOrWhiteSpace(textBoxMinGWPath.Text))
             {
                 if (Directory.Exists(textBoxMinGWPath.Text) && File.Exists(textBoxMinGWPath.Text + "\\bin\\g++.exe"))
                 {
@@ -190,7 +190,7 @@ namespace VSCodeConfigHelper
         private void ButtonViewWorkspace_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.OK || result == DialogResult.Yes)
+            if (result == DialogResult.OK )
             {
                 textBoxWorkspacePath.Text = folderBrowserDialog1.SelectedPath;
             }
@@ -304,7 +304,7 @@ namespace VSCodeConfigHelper
                 JObject launchJson = GetLaunchJson();
                 JObject tasksJson = getTasksJson();
                 JObject settingsJson = GetSettingsJson();
-                if (workspacePath == string.Empty || !isMinGWOk)
+                if (string.IsNullOrWhiteSpace(workspacePath) || !isMinGWOk)
                 {
                     labelConfigState.ForeColor = Color.Red;
                     labelConfigState.Text = "MinGW 路径或工作文件夹尚未配置完成。";
@@ -342,6 +342,12 @@ namespace VSCodeConfigHelper
         private void Form1_Load(object sender, EventArgs e)
         {
             textBoxHelp.Text = helpText;
+        }
+
+        private void LinkLabelManual_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string manualLink = @"https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/README.md";
+            Process.Start(manualLink);
         }
     }
 }
