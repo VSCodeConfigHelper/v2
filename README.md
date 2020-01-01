@@ -11,7 +11,7 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 然后，您只需要[下载](https://github.com/Guyutongxue/VSCodeConfigHelper/releases)此工具，然后按照上面的提示进行即可：
 
 1. 第一步：点击工具中的下载地址获得 MinGW-w64 工具包。
-2. 第二步：使用解压工具将刚才的文件解压，然后将其中 `mingw64` 这一文件夹的路径输入到工具中。
+2. 第二步：使用解压工具将刚才的文件解压，然后将其中 `mingw64` 这一文件夹的路径输入到工具中。此文件夹用于存放编译器等重要文件，请不要删除。
 3. 第三步：点击“设置环境变量”按钮即可。
 4. 第四步：点击工具中的下载地址跳转到 Visual Studio Code 官网，下载最新版本的安装程序，然后双击运行安装程序，按照其提示完成安装。
 5. 第五步：点击工具中的“安装插件...”按钮，跳转到插件安装网页。点击网页中的 “Install” ，并允许网页打开 Visual Studio Code 。在 Visual Studio Code 中选择 “Install”，完成插件的安装。
@@ -34,3 +34,9 @@ int main(){
 
 按 <kbd>F5</kbd> （在不同设备上可能是 <kbd>Fn</kbd>+<kbd>F5</kbd>），期望在底部弹出一个终端并打印出 `Hello,world!` 。
 
+## 遇到了 .NET Framework ... 的问题
+
+如果您无法启动工具，出现这种情况：
+![.NET Framework not found](https://s2.ax1x.com/2020/01/02/lJ5Ocd.jpg)
+
+请前往 [Microsoft 下载](https://www.microsoft.com/zh-cn/download/details.aspx?id=17718) 获取该依赖环境。
