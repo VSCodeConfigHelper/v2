@@ -14,7 +14,7 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 2. 第二步：使用解压工具将刚才的文件解压，然后将其中 `mingw64` 这一文件夹的路径输入到工具中。
 3. 第三步：点击“设置环境变量”按钮即可。
 4. 第四步：点击工具中的下载地址跳转到 Visual Studio Code 官网，下载最新版本的安装程序，然后双击运行安装程序，按照其提示完成安装。
-5. 第五步：点击工具中的“下载插件...”按钮，跳转到插件安装网页。点击网页中的 “Install” ，并允许网页打开 Visual Studio Code 。在 Visual Studio Code 中选择 “Install”，完成插件的安装。
+5. 第五步：点击工具中的“安装插件...”按钮，跳转到插件安装网页。点击网页中的 “Install” ，并允许网页打开 Visual Studio Code 。在 Visual Studio Code 中选择 “Install”，完成插件的安装。
 6. 第六步：选择一个工作文件夹，输入到工具中。
 7. 第七步：点击“一键配置”按钮即可。
 
