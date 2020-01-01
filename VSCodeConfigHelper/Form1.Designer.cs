@@ -30,7 +30,6 @@
         {
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStart = new System.Windows.Forms.TabPage();
-            this.linkLabelMinGW_32 = new System.Windows.Forms.LinkLabel();
             this.labelConfigState = new System.Windows.Forms.Label();
             this.buttonConfig = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -39,7 +38,7 @@
             this.labelWorkspaceHint = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.linkLabelVSCode = new System.Windows.Forms.LinkLabel();
-            this.linkLabelMinGW_64 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelMinGW = new System.Windows.Forms.LinkLabel();
             this.labelMinGWPathHint = new System.Windows.Forms.Label();
             this.labelExtensionHint = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,9 +53,9 @@
             this.textBoxMinGWPath = new System.Windows.Forms.TextBox();
             this.buttonViewMinGW = new System.Windows.Forms.Button();
             this.tabPageHelp = new System.Windows.Forms.TabPage();
+            this.textBoxHelp = new System.Windows.Forms.TextBox();
             this.labelAuthor = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.textBoxHelp = new System.Windows.Forms.TextBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStart.SuspendLayout();
             this.tabPageHelp.SuspendLayout();
@@ -74,7 +73,6 @@
             // 
             // tabPageStart
             // 
-            this.tabPageStart.Controls.Add(this.linkLabelMinGW_32);
             this.tabPageStart.Controls.Add(this.labelConfigState);
             this.tabPageStart.Controls.Add(this.buttonConfig);
             this.tabPageStart.Controls.Add(this.label7);
@@ -83,7 +81,7 @@
             this.tabPageStart.Controls.Add(this.labelWorkspaceHint);
             this.tabPageStart.Controls.Add(this.label6);
             this.tabPageStart.Controls.Add(this.linkLabelVSCode);
-            this.tabPageStart.Controls.Add(this.linkLabelMinGW_64);
+            this.tabPageStart.Controls.Add(this.linkLabelMinGW);
             this.tabPageStart.Controls.Add(this.labelMinGWPathHint);
             this.tabPageStart.Controls.Add(this.labelExtensionHint);
             this.tabPageStart.Controls.Add(this.label5);
@@ -104,17 +102,6 @@
             this.tabPageStart.TabIndex = 0;
             this.tabPageStart.Text = "开始";
             this.tabPageStart.UseVisualStyleBackColor = true;
-            // 
-            // linkLabelMinGW_32
-            // 
-            this.linkLabelMinGW_32.AutoSize = true;
-            this.linkLabelMinGW_32.Location = new System.Drawing.Point(128, 23);
-            this.linkLabelMinGW_32.Name = "linkLabelMinGW_32";
-            this.linkLabelMinGW_32.Size = new System.Drawing.Size(101, 12);
-            this.linkLabelMinGW_32.TabIndex = 1;
-            this.linkLabelMinGW_32.TabStop = true;
-            this.linkLabelMinGW_32.Text = "下载地址（32位）";
-            this.linkLabelMinGW_32.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // labelConfigState
             // 
@@ -195,16 +182,16 @@
             this.linkLabelVSCode.Text = "下载地址...";
             this.linkLabelVSCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelVSCode_LinkClicked);
             // 
-            // linkLabelMinGW_64
+            // linkLabelMinGW
             // 
-            this.linkLabelMinGW_64.AutoSize = true;
-            this.linkLabelMinGW_64.Location = new System.Drawing.Point(3, 23);
-            this.linkLabelMinGW_64.Name = "linkLabelMinGW_64";
-            this.linkLabelMinGW_64.Size = new System.Drawing.Size(101, 12);
-            this.linkLabelMinGW_64.TabIndex = 15;
-            this.linkLabelMinGW_64.TabStop = true;
-            this.linkLabelMinGW_64.Text = "下载地址（64位）";
-            this.linkLabelMinGW_64.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelMinGW_LinkClicked);
+            this.linkLabelMinGW.AutoSize = true;
+            this.linkLabelMinGW.Location = new System.Drawing.Point(259, 16);
+            this.linkLabelMinGW.Name = "linkLabelMinGW";
+            this.linkLabelMinGW.Size = new System.Drawing.Size(53, 12);
+            this.linkLabelMinGW.TabIndex = 15;
+            this.linkLabelMinGW.TabStop = true;
+            this.linkLabelMinGW.Text = "下载地址";
+            this.linkLabelMinGW.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelMinGW_LinkClicked);
             // 
             // labelMinGWPathHint
             // 
@@ -273,7 +260,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Location = new System.Drawing.Point(3, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(137, 12);
             this.label1.TabIndex = 5;
@@ -338,16 +325,6 @@
             this.tabPageHelp.Text = "帮助";
             this.tabPageHelp.UseVisualStyleBackColor = true;
             // 
-            // labelAuthor
-            // 
-            this.labelAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelAuthor.AutoSize = true;
-            this.labelAuthor.Location = new System.Drawing.Point(4, 409);
-            this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(197, 12);
-            this.labelAuthor.TabIndex = 0;
-            this.labelAuthor.Text = "谷雨同学制作 guyutongxue@163.com";
-            // 
             // textBoxHelp
             // 
             this.textBoxHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -362,6 +339,16 @@
             this.textBoxHelp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxHelp.Size = new System.Drawing.Size(306, 400);
             this.textBoxHelp.TabIndex = 1;
+            // 
+            // labelAuthor
+            // 
+            this.labelAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelAuthor.AutoSize = true;
+            this.labelAuthor.Location = new System.Drawing.Point(4, 409);
+            this.labelAuthor.Name = "labelAuthor";
+            this.labelAuthor.Size = new System.Drawing.Size(197, 12);
+            this.labelAuthor.TabIndex = 0;
+            this.labelAuthor.Text = "谷雨同学制作 guyutongxue@163.com";
             // 
             // Form1
             // 
@@ -402,7 +389,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelMinGWPathHint;
         private System.Windows.Forms.LinkLabel linkLabelVSCode;
-        private System.Windows.Forms.LinkLabel linkLabelMinGW_64;
+        private System.Windows.Forms.LinkLabel linkLabelMinGW;
         private System.Windows.Forms.Label labelWorkspaceHint;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonViewWorkspace;
@@ -411,7 +398,6 @@
         private System.Windows.Forms.Button buttonConfig;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelAuthor;
-        private System.Windows.Forms.LinkLabel linkLabelMinGW_32;
         private System.Windows.Forms.TextBox textBoxHelp;
     }
 }
