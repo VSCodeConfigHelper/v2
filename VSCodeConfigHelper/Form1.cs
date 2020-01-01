@@ -24,6 +24,69 @@ namespace VSCodeConfigHelper
 
         string minGWPath = string.Empty;
         bool isMinGWOk = false;
+        static readonly string helpText =
+            "========================================" + Environment.NewLine +
+            "什么是 MinGW-w64 ？" + Environment.NewLine +
+            "----------------------------------------" + Environment.NewLine +
+            "MinGW (Minimalist GNU for Windows)，是一个适用于" +
+            "Windows 应用程序的极简开发环境， 提供了一个完整的" +
+            "开源编程工具集，Mingw-w64 则是 MinGW 的“升级版” " +
+            "，提供了对 64 位计算机的支持。" + Environment.NewLine +
+            Environment.NewLine + Environment.NewLine +
+            "========================================" + Environment.NewLine +
+            "32 位和 64 位有什么区别？如何判断我的计算机是 32 " +
+            "位还是 64 位的呢？" + Environment.NewLine +
+            "----------------------------------------" + Environment.NewLine +
+            "32 位和 64 位指的是操作系统的不同类型。它们所支持" +
+            "的内存、处理器和软件，以及处理数据的能力和大小都" +
+            "有一定区别。您可以在 Internet 上找到更多的相关资" +
+            "料。\n" + Environment.NewLine +
+            "您可以在“控制面板->系统与安全->系统”页面找到您的 " +
+            "系统类型。\n" + Environment.NewLine +
+             Environment.NewLine + Environment.NewLine +
+            "========================================" + Environment.NewLine +
+            "下载下来的 MinGW-w64 文件打不开，怎么办？" + Environment.NewLine +
+            "----------------------------------------" + Environment.NewLine +
+            "您刚刚所下载的文件是 7-Zip 格式，一种效率较高的压" +
+            "缩文件。您可以通过任何主流的解压缩工具（如 WinRAR、" +
+            "Bandizip 等）解压，也可以使用专门的 7-Zip 工具（ht" +
+            "tps://www.7-zip.org/）解压。" + Environment.NewLine +
+            Environment.NewLine + Environment.NewLine +
+            "========================================" + Environment.NewLine +
+            "设置环境变量是什么意思？" + Environment.NewLine +
+            "----------------------------------------" + Environment.NewLine +
+            "环境变量是指在操作系统中用来指定操作系统运行环境"+
+            "的一些参数。这里的设置是将 MinGW 相关程序添加到 "+
+            "Path 这一环境变量当中，允许用户可以轻松地键入 `g"+
+            "++` 等命令直接编译。" + Environment.NewLine +
+            Environment.NewLine + Environment.NewLine +
+            "========================================" + Environment.NewLine +
+            "“安装插件”是在做什么？" + Environment.NewLine +
+            "----------------------------------------" + Environment.NewLine +
+            "VS Code 本身仅仅是一个文本编辑器，正是由于它强大的"+
+            "插件生态，才能让它实现程序的编译、运行和调试。这里"+
+            "安装的插件是微软官方制作的 C/C++ 插件，提供了简洁易"+
+            "用的调试和 IntelliSense 智能提示功能。" + Environment.NewLine +
+            Environment.NewLine + Environment.NewLine +
+            "========================================" + Environment.NewLine +
+            "为什么要选择工作文件夹？“一键配置”都做了什么？" + Environment.NewLine +
+            "----------------------------------------" + Environment.NewLine +
+            " VS Code 的核心理念和 Visual Studio 类似也是基于"+
+            "“项目”这一基本单位的。在 VS Code 中，项目的表现形" +
+            "式就是“工作区”（Workspace）。您的一切编译、运行配"+
+            "置都只适用于工作区内部，这样您可以针对不同的语言、"+
+            "不同的用途进行个性化的配置。" + Environment.NewLine +
+            "配置的基本原理就是 VS Code 打开工作区文件夹时，会读"+
+            "取 `.vscode` 子文件夹内部的数个 JSON 文件。这些 JS"+
+            "ON 文件通过固定的格式说明了编译器、调试器、运行路径"+
+            "等必要的信息，从而实现了用户层面的诸多功能。本工具"+
+            "所做的就是通过您输入的 MinGW 路径自动配置好上述 JSON 文件。"+
+            Environment.NewLine + Environment.NewLine +
+            "========================================" + Environment.NewLine +
+            "如果您还有相关问题，欢迎通过下方的邮件地址联系开发者"+
+            "谷雨同学 。"
+            ;
+
 
         private void ButtonViewMinGW_Click(object sender, EventArgs e)
         {
@@ -46,6 +109,7 @@ namespace VSCodeConfigHelper
                     labelMinGWState.Text = "检测到编译器：";
                     string version = GetGxxVersion(textBoxMinGWPath.Text + "\\bin\\g++.exe");
                     labelMinGWState.Text += '\n' + version;
+                    // prevent duplicate
                     minGWPath = textBoxMinGWPath.Text.ToLower();
                     isMinGWOk = true;
                 }
@@ -110,7 +174,13 @@ namespace VSCodeConfigHelper
 
         private void LinkLabelMinGW_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string mingw64Link = @"https://sourceforge.net/projects/mingw-w64/files/";
+            string mingw64Link = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z";
+            Process.Start(mingw64Link);
+        }
+
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string mingw64Link = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-win32/dwarf/i686-8.1.0-release-win32-dwarf-rt_v6-rev0.7z";
             Process.Start(mingw64Link);
         }
 
@@ -238,13 +308,13 @@ namespace VSCodeConfigHelper
                 JObject launchJson = GetLaunchJson();
                 JObject tasksJson = getTasksJson();
                 JObject settingsJson = GetSettingsJson();
-                if (workspacePath == string.Empty || minGWPath == string.Empty)
+                if (workspacePath == string.Empty || !isMinGWOk)
                 {
                     labelConfigState.ForeColor = Color.Red;
-                    labelConfigState.Text = "MinGW路径 或 工作文件夹 尚未配置完成。";
+                    labelConfigState.Text = "MinGW 路径或工作文件夹尚未配置完成。";
                     return;
                 }
-                if(Directory.Exists(workspacePath + "\\.vscode"))
+                if (Directory.Exists(workspacePath + "\\.vscode"))
                 {
                     labelConfigState.ForeColor = Color.Red;
                     labelConfigState.Text = "检测到已有配置，若继续请先删除 .vscode 文件夹。";
@@ -271,6 +341,11 @@ namespace VSCodeConfigHelper
                 labelConfigState.ForeColor = Color.Red;
                 labelConfigState.Text = "配置失败：" + ex.Message;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            textBoxHelp.Text = helpText;
         }
     }
 }
