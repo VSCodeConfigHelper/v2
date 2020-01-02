@@ -203,7 +203,7 @@
             this.labelMinGWPathHint.Name = "labelMinGWPathHint";
             this.labelMinGWPathHint.Size = new System.Drawing.Size(287, 25);
             this.labelMinGWPathHint.TabIndex = 14;
-            this.labelMinGWPathHint.Text = "输入您刚刚下载（或者安装）得到的 mingw64 这个文件夹的路径：";
+            this.labelMinGWPathHint.Text = "您解压后可以得到一个 mingw64 文件夹。将它的路径输入在下面：";
             // 
             // labelExtensionHint
             // 
@@ -266,9 +266,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(137, 12);
+            this.label1.Size = new System.Drawing.Size(179, 12);
             this.label1.TabIndex = 5;
-            this.label1.Text = "第一步：下载 MinGW-w64";
+            this.label1.Text = "第一步：下载 MinGW-w64 并解压";
             // 
             // labelMinGWState
             // 
@@ -384,7 +384,7 @@
             this.labelAuthor.Name = "labelAuthor";
             this.labelAuthor.Size = new System.Drawing.Size(275, 12);
             this.labelAuthor.TabIndex = 0;
-            this.labelAuthor.Text = "v1.0.0-beta2 谷雨同学制作 guyutongxue@163.com";
+            this.labelAuthor.Text = "v1.0.0-beta3 谷雨同学制作 guyutongxue@163.com";
             // 
             // Form1
             // 

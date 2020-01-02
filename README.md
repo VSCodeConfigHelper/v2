@@ -20,8 +20,6 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 
 至此您已经完成了 Visual Studio Code 的全部配置工作。您可以尝试编写您的第一个程序了！
 
-## 尝试编译调试
-
 在 Visual Studio 中打开您的工作文件夹（<Kbd>Ctrl</kbd>+<Kbd>K</kbd>, <Kbd>Ctrl</kbd>+<Kbd>O</kbd>）。然后在右侧工作区视图中新建 `helloworld.cpp` ：
 
 ```C++
@@ -37,6 +35,13 @@ int main(){
 ## 遇到了 .NET Framework ... 的问题
 
 如果您无法启动工具，出现这种情况：
+
 ![.NET Framework not found](https://s2.ax1x.com/2020/01/02/lJ5Ocd.jpg)
 
 请前往 [Microsoft 下载](https://www.microsoft.com/zh-cn/download/details.aspx?id=17718) 获取该依赖环境。
+
+-----
+
+## 关于此项目
+
+本项目使用 Visual Studio 2019 开发，基于 .NET Framework 4.0 。代码采用 MIT 协议开源，欢迎您贡献出您自己的一份力量。您只需要克隆本仓库，然后使用 Visual Studio 打开解决方案文件即可生成、调试。
