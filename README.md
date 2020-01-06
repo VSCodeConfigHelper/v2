@@ -2,6 +2,8 @@
 
 VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它专为编程新手打造，致力于让学生专注于编程的学习而非环境的配置工作上。
 
+**[下载地址](https://github.com/Guyutongxue/VSCodeConfigHelper/releases)**
+
 ## 使用方法
 
 此工具只能在 Windows 环境下使用。如果您使用的是 macOS，请参阅[此处](VS_Code_in_Mac.md)。如果您使用的是 GNU/Linux，您来这里做什么？
