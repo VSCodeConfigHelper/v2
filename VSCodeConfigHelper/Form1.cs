@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -24,6 +25,7 @@ namespace VSCodeConfigHelper
 
         string minGWPath = string.Empty;
         bool isMinGWOk = false;
+        bool isWorkspaceOk = false;
         static readonly string helpText =
             "========================================" + Environment.NewLine +
             "什么是 MinGW-w64 ？" + Environment.NewLine +
@@ -72,6 +74,13 @@ namespace VSCodeConfigHelper
             "是通过您输入的 MinGW 路径自动配置好上述 JSON 文件。" +
             Environment.NewLine + Environment.NewLine +
             "========================================" + Environment.NewLine +
+            "为什么工作文件夹不支持中文？" + Environment.NewLine +
+            "----------------------------------------" + Environment.NewLine +
+            "由于 MinGW 中 gdb 调试器并不支持 Unicode (UTF-16) 编码" +
+            "的路径参数，详情可见 https://github.com/Microsoft/vscode-cpptools/issues/1998 " +
+            "的讨论。对此我感到十分抱歉，还请您尝试其它命名，谢谢。" +
+            Environment.NewLine + Environment.NewLine +
+            "========================================" + Environment.NewLine +
             "如果您还有相关问题，欢迎通过下方的邮件地址联系开发者" +
             "谷雨同学。"
             ;
@@ -80,7 +89,7 @@ namespace VSCodeConfigHelper
         private void ButtonViewMinGW_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.OK )
+            if (result == DialogResult.OK)
             {
                 textBoxMinGWPath.Text = folderBrowserDialog1.SelectedPath;
             }
@@ -190,7 +199,7 @@ namespace VSCodeConfigHelper
         private void ButtonViewWorkspace_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.OK )
+            if (result == DialogResult.OK)
             {
                 textBoxWorkspacePath.Text = folderBrowserDialog1.SelectedPath;
             }
@@ -304,7 +313,7 @@ namespace VSCodeConfigHelper
                 JObject launchJson = GetLaunchJson();
                 JObject tasksJson = getTasksJson();
                 JObject settingsJson = GetSettingsJson();
-                if (string.IsNullOrWhiteSpace(workspacePath) || !isMinGWOk)
+                if (!isWorkspaceOk || !isMinGWOk)
                 {
                     labelConfigState.ForeColor = Color.Red;
                     labelConfigState.Text = "MinGW 路径或工作文件夹尚未配置完成。";
@@ -317,6 +326,7 @@ namespace VSCodeConfigHelper
                     return;
                 }
                 Directory.CreateDirectory(workspacePath + "\\.vscode");
+                File.SetAttributes(workspacePath + "\\.vscode", FileAttributes.Hidden);
                 StreamWriter launchsw = new StreamWriter(workspacePath + "\\.vscode\\launch.json");
                 launchsw.Write(launchJson.ToString());
                 launchsw.Flush();
@@ -348,6 +358,26 @@ namespace VSCodeConfigHelper
         {
             string manualLink = @"https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/README.md";
             Process.Start(manualLink);
+        }
+
+        private void TextBoxWorkspacePath_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxWorkspacePath.Text))
+            {
+                isWorkspaceOk = false;
+                labelWorkspaceStatus.Visible = false;
+                return;
+            }
+            if (!Regex.IsMatch(textBoxWorkspacePath.Text, "^[ -~]*$"))
+            {
+                isWorkspaceOk = false;
+                labelWorkspaceStatus.Visible = true;
+            }
+            else
+            {
+                isWorkspaceOk = true;
+                labelWorkspaceStatus.Visible = false;
+            }
         }
     }
 }

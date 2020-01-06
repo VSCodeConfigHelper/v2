@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStart = new System.Windows.Forms.TabPage();
+            this.labelWorkspaceStatus = new System.Windows.Forms.Label();
             this.labelConfigState = new System.Windows.Forms.Label();
             this.buttonConfig = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -72,11 +73,12 @@
             this.tabControlMain.Location = new System.Drawing.Point(12, 12);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(326, 450);
+            this.tabControlMain.Size = new System.Drawing.Size(326, 473);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPageStart
             // 
+            this.tabPageStart.Controls.Add(this.labelWorkspaceStatus);
             this.tabPageStart.Controls.Add(this.labelConfigState);
             this.tabPageStart.Controls.Add(this.buttonConfig);
             this.tabPageStart.Controls.Add(this.label7);
@@ -102,24 +104,35 @@
             this.tabPageStart.Location = new System.Drawing.Point(4, 22);
             this.tabPageStart.Name = "tabPageStart";
             this.tabPageStart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStart.Size = new System.Drawing.Size(318, 424);
+            this.tabPageStart.Size = new System.Drawing.Size(318, 447);
             this.tabPageStart.TabIndex = 0;
             this.tabPageStart.Text = "开始";
             this.tabPageStart.UseVisualStyleBackColor = true;
+            // 
+            // labelWorkspaceStatus
+            // 
+            this.labelWorkspaceStatus.AutoSize = true;
+            this.labelWorkspaceStatus.ForeColor = System.Drawing.Color.Red;
+            this.labelWorkspaceStatus.Location = new System.Drawing.Point(6, 351);
+            this.labelWorkspaceStatus.Name = "labelWorkspaceStatus";
+            this.labelWorkspaceStatus.Size = new System.Drawing.Size(221, 12);
+            this.labelWorkspaceStatus.TabIndex = 24;
+            this.labelWorkspaceStatus.Text = "路径中不能包含中文或者其它特殊字符。";
+            this.labelWorkspaceStatus.Visible = false;
             // 
             // labelConfigState
             // 
             this.labelConfigState.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelConfigState.Location = new System.Drawing.Point(97, 381);
+            this.labelConfigState.Location = new System.Drawing.Point(100, 400);
             this.labelConfigState.Name = "labelConfigState";
-            this.labelConfigState.Size = new System.Drawing.Size(215, 40);
+            this.labelConfigState.Size = new System.Drawing.Size(208, 40);
             this.labelConfigState.TabIndex = 23;
             this.labelConfigState.Text = "     ";
             // 
             // buttonConfig
             // 
-            this.buttonConfig.Location = new System.Drawing.Point(6, 376);
+            this.buttonConfig.Location = new System.Drawing.Point(6, 395);
             this.buttonConfig.Name = "buttonConfig";
             this.buttonConfig.Size = new System.Drawing.Size(85, 23);
             this.buttonConfig.TabIndex = 22;
@@ -130,7 +143,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 361);
+            this.label7.Location = new System.Drawing.Point(3, 380);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(101, 12);
             this.label7.TabIndex = 21;
@@ -155,6 +168,7 @@
             this.textBoxWorkspacePath.Name = "textBoxWorkspacePath";
             this.textBoxWorkspacePath.Size = new System.Drawing.Size(226, 21);
             this.textBoxWorkspacePath.TabIndex = 19;
+            this.textBoxWorkspacePath.TextChanged += new System.EventHandler(this.TextBoxWorkspacePath_TextChanged);
             // 
             // labelWorkspaceHint
             // 
@@ -327,7 +341,7 @@
             this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
             this.tabPageHelp.Name = "tabPageHelp";
             this.tabPageHelp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHelp.Size = new System.Drawing.Size(318, 424);
+            this.tabPageHelp.Size = new System.Drawing.Size(318, 447);
             this.tabPageHelp.TabIndex = 1;
             this.tabPageHelp.Text = "帮助";
             this.tabPageHelp.UseVisualStyleBackColor = true;
@@ -373,24 +387,24 @@
             this.textBoxHelp.Name = "textBoxHelp";
             this.textBoxHelp.ReadOnly = true;
             this.textBoxHelp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxHelp.Size = new System.Drawing.Size(306, 365);
+            this.textBoxHelp.Size = new System.Drawing.Size(306, 388);
             this.textBoxHelp.TabIndex = 1;
             // 
             // labelAuthor
             // 
             this.labelAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelAuthor.AutoSize = true;
-            this.labelAuthor.Location = new System.Drawing.Point(4, 409);
+            this.labelAuthor.Location = new System.Drawing.Point(4, 432);
             this.labelAuthor.Name = "labelAuthor";
             this.labelAuthor.Size = new System.Drawing.Size(275, 12);
             this.labelAuthor.TabIndex = 0;
-            this.labelAuthor.Text = "v1.0.0-beta3 谷雨同学制作 guyutongxue@163.com";
+            this.labelAuthor.Text = "v1.0.0-beta4 谷雨同学制作 guyutongxue@163.com";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 474);
+            this.ClientSize = new System.Drawing.Size(350, 497);
             this.Controls.Add(this.tabControlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -439,6 +453,7 @@
         private System.Windows.Forms.LinkLabel linkLabelManual;
         private System.Windows.Forms.Label labelFAQ;
         private System.Windows.Forms.Label labelManual;
+        private System.Windows.Forms.Label labelWorkspaceStatus;
     }
 }
 

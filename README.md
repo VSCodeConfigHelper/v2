@@ -15,12 +15,12 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 3. 第三步：点击“设置环境变量”按钮即可。
 4. 第四步：点击工具中的下载地址跳转到 Visual Studio Code 官网，下载最新版本的安装程序，然后双击运行安装程序，按照其提示完成安装。
 5. 第五步：点击工具中的“安装插件...”按钮，跳转到插件安装网页。点击网页中的 “Install” ，并允许网页打开 Visual Studio Code 。在 Visual Studio Code 中选择 “Install”，完成插件的安装。
-6. 第六步：选择一个工作文件夹，输入到工具中。
+6. 第六步：选择一个工作文件夹（不能包含中文或中文字符），输入到工具中。
 7. 第七步：点击“一键配置”按钮即可。
 
 至此您已经完成了 Visual Studio Code 的全部配置工作。您可以尝试编写您的第一个程序了！
 
-在 Visual Studio 中打开您的工作文件夹（<Kbd>Ctrl</kbd>+<Kbd>K</kbd>, <Kbd>Ctrl</kbd>+<Kbd>O</kbd>）。然后在右侧工作区视图中新建 `helloworld.cpp` ：
+在 Visual Studio 中打开您的工作文件夹（<Kbd>Ctrl</kbd>+<Kbd>K</kbd>, <Kbd>Ctrl</kbd>+<Kbd>O</kbd>）（**注意，并不是 .vscode 文件夹，而是它的上级文件夹，即在第六步中所填写的文件夹**）。然后在右侧工作区视图中新建 `helloworld.cpp` ：
 
 ```C++
 #include<iostream>
@@ -31,6 +31,10 @@ int main(){
 ```
 
 按 <kbd>F5</kbd> （在不同设备上可能是 <kbd>Fn</kbd>+<kbd>F5</kbd>），期望在底部弹出一个终端并打印出 `Hello,world!` 。
+
+## 遇到了 Windows Defender SmartScreen ... 的问题
+
+请您选择“仍要运行”。
 
 ## 遇到了 .NET Framework ... 的问题
 
