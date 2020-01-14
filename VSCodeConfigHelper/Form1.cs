@@ -26,6 +26,13 @@ namespace VSCodeConfigHelper
         string minGWPath = string.Empty;
         bool isMinGWOk = false;
         bool isWorkspaceOk = false;
+        JArray args = new JArray {
+            "-g",
+            "-std=c++17",
+            "${file}",
+            "-o",
+            "${fileDirname}\\${fileBasenameNoExtension}.exe"
+        };
         static readonly string helpText =
             "========================================" + Environment.NewLine +
             "什么是 MinGW-w64 ？" + Environment.NewLine +
@@ -182,9 +189,19 @@ namespace VSCodeConfigHelper
         {
             string mingwLink;
             if (IsRunningOn64Bit)
-                mingwLink = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z";
+            {
+                if (radioButtonPKU.Checked)
+                    mingwLink = @"https://disk.pku.edu.cn:443/link/B897756E8392A02AD20F56C6A17E0655";
+                else
+                    mingwLink = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z";
+            }
             else
-                mingwLink = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-win32/dwarf/i686-8.1.0-release-win32-dwarf-rt_v6-rev0.7z";
+            {
+                if (radioButtonPKU.Checked)
+                    mingwLink = @"https://disk.pku.edu.cn:443/link/E9E6D208F9AEC29D7D77BA2A923A6400";
+                else
+                    mingwLink = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-win32/dwarf/i686-8.1.0-release-win32-dwarf-rt_v6-rev0.7z";
+            }
             Process.Start(mingwLink);
         }
 
@@ -241,14 +258,6 @@ namespace VSCodeConfigHelper
 
         private JObject getTasksJson()
         {
-            JArray args = new JArray
-            {
-                "-g",
-                "-std=c++17",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            };
             JObject group = new JObject
             {
                 {"kind", "build"},
@@ -352,6 +361,13 @@ namespace VSCodeConfigHelper
         private void Form1_Load(object sender, EventArgs e)
         {
             textBoxHelp.Text = helpText;
+            if (DateTime.Now.Date < new DateTime(2024, 10, 1)) radioButtonPKU.Select();
+            else
+            {
+                radioButtonPKU.Enabled = false;
+                radioButtonOffical.Select();
+            }
+            ShowArgs();
         }
 
         private void LinkLabelManual_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -378,6 +394,41 @@ namespace VSCodeConfigHelper
                 isWorkspaceOk = true;
                 labelWorkspaceStatus.Visible = false;
             }
+        }
+
+        private void GenerateArgs()
+        {
+            string text = textBoxArgs.Text.Trim();
+            string[] argtext = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            args = new JArray(argtext);
+        }
+
+        private void ShowArgs()
+        {
+            StringBuilder text = new StringBuilder();
+            foreach (object i in args)
+            {
+                text.AppendLine(i.ToString());
+            }
+            textBoxArgs.Text = text.ToString().Trim();
+        }
+
+        private void buttonSaveArgs_Click(object sender, EventArgs e)
+        {
+            GenerateArgs();
+            ShowArgs();
+        }
+
+        private void buttonArgDefault_Click(object sender, EventArgs e)
+        {
+            args = new JArray {
+                "-g",
+                "-std=c++17",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            };
+            ShowArgs();
         }
     }
 }
