@@ -93,6 +93,22 @@ namespace VSCodeConfigHelper
             ;
 
         public static bool IsRunningOn64Bit { get { return IntPtr.Size == 8; } }
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            textBoxHelp.Text = helpText;
+            string specify = IsRunningOn64Bit ? "64" : "32";
+            labelMinGWPathHint.Text = $"您解压后可以得到一个 mingw{specify} 文件夹。这里面包含着重要的编译必需文件，建议您将它移动到妥善的位置，如 C 盘根目录下。将它的路径输入在下面：";
+            // 北大网盘有效期截止至此
+            if (DateTime.Now.Date < new DateTime(2024, 10, 1)) radioButtonPKU.Select();
+            else
+            {
+                radioButtonPKU.Enabled = false;
+                radioButtonOffical.Select();
+            }
+            ShowArgs();
+        }
+
         private void ButtonViewMinGW_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
@@ -358,19 +374,7 @@ namespace VSCodeConfigHelper
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            textBoxHelp.Text = helpText;
-            string specify = IsRunningOn64Bit ? "64" : "32";
-            labelMinGWPathHint.Text = $"您解压后可以得到一个 mingw{specify} 文件夹。这里面包含着重要的编译必需文件，建议您将它移动到妥善的位置，如 C 盘根目录下。将它的路径输入在下面：";
-            if (DateTime.Now.Date < new DateTime(2024, 10, 1)) radioButtonPKU.Select();
-            else
-            {
-                radioButtonPKU.Enabled = false;
-                radioButtonOffical.Select();
-            }
-            ShowArgs();
-        }
+
 
         private void LinkLabelManual_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

@@ -42,9 +42,9 @@ int main(){
 
 如果您无法启动工具，出现这种情况：
 
-![.NET Framework not found](https://s2.ax1x.com/2020/01/02/lJ5Ocd.jpg)
+![.NET Framework not found](https://s2.ax1x.com/2020/01/14/lqbwOU.jpg)
 
-请前往 [Microsoft 下载](https://www.microsoft.com/zh-cn/download/details.aspx?id=17718) 获取该依赖环境。
+请前往 [Microsoft 下载](https://www.microsoft.com/en-us/download/details.aspx?id=42642) 获取该依赖 .NET Framework 4.5 环境。
 
 -----
 
