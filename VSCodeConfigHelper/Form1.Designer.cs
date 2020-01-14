@@ -62,6 +62,7 @@
             this.labelAuthor = new System.Windows.Forms.Label();
             this.tabPageSetting = new System.Windows.Forms.TabPage();
             this.groupBoxArg = new System.Windows.Forms.GroupBox();
+            this.buttonArgDefault = new System.Windows.Forms.Button();
             this.labelArgInstruction = new System.Windows.Forms.Label();
             this.buttonSaveArgs = new System.Windows.Forms.Button();
             this.labelArgWarning = new System.Windows.Forms.Label();
@@ -71,7 +72,6 @@
             this.radioButtonOffical = new System.Windows.Forms.RadioButton();
             this.radioButtonPKU = new System.Windows.Forms.RadioButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.buttonArgDefault = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageStart.SuspendLayout();
             this.tabPageHelp.SuspendLayout();
@@ -229,7 +229,7 @@
             // linkLabelMinGW
             // 
             this.linkLabelMinGW.AutoSize = true;
-            this.linkLabelMinGW.Location = new System.Drawing.Point(321, 20);
+            this.linkLabelMinGW.Location = new System.Drawing.Point(317, 15);
             this.linkLabelMinGW.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabelMinGW.Name = "linkLabelMinGW";
             this.linkLabelMinGW.Size = new System.Drawing.Size(91, 15);
@@ -240,12 +240,12 @@
             // 
             // labelMinGWPathHint
             // 
-            this.labelMinGWPathHint.Location = new System.Drawing.Point(4, 82);
+            this.labelMinGWPathHint.Location = new System.Drawing.Point(4, 57);
             this.labelMinGWPathHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelMinGWPathHint.Name = "labelMinGWPathHint";
-            this.labelMinGWPathHint.Size = new System.Drawing.Size(383, 31);
+            this.labelMinGWPathHint.Size = new System.Drawing.Size(412, 56);
             this.labelMinGWPathHint.TabIndex = 14;
-            this.labelMinGWPathHint.Text = "您解压后可以得到一个 mingw64 文件夹。将它的路径输入在下面：";
+            this.labelMinGWPathHint.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // labelExtensionHint
             // 
@@ -302,7 +302,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 55);
+            this.label2.Location = new System.Drawing.Point(4, 42);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(183, 15);
@@ -312,7 +312,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 20);
+            this.label1.Location = new System.Drawing.Point(4, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(230, 15);
@@ -324,7 +324,7 @@
             this.labelMinGWState.Location = new System.Drawing.Point(5, 150);
             this.labelMinGWState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelMinGWState.Name = "labelMinGWState";
-            this.labelMinGWState.Size = new System.Drawing.Size(385, 45);
+            this.labelMinGWState.Size = new System.Drawing.Size(411, 45);
             this.labelMinGWState.TabIndex = 4;
             this.labelMinGWState.Text = "     ";
             // 
@@ -471,6 +471,17 @@
             this.groupBoxArg.TabStop = false;
             this.groupBoxArg.Text = "配置 g++ 编译参数";
             // 
+            // buttonArgDefault
+            // 
+            this.buttonArgDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonArgDefault.Location = new System.Drawing.Point(6, 189);
+            this.buttonArgDefault.Name = "buttonArgDefault";
+            this.buttonArgDefault.Size = new System.Drawing.Size(84, 29);
+            this.buttonArgDefault.TabIndex = 2;
+            this.buttonArgDefault.Text = "恢复默认";
+            this.buttonArgDefault.UseVisualStyleBackColor = true;
+            this.buttonArgDefault.Click += new System.EventHandler(this.buttonArgDefault_Click);
+            // 
             // labelArgInstruction
             // 
             this.labelArgInstruction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -556,17 +567,6 @@
             this.radioButtonPKU.TabStop = true;
             this.radioButtonPKU.Text = "北大网盘";
             this.radioButtonPKU.UseVisualStyleBackColor = true;
-            // 
-            // buttonArgDefault
-            // 
-            this.buttonArgDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonArgDefault.Location = new System.Drawing.Point(6, 189);
-            this.buttonArgDefault.Name = "buttonArgDefault";
-            this.buttonArgDefault.Size = new System.Drawing.Size(84, 29);
-            this.buttonArgDefault.TabIndex = 2;
-            this.buttonArgDefault.Text = "恢复默认";
-            this.buttonArgDefault.UseVisualStyleBackColor = true;
-            this.buttonArgDefault.Click += new System.EventHandler(this.buttonArgDefault_Click);
             // 
             // Form1
             // 
