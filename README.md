@@ -6,7 +6,7 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 
 ## 使用方法
 
-此工具只能在 Windows 环境下（版本不低于 Windows 7 Service Pack 1）使用。如果您使用的是 macOS，请参阅[此处](VS_Code_in_Mac.md)。如果您使用的是 GNU/Linux，您来这里做什么？
+此工具只能在 Windows （版本不低于 Windows 7 Service Pack 1）环境下使用。如果您使用的是 macOS，请参阅[此处](VS_Code_in_Mac.md)。如果您使用的是 GNU/Linux，您来这里做什么？
 
 您**只**需要一个支持 7-Zip 解压缩的软件。您可以使用*任何*主流的工具包括 WinRAR、Bandizip 甚至“好压”。
 
