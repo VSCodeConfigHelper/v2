@@ -506,10 +506,10 @@ int main() {
                 }
                 labelConfigState.Text += "成功。";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                labelConfigState.Text += ("失败：" + ex.Message);
                 MessageBox.Show("暂时无法启动 VS Code，请尝试手动启动或者重新打开本工具。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                throw new Exception("启动 VS Code 失败。");
             }
         }
 
