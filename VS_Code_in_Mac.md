@@ -123,11 +123,16 @@ int main(){
 
 ```JSON
 {
-    "name": "Launch",
-    "type": "lldb",
-    "request": "launch",
-    "program": "${fileDirname}/${fileBasenameNoExtension}.out",
-    "args": [],
-    "preLaunchTask": "Build with Clang"
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.out",
+            "args": [],
+            "preLaunchTask": "Build with Clang"
+        }
+    ]
 }
 ```
