@@ -17,7 +17,7 @@ xcode-select --install
 
 ## 配置 VS Code
 
-打开 VS Code ，左侧打开“插件”（Extensions）面板，搜索安装“ C/C++ ”。
+前往[此处](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)安装 C/C++ 插件。点击 Install 即可。
 
 打开一个保存 C++ 文档的文件夹（Open Folder）。按 ⌘+⇧+P，搜索选择“ C/C++: Edit Configurations... (UI)”。
 
@@ -112,3 +112,22 @@ int main(){
 ```
 
 按 <kbd>F5</kbd> ，期望弹出一个终端并打印出 `Hello,world!` 。
+
+-----
+
+如果你使用的是 macOS Catalina ，你的断点调试功能可能暂时无法使用。请耐心等待 VS Code 更新，或者使用以下解决方案：
+
+前往[此处](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) 获得 CodeLLDB 插件。
+
+更改你的 `launch.json` 为：
+
+```JSON
+{
+    "name": "Launch",
+    "type": "lldb",
+    "request": "launch",
+    "program": "${fileDirname}/${fileBasenameNoExtension}.out",
+    "args": [],
+    "preLaunchTask": "Build with Clang"
+}
+```
