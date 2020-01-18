@@ -8,16 +8,48 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Net;
 using System.Diagnostics;
+using System.Security.Principal;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 
 namespace VSCodeConfigHelper
 {
 
     public partial class Form1 : Form
     {
+
+        #region Add Shield Icon
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(HandleRef hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        /// <summary>
+        ///     Enables the elevated shield icon on the given button control
+        /// </summary>
+        /// <param name="ThisButton">
+        ///     Button control to enable the elevated shield icon on.
+        /// </param>
+        private void EnableElevateIcon_BCM_SETSHIELD(Button ThisButton)
+        {
+            // Input validation, validate that ThisControl is not null
+            if (ThisButton == null) return;
+
+            // Define BCM_SETSHIELD locally, declared originally in Commctrl.h
+            uint BCM_SETSHIELD = 0x0000160C;
+
+            // Set button style to the system style
+            ThisButton.FlatStyle = FlatStyle.System;
+
+            // Send the BCM_SETSHIELD message to the button control
+            SendMessage(new HandleRef(ThisButton, ThisButton.Handle), BCM_SETSHIELD, new IntPtr(0), new IntPtr(1));
+        }
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -29,9 +61,9 @@ namespace VSCodeConfigHelper
         JArray args = new JArray {
             "-g",
             "-std=c++17",
-            "${file}",
+            "\"${file}\"",
             "-o",
-            "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
         };
         static readonly string helpText =
             "========================================" + Environment.NewLine +
@@ -91,14 +123,74 @@ namespace VSCodeConfigHelper
             "如果您还有相关问题，欢迎通过下方的邮件地址联系开发者" +
             "谷雨同学。"
             ;
+        readonly string testCode = @"// VS Code C++ 测试代码 ""Hello World""
+// 由 VSCodeConfigHelper 生成
+
+// 您可以在当前的文件夹（您第六步输入的文件夹）下编写代码。
+
+// 按下 F5（部分设备上可能是 Fn + F5）编译调试。
+// 按下 Ctrl + Shift + B 编译，但不运行。
+// 按下 Ctrl + F5（部分设备上可能是 Ctrl + Fn + F5）编译运行，但不调试。
+
+#include <iostream>
+
+/**
+ * 程序执行的入口点。
+ */
+int main() {
+    // 在标准输出中打印 ""Hello, world!""
+    std::cout << ""Hello, world!"" << std::endl;
+    return 0;
+}
+
+// 此文件编译运行将输出 ""Hello, world!""。
+// 您将在下方弹出的终端（Terminal）窗口中看到这一行字。
+
+// 如果遇到了问题，请您重试或者咨询开发者。";
 
         public static bool IsRunningOn64Bit { get { return IntPtr.Size == 8; } }
-        
+
+        private static bool IsAdministrator
+        {
+            get
+            {
+
+                WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (IsAdministrator)
+            {
+                labelAuth.Width = 409;
+                labelAuth.Text = "当前权限：系统管理员" + Environment.NewLine;
+                labelAuth.Text += "您在此工具进行的操作（包括安装、设置环境变量和启动等）" +
+                    "将适用于所有用户，请谨慎操作。" + Environment.NewLine;
+                labelAuth.Text += "若要使用普通用户权限，请重新使用非管理员权限运行此程序。";
+                buttonAuth.Visible = false;
+
+                Text = "管理员: VS Code C++配置工具";
+
+            }
+            else
+            {
+                labelAuth.Text = "当前权限：普通用户" + Environment.NewLine;
+                labelAuth.Text += "您在此工具进行的操作（包括安装、设置环境变量和启动等）" +
+                    "将仅适用于此账户。" + Environment.NewLine;
+                labelAuth.Text += "若要使用系统管理员权限，请点击右侧按钮。";
+                EnableElevateIcon_BCM_SETSHIELD(buttonAuth);
+            }
+
             textBoxHelp.Text = helpText;
+
+            labelAuthor.Text = $"v{Application.ProductVersion} 谷雨同学制作 guyutongxue@163.com";
+
             string specify = IsRunningOn64Bit ? "64" : "32";
             labelMinGWPathHint.Text = $"您解压后可以得到一个 mingw{specify} 文件夹。这里面包含着重要的编译必需文件，建议您将它移动到妥善的位置，如 C 盘根目录下。将它的路径输入在下面：";
+
             // 北大网盘有效期截止至此
             if (DateTime.Now.Date < new DateTime(2024, 10, 1)) radioButtonPKU.Select();
             else
@@ -106,6 +198,7 @@ namespace VSCodeConfigHelper
                 radioButtonPKU.Enabled = false;
                 radioButtonOffical.Select();
             }
+
             ShowArgs();
         }
 
@@ -152,16 +245,18 @@ namespace VSCodeConfigHelper
                 labelPathState.Text = "MinGW 路径尚未配置完成。";
                 return;
             }
-            string path = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.Machine);
+            // If admin, set PATH to machine; else set PATH to user.
+            EnvironmentVariableTarget current = IsAdministrator ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.User;
+            string path = Environment.GetEnvironmentVariable("Path", current);
             if (path.Contains(minGWPath + "\\bin"))
             {
                 labelPathState.ForeColor = Color.Green;
                 labelPathState.Text = "环境变量已设置。";
                 return;
             }
-            Environment.SetEnvironmentVariable("Path", path + ";" + minGWPath + "\\bin", EnvironmentVariableTarget.Machine);
+            Environment.SetEnvironmentVariable("Path", path + ";" + minGWPath + "\\bin", current);
             // Check
-            path = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.Machine);
+            path = Environment.GetEnvironmentVariable("Path", current);
             if (path.Contains(minGWPath + "\\bin"))
             {
                 labelPathState.ForeColor = Color.Green;
@@ -174,7 +269,7 @@ namespace VSCodeConfigHelper
             }
         }
 
-        public static string GetGxxVersion(string path)
+        private static string GetGxxVersion(string path)
         {
 
             string result = string.Empty;
@@ -194,6 +289,8 @@ namespace VSCodeConfigHelper
             }
             return result;
         }
+
+
 
         private void ButtonExtension_Click(object sender, EventArgs e)
         {
@@ -224,9 +321,21 @@ namespace VSCodeConfigHelper
 
         private void LinkLabelVSCode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            try
+            {
 
-            string vsCodeLink = @"https://code.visualstudio.com/#alt-downloads";
-            Process.Start(vsCodeLink);
+                string adminSpec = IsAdministrator ? "" : "-user";
+                string bitSpec = IsRunningOn64Bit ? "-x64" : "";
+                Process.Start("https://update.code.visualstudio.com/latest/win32" + bitSpec + adminSpec + "/stable");
+            }
+            catch (Exception)
+            {
+                // Shouldn't be executed
+                MessageBox.Show("无法获得直接下载地址，请手动点击下载" + (IsAdministrator ? " System 版本安装包" : "") + "。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Process.Start("https://code.visualstudio.com/Download");
+            }
+            // Hint image (Open by browser)
+            Process.Start("https://s2.ax1x.com/2020/01/18/1pRERI.png");
         }
 
         private void ButtonViewWorkspace_Click(object sender, EventArgs e)
@@ -293,7 +402,7 @@ namespace VSCodeConfigHelper
                 { "owner", "cpp" },
                 { "fileLocation", "absolute"},
                 { "pattern",new JObject{
-                     {"regexp", "^(.*):(\\d+):(\\d+):\\s+(error):\\s+(.*)$"},
+                    {"regexp", "^(.*):(\\d+):(\\d+):\\s+(error):\\s+(.*)$"},
                     {"file", 1},
                     {"line", 2},
                     {"column", 3},
@@ -317,6 +426,16 @@ namespace VSCodeConfigHelper
                             {"problemMatcher",problemMatcher}
                         }
                     }
+                },
+                // https://github.com/microsoft/vscode/issues/70509
+                { "options",new JObject
+                    { {
+                        "shell", new JObject
+                        {
+                            { "executable", "cmd.exe" },
+                            { "args", new JArray("/c") }
+                        }
+                    } }
                 }
             };
             return tasks;
@@ -330,10 +449,57 @@ namespace VSCodeConfigHelper
             }};
         }
 
+        private void LoadVSCode(string path)
+        {
+            labelConfigState.Text += "启动 VS Code 中...";
+            string filepath = $"{path}\\helloworld.cpp";
+            if (File.Exists(filepath))
+            {
+                for (int i = 1; ; i++)
+                {
+                    filepath = $"{path}\\helloworld({i}).cpp";
+                    if (!File.Exists(filepath)) break;
+                }
+            }
+            StreamWriter sw = new StreamWriter(filepath, false, Encoding.UTF8);
+            sw.Write(testCode);
+            sw.Flush();
+            sw.Close();
+            OpenTestCode(path, filepath);
+            labelConfigState.Text += "成功。";
+        }
+
+        public static void OpenTestCode(string folderpath, string filepath)
+        {
+
+            using (Process proc = new Process())
+            {
+                // Must execute by shell to use User PATH
+                // Hide the Shell Console Window
+                proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                proc.StartInfo.UseShellExecute = true;
+                proc.StartInfo.FileName = "code";
+                proc.StartInfo.Arguments = $"\"{folderpath}\" -g \"{filepath}\"";
+                proc.Start();
+                proc.WaitForExit();
+                proc.Close();
+            }
+        }
+
         private void ButtonConfig_Click(object sender, EventArgs e)
         {
             try
             {
+                // Kill VS Code process to apply PATH env and prevent occupy
+                Process[] processList = System.Diagnostics.Process.GetProcesses();
+                foreach (var process in processList)
+                {
+                    if (process.ProcessName.ToLower() == "code")
+                    {
+                        process.Kill();
+                    }
+                }
+
                 string workspacePath = textBoxWorkspacePath.Text;
                 JObject launchJson = GetLaunchJson();
                 JObject tasksJson = getTasksJson();
@@ -346,9 +512,9 @@ namespace VSCodeConfigHelper
                 }
                 if (Directory.Exists(workspacePath + "\\.vscode"))
                 {
-                    labelConfigState.ForeColor = Color.Red;
-                    labelConfigState.Text = "检测到已有配置，若继续请先删除 .vscode 文件夹。";
-                    return;
+                    DialogResult result = MessageBox.Show("检测到已有配置，是否覆盖？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (result == DialogResult.Cancel) return;
+                    Directory.Delete(workspacePath + "\\.vscode", true);
                 }
                 Directory.CreateDirectory(workspacePath + "\\.vscode");
                 File.SetAttributes(workspacePath + "\\.vscode", FileAttributes.Hidden);
@@ -366,6 +532,7 @@ namespace VSCodeConfigHelper
                 settingssw.Close();
                 labelConfigState.ForeColor = Color.Green;
                 labelConfigState.Text = "配置成功。";
+                if (checkBoxOpen.Checked) LoadVSCode(workspacePath);
             }
             catch (Exception ex)
             {
@@ -430,11 +597,41 @@ namespace VSCodeConfigHelper
             args = new JArray {
                 "-g",
                 "-std=c++17",
-                "${file}",
+                "\"${file}\"",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
             };
             ShowArgs();
+        }
+
+        private void buttonAuth_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var exeName = Process.GetCurrentProcess().MainModule.FileName;
+                ProcessStartInfo startInfo = new ProcessStartInfo(exeName);
+                startInfo.Verb = "runas";
+                Process.Start(startInfo);
+                Application.Exit();
+            }
+            catch (Win32Exception)
+            {
+                // Do nothing.
+                // If user cancel the operation by UAC, Process.Start will
+                // throw an exception. Just ignore it.
+            }
+        }
+
+        private void radioButtonPKU_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonOffical.Checked)
+            {
+                linkLabelMinGW.Text = "下载地址";
+            }
+            else
+            {
+                linkLabelMinGW.Text = "下载地址...";
+            }
         }
     }
 }

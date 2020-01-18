@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStart = new System.Windows.Forms.TabPage();
+            this.checkBoxOpen = new System.Windows.Forms.CheckBox();
             this.labelWorkspaceStatus = new System.Windows.Forms.Label();
             this.labelConfigState = new System.Windows.Forms.Label();
             this.buttonConfig = new System.Windows.Forms.Button();
@@ -61,6 +62,9 @@
             this.textBoxHelp = new System.Windows.Forms.TextBox();
             this.labelAuthor = new System.Windows.Forms.Label();
             this.tabPageSetting = new System.Windows.Forms.TabPage();
+            this.groupBoxPrivil = new System.Windows.Forms.GroupBox();
+            this.buttonAuth = new System.Windows.Forms.Button();
+            this.labelAuth = new System.Windows.Forms.Label();
             this.groupBoxArg = new System.Windows.Forms.GroupBox();
             this.buttonArgDefault = new System.Windows.Forms.Button();
             this.labelArgInstruction = new System.Windows.Forms.Label();
@@ -76,6 +80,7 @@
             this.tabPageStart.SuspendLayout();
             this.tabPageHelp.SuspendLayout();
             this.tabPageSetting.SuspendLayout();
+            this.groupBoxPrivil.SuspendLayout();
             this.groupBoxArg.SuspendLayout();
             this.groupBoxMinGWSrc.SuspendLayout();
             this.SuspendLayout();
@@ -94,6 +99,7 @@
             // 
             // tabPageStart
             // 
+            this.tabPageStart.Controls.Add(this.checkBoxOpen);
             this.tabPageStart.Controls.Add(this.labelWorkspaceStatus);
             this.tabPageStart.Controls.Add(this.labelConfigState);
             this.tabPageStart.Controls.Add(this.buttonConfig);
@@ -126,6 +132,18 @@
             this.tabPageStart.Text = "开始";
             this.tabPageStart.UseVisualStyleBackColor = true;
             // 
+            // checkBoxOpen
+            // 
+            this.checkBoxOpen.AutoSize = true;
+            this.checkBoxOpen.Checked = true;
+            this.checkBoxOpen.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxOpen.Location = new System.Drawing.Point(7, 529);
+            this.checkBoxOpen.Name = "checkBoxOpen";
+            this.checkBoxOpen.Size = new System.Drawing.Size(134, 19);
+            this.checkBoxOpen.TabIndex = 25;
+            this.checkBoxOpen.Text = "配置成功后启动";
+            this.checkBoxOpen.UseVisualStyleBackColor = true;
+            // 
             // labelWorkspaceStatus
             // 
             this.labelWorkspaceStatus.AutoSize = true;
@@ -142,16 +160,16 @@
             // 
             this.labelConfigState.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelConfigState.Location = new System.Drawing.Point(133, 500);
+            this.labelConfigState.Location = new System.Drawing.Point(152, 500);
             this.labelConfigState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelConfigState.Name = "labelConfigState";
-            this.labelConfigState.Size = new System.Drawing.Size(277, 50);
+            this.labelConfigState.Size = new System.Drawing.Size(258, 50);
             this.labelConfigState.TabIndex = 23;
             this.labelConfigState.Text = "     ";
             // 
             // buttonConfig
             // 
-            this.buttonConfig.Location = new System.Drawing.Point(8, 494);
+            this.buttonConfig.Location = new System.Drawing.Point(8, 493);
             this.buttonConfig.Margin = new System.Windows.Forms.Padding(4);
             this.buttonConfig.Name = "buttonConfig";
             this.buttonConfig.Size = new System.Drawing.Size(113, 29);
@@ -163,7 +181,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 475);
+            this.label7.Location = new System.Drawing.Point(4, 469);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(127, 15);
@@ -216,19 +234,19 @@
             // linkLabelVSCode
             // 
             this.linkLabelVSCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabelVSCode.AutoSize = true;
-            this.linkLabelVSCode.Location = new System.Drawing.Point(321, 270);
+            this.linkLabelVSCode.Location = new System.Drawing.Point(317, 270);
             this.linkLabelVSCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabelVSCode.Name = "linkLabelVSCode";
             this.linkLabelVSCode.Size = new System.Drawing.Size(91, 15);
             this.linkLabelVSCode.TabIndex = 16;
             this.linkLabelVSCode.TabStop = true;
-            this.linkLabelVSCode.Text = "下载地址...";
+            this.linkLabelVSCode.Text = "下载地址";
+            this.linkLabelVSCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.linkLabelVSCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelVSCode_LinkClicked);
             // 
             // linkLabelMinGW
             // 
-            this.linkLabelMinGW.AutoSize = true;
+            this.linkLabelMinGW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabelMinGW.Location = new System.Drawing.Point(317, 15);
             this.linkLabelMinGW.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabelMinGW.Name = "linkLabelMinGW";
@@ -236,6 +254,7 @@
             this.linkLabelMinGW.TabIndex = 15;
             this.linkLabelMinGW.TabStop = true;
             this.linkLabelMinGW.Text = "下载地址...";
+            this.linkLabelMinGW.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.linkLabelMinGW.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelMinGW_LinkClicked);
             // 
             // labelMinGWPathHint
@@ -438,16 +457,15 @@
             // labelAuthor
             // 
             this.labelAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelAuthor.AutoSize = true;
             this.labelAuthor.Location = new System.Drawing.Point(5, 540);
             this.labelAuthor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(361, 15);
+            this.labelAuthor.Size = new System.Drawing.Size(414, 15);
             this.labelAuthor.TabIndex = 0;
-            this.labelAuthor.Text = "v1.0.0-beta5 谷雨同学制作 guyutongxue@163.com";
             // 
             // tabPageSetting
             // 
+            this.tabPageSetting.Controls.Add(this.groupBoxPrivil);
             this.tabPageSetting.Controls.Add(this.groupBoxArg);
             this.tabPageSetting.Controls.Add(this.groupBoxMinGWSrc);
             this.tabPageSetting.Location = new System.Drawing.Point(4, 25);
@@ -457,6 +475,34 @@
             this.tabPageSetting.Text = "设置";
             this.tabPageSetting.UseVisualStyleBackColor = true;
             // 
+            // groupBoxPrivil
+            // 
+            this.groupBoxPrivil.Controls.Add(this.buttonAuth);
+            this.groupBoxPrivil.Controls.Add(this.labelAuth);
+            this.groupBoxPrivil.Location = new System.Drawing.Point(3, 99);
+            this.groupBoxPrivil.Name = "groupBoxPrivil";
+            this.groupBoxPrivil.Size = new System.Drawing.Size(421, 132);
+            this.groupBoxPrivil.TabIndex = 6;
+            this.groupBoxPrivil.TabStop = false;
+            this.groupBoxPrivil.Text = "当前权限";
+            // 
+            // buttonAuth
+            // 
+            this.buttonAuth.Location = new System.Drawing.Point(274, 55);
+            this.buttonAuth.Name = "buttonAuth";
+            this.buttonAuth.Size = new System.Drawing.Size(141, 29);
+            this.buttonAuth.TabIndex = 0;
+            this.buttonAuth.Text = "使用管理员身份";
+            this.buttonAuth.UseVisualStyleBackColor = true;
+            this.buttonAuth.Click += new System.EventHandler(this.buttonAuth_Click);
+            // 
+            // labelAuth
+            // 
+            this.labelAuth.Location = new System.Drawing.Point(6, 21);
+            this.labelAuth.Name = "labelAuth";
+            this.labelAuth.Size = new System.Drawing.Size(262, 108);
+            this.labelAuth.TabIndex = 1;
+            // 
             // groupBoxArg
             // 
             this.groupBoxArg.Controls.Add(this.buttonArgDefault);
@@ -464,7 +510,7 @@
             this.groupBoxArg.Controls.Add(this.buttonSaveArgs);
             this.groupBoxArg.Controls.Add(this.labelArgWarning);
             this.groupBoxArg.Controls.Add(this.textBoxArgs);
-            this.groupBoxArg.Location = new System.Drawing.Point(3, 136);
+            this.groupBoxArg.Location = new System.Drawing.Point(3, 237);
             this.groupBoxArg.Name = "groupBoxArg";
             this.groupBoxArg.Size = new System.Drawing.Size(421, 224);
             this.groupBoxArg.TabIndex = 1;
@@ -529,7 +575,7 @@
             this.groupBoxMinGWSrc.Controls.Add(this.labelMinGWSrcInstruction);
             this.groupBoxMinGWSrc.Controls.Add(this.radioButtonOffical);
             this.groupBoxMinGWSrc.Controls.Add(this.radioButtonPKU);
-            this.groupBoxMinGWSrc.Location = new System.Drawing.Point(3, 25);
+            this.groupBoxMinGWSrc.Location = new System.Drawing.Point(3, 3);
             this.groupBoxMinGWSrc.Name = "groupBoxMinGWSrc";
             this.groupBoxMinGWSrc.Size = new System.Drawing.Size(421, 90);
             this.groupBoxMinGWSrc.TabIndex = 0;
@@ -567,6 +613,7 @@
             this.radioButtonPKU.TabStop = true;
             this.radioButtonPKU.Text = "北大网盘";
             this.radioButtonPKU.UseVisualStyleBackColor = true;
+            this.radioButtonPKU.CheckedChanged += new System.EventHandler(this.radioButtonPKU_CheckedChanged);
             // 
             // Form1
             // 
@@ -586,6 +633,7 @@
             this.tabPageHelp.ResumeLayout(false);
             this.tabPageHelp.PerformLayout();
             this.tabPageSetting.ResumeLayout(false);
+            this.groupBoxPrivil.ResumeLayout(false);
             this.groupBoxArg.ResumeLayout(false);
             this.groupBoxArg.PerformLayout();
             this.groupBoxMinGWSrc.ResumeLayout(false);
@@ -639,6 +687,10 @@
         private System.Windows.Forms.Label labelMinGWSrcInstruction;
         private System.Windows.Forms.Label labelArgInstruction;
         private System.Windows.Forms.Button buttonArgDefault;
+        private System.Windows.Forms.CheckBox checkBoxOpen;
+        private System.Windows.Forms.GroupBox groupBoxPrivil;
+        private System.Windows.Forms.Label labelAuth;
+        private System.Windows.Forms.Button buttonAuth;
     }
 }
 
