@@ -81,7 +81,7 @@ xcode-select --install
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "{fileDirname}/${fileBasenameNoExtension}.out",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
