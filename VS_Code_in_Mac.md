@@ -59,7 +59,7 @@ xcode-select --install
                 "-stdlib=libc++",
                 "${file}",
                 "-o",
-                "{fileDirname}/${fileBasenameNoExtension}.out",
+                "${fileDirname}/${fileBasenameNoExtension}.out",
                 "--debug"
             ],
             "group": {
