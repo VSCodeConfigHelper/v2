@@ -20,7 +20,9 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 6. 第六步：选择一个工作文件夹（不能包含中文或中文字符），输入到工具中。
 7. 第七步：点击“一键配置”按钮即可。
 
-如果您在第七步中勾选了“配置成功启动”选项的话，你已经打开了一个 VS Code 窗口和一份 Hello World 代码。
+如果您在第七步中勾选了“生成测试代码”选项的话，你已经拥有一份 Hello World 代码。
+
+如果您在第七步中勾选了“配置成功后启动”选项的话，你可能已经启动了 VS Code。若启动失败或者未勾选，请在 VS Code 中手动打开文件夹（<kbd>Ctrl</kbd>+<kbd>K</kbd>, <kbd>Ctrl</kbd>+<kbd>O</kbd>），选择**工作文件夹**，也就是你第六步填写的文件夹。**（不是 .vscode 文件夹。）**
 
 按 <kbd>F5</kbd> （在不同设备上可能是 <kbd>Fn</kbd>+<kbd>F5</kbd>），期望在底部弹出一个终端并打印出 `Hello,world!` 。
 

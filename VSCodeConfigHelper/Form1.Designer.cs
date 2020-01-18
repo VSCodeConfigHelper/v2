@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStart = new System.Windows.Forms.TabPage();
+            this.checkBoxGenTest = new System.Windows.Forms.CheckBox();
             this.checkBoxOpen = new System.Windows.Forms.CheckBox();
             this.labelWorkspaceStatus = new System.Windows.Forms.Label();
             this.labelConfigState = new System.Windows.Forms.Label();
@@ -99,6 +100,7 @@
             // 
             // tabPageStart
             // 
+            this.tabPageStart.Controls.Add(this.checkBoxGenTest);
             this.tabPageStart.Controls.Add(this.checkBoxOpen);
             this.tabPageStart.Controls.Add(this.labelWorkspaceStatus);
             this.tabPageStart.Controls.Add(this.labelConfigState);
@@ -132,12 +134,24 @@
             this.tabPageStart.Text = "开始";
             this.tabPageStart.UseVisualStyleBackColor = true;
             // 
+            // checkBoxGenTest
+            // 
+            this.checkBoxGenTest.AutoSize = true;
+            this.checkBoxGenTest.Checked = true;
+            this.checkBoxGenTest.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxGenTest.Location = new System.Drawing.Point(139, 468);
+            this.checkBoxGenTest.Name = "checkBoxGenTest";
+            this.checkBoxGenTest.Size = new System.Drawing.Size(119, 19);
+            this.checkBoxGenTest.TabIndex = 26;
+            this.checkBoxGenTest.Text = "生成测试代码";
+            this.checkBoxGenTest.UseVisualStyleBackColor = true;
+            // 
             // checkBoxOpen
             // 
             this.checkBoxOpen.AutoSize = true;
             this.checkBoxOpen.Checked = true;
             this.checkBoxOpen.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxOpen.Location = new System.Drawing.Point(7, 529);
+            this.checkBoxOpen.Location = new System.Drawing.Point(274, 468);
             this.checkBoxOpen.Name = "checkBoxOpen";
             this.checkBoxOpen.Size = new System.Drawing.Size(134, 19);
             this.checkBoxOpen.TabIndex = 25;
@@ -626,6 +640,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "VS Code C++配置工具";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPageStart.ResumeLayout(false);
@@ -691,6 +706,7 @@
         private System.Windows.Forms.GroupBox groupBoxPrivil;
         private System.Windows.Forms.Label labelAuth;
         private System.Windows.Forms.Button buttonAuth;
+        private System.Windows.Forms.CheckBox checkBoxGenTest;
     }
 }
 

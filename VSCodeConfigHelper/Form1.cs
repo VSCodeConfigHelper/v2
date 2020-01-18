@@ -55,9 +55,11 @@ namespace VSCodeConfigHelper
             InitializeComponent();
         }
 
+        string workspacePath = string.Empty;
         string minGWPath = string.Empty;
         bool isMinGWOk = false;
         bool isWorkspaceOk = false;
+        bool isSuccess = false;
         JArray args = new JArray {
             "-g",
             "-std=c++17",
@@ -200,6 +202,14 @@ int main() {
             }
 
             ShowArgs();
+
+            if (File.Exists("VSCHcache.txt"))
+            {
+                StreamReader sr = new StreamReader("VSCHcache.txt");
+                textBoxMinGWPath.Text = sr.ReadLine();
+                textBoxWorkspacePath.Text = sr.ReadLine();
+                sr.Close();
+            }
         }
 
         private void ButtonViewMinGW_Click(object sender, EventArgs e)
@@ -215,16 +225,17 @@ int main() {
         private void TextBoxMinGWPath_TextChanged(object sender, EventArgs e)
         {
             isMinGWOk = false;
-            if (!string.IsNullOrWhiteSpace(textBoxMinGWPath.Text))
+            minGWPath = textBoxMinGWPath.Text;
+            if (!string.IsNullOrWhiteSpace(minGWPath))
             {
-                if (Directory.Exists(textBoxMinGWPath.Text) && File.Exists(textBoxMinGWPath.Text + "\\bin\\g++.exe"))
+                if (Directory.Exists(minGWPath) && File.Exists(minGWPath + "\\bin\\g++.exe"))
                 {
                     labelMinGWState.ForeColor = Color.Green;
                     labelMinGWState.Text = "检测到编译器：";
-                    string version = GetGxxVersion(textBoxMinGWPath.Text + "\\bin\\g++.exe");
+                    string version = GetGxxVersion(minGWPath + "\\bin\\g++.exe");
                     labelMinGWState.Text += '\n' + version;
                     // prevent duplicate
-                    minGWPath = textBoxMinGWPath.Text.ToLower();
+                    minGWPath = minGWPath.ToLower();
                     isMinGWOk = true;
                 }
                 else
@@ -449,9 +460,9 @@ int main() {
             }};
         }
 
-        private void LoadVSCode(string path)
+        private string GenerateTestFile(string path)
         {
-            labelConfigState.Text += "启动 VS Code 中...";
+            labelConfigState.Text += "生成测试文件中...";
             string filepath = $"{path}\\helloworld.cpp";
             if (File.Exists(filepath))
             {
@@ -465,42 +476,50 @@ int main() {
             sw.Write(testCode);
             sw.Flush();
             sw.Close();
-            OpenTestCode(path, filepath);
             labelConfigState.Text += "成功。";
+            return filepath;
         }
 
-        public static void OpenTestCode(string folderpath, string filepath)
+        private void LoadVSCode(string path, string filepath = null)
         {
-
-            using (Process proc = new Process())
+            try
             {
-                // Must execute by shell to use User PATH
-                // Hide the Shell Console Window
-                proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                proc.StartInfo.UseShellExecute = true;
-                proc.StartInfo.FileName = "code";
-                proc.StartInfo.Arguments = $"\"{folderpath}\" -g \"{filepath}\"";
-                proc.Start();
-                proc.WaitForExit();
-                proc.Close();
+                labelConfigState.Text += "启动 VS Code 中...";
+                using (Process proc = new Process())
+                {
+                    // Must execute by shell to use User PATH
+                    // Hide the Shell Console Window
+                    proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    proc.StartInfo.UseShellExecute = true;
+                    proc.StartInfo.FileName = "code";
+                    if (string.IsNullOrEmpty(filepath))
+                    {
+                        proc.StartInfo.Arguments = $"\"{path}\"";
+                    }
+                    else
+                    {
+                        proc.StartInfo.Arguments = $"\"{path}\" -g \"{filepath}\"";
+                    }
+                    proc.Start();
+                    proc.WaitForExit();
+                    proc.Close();
+                }
+                labelConfigState.Text += "成功。";
+            }
+            catch (Exception ex)
+            {
+                labelConfigState.Text += ("失败：" + ex.Message);
+                MessageBox.Show("暂时无法启动 VS Code，请尝试手动启动或者重新打开本工具。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
 
         private void ButtonConfig_Click(object sender, EventArgs e)
         {
             try
             {
-                // Kill VS Code process to apply PATH env and prevent occupy
-                Process[] processList = System.Diagnostics.Process.GetProcesses();
-                foreach (var process in processList)
-                {
-                    if (process.ProcessName.ToLower() == "code")
-                    {
-                        process.Kill();
-                    }
-                }
-
-                string workspacePath = textBoxWorkspacePath.Text;
+                isSuccess = false;
+                workspacePath = textBoxWorkspacePath.Text;
                 JObject launchJson = GetLaunchJson();
                 JObject tasksJson = getTasksJson();
                 JObject settingsJson = GetSettingsJson();
@@ -516,6 +535,17 @@ int main() {
                     if (result == DialogResult.Cancel) return;
                     Directory.Delete(workspacePath + "\\.vscode", true);
                 }
+
+                // Kill VS Code process to apply PATH env and prevent occupy
+                Process[] processList = System.Diagnostics.Process.GetProcesses();
+                foreach (var process in processList)
+                {
+                    if (process.ProcessName.ToLower() == "code")
+                    {
+                        process.Kill();
+                    }
+                }
+
                 Directory.CreateDirectory(workspacePath + "\\.vscode");
                 File.SetAttributes(workspacePath + "\\.vscode", FileAttributes.Hidden);
                 StreamWriter launchsw = new StreamWriter(workspacePath + "\\.vscode\\launch.json");
@@ -532,12 +562,19 @@ int main() {
                 settingssw.Close();
                 labelConfigState.ForeColor = Color.Green;
                 labelConfigState.Text = "配置成功。";
-                if (checkBoxOpen.Checked) LoadVSCode(workspacePath);
+
+                if (checkBoxGenTest.Checked)
+                {
+                    string filepath = GenerateTestFile(workspacePath);
+                    if (checkBoxOpen.Checked) LoadVSCode(workspacePath, filepath);
+                }
+                else if (checkBoxOpen.Checked) LoadVSCode(workspacePath);
+                isSuccess = true;
             }
             catch (Exception ex)
             {
                 labelConfigState.ForeColor = Color.Red;
-                labelConfigState.Text = "配置失败：" + ex.Message;
+                labelConfigState.Text += "配置失败：" + ex.Message;
             }
         }
 
@@ -551,13 +588,14 @@ int main() {
 
         private void TextBoxWorkspacePath_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBoxWorkspacePath.Text))
+            workspacePath = textBoxWorkspacePath.Text;
+            if (string.IsNullOrWhiteSpace(workspacePath))
             {
                 isWorkspaceOk = false;
                 labelWorkspaceStatus.Visible = false;
                 return;
             }
-            if (!Regex.IsMatch(textBoxWorkspacePath.Text, "^[ -~]*$"))
+            if (!Regex.IsMatch(workspacePath, "^[ -~]*$"))
             {
                 isWorkspaceOk = false;
                 labelWorkspaceStatus.Visible = true;
@@ -631,6 +669,25 @@ int main() {
             else
             {
                 linkLabelMinGW.Text = "下载地址...";
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!isSuccess)
+            {
+                StreamWriter sw = new StreamWriter("VSCHcache.txt");
+                sw.WriteLine(minGWPath);
+                sw.WriteLine(workspacePath);
+                sw.Flush();
+                sw.Close();
+            }
+            else
+            {
+                if (File.Exists("VSCHcache.txt"))
+                {
+                    File.Delete("VSCHcache.txt");
+                }
             }
         }
     }
