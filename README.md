@@ -13,24 +13,14 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 然后，您只需要[下载](https://github.com/Guyutongxue/VSCodeConfigHelper/releases)此工具，然后按照上面的提示进行即可：
 
 1. 第一步：点击工具中的下载地址获得 MinGW-w64 工具包。
-2. 第二步：使用解压工具将刚才的文件解压，然后将其中 `mingw64` 这一文件夹的路径输入到工具中。此文件夹用于存放编译器等重要文件，请不要删除。
+2. 第二步：使用解压工具将刚才的文件解压，然后将其中 `mingw64` 这一文件夹的路径输入到工具中。此文件夹用于存放编译器等重要文件，请妥善保存。
 3. 第三步：点击“设置环境变量”按钮即可。
-4. 第四步：点击工具中的下载地址跳转到 Visual Studio Code 官网，下载最新版本的安装程序，然后双击运行安装程序，按照其提示完成安装。
+4. 第四步：点击工具中的下载地址跳转到 Visual Studio Code 官网，下载最新版本的安装程序，然后双击运行安装程序，按照其提示完成安装。请保持默认选项。
 5. 第五步：点击工具中的“安装插件...”按钮，跳转到插件安装网页。点击网页中的 “Install” ，并允许网页打开 Visual Studio Code 。在 Visual Studio Code 中选择 “Install”，完成插件的安装。
 6. 第六步：选择一个工作文件夹（不能包含中文或中文字符），输入到工具中。
 7. 第七步：点击“一键配置”按钮即可。
 
-至此您已经完成了 Visual Studio Code 的全部配置工作。您可以尝试编写您的第一个程序了！
-
-在 Visual Studio 中打开您的工作文件夹（<Kbd>Ctrl</kbd>+<Kbd>K</kbd>, <Kbd>Ctrl</kbd>+<Kbd>O</kbd>）（**注意，并不是 .vscode 文件夹，而是它的上级文件夹，即在第六步中所填写的文件夹**）。然后在右侧工作区视图中新建 `helloworld.cpp` ：
-
-```C++
-#include<iostream>
-using namespace std;
-int main(){
-    cout<<"Hello,world!"<<endl;
-}
-```
+如果您在第七步中勾选了“配置成功启动”选项的话，你已经打开了一个 VS Code 窗口和一份 Hello World 代码。
 
 按 <kbd>F5</kbd> （在不同设备上可能是 <kbd>Fn</kbd>+<kbd>F5</kbd>），期望在底部弹出一个终端并打印出 `Hello,world!` 。
 
