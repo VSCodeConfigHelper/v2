@@ -6,7 +6,7 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 
 ## 使用方法
 
-此工具只能在 Windows 环境下使用。如果您使用的是 macOS，请参阅[此处](VS_Code_in_Mac.md)。如果您使用的是 GNU/Linux，您来这里做什么？
+此工具只能在 Windows （版本不低于 Windows 7 Service Pack 1）环境下使用。如果您使用的是 macOS，请参阅[此处](VS_Code_in_Mac.md)。如果您使用的是 GNU/Linux，您来这里做什么？
 
 您**只**需要一个支持 7-Zip 解压缩的软件。您可以使用*任何*主流的工具包括 WinRAR、Bandizip 甚至“好压”。
 
@@ -34,10 +34,10 @@ VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它�
 
 ![.NET Framework not found](https://s2.ax1x.com/2020/01/14/lqbwOU.jpg)
 
-请前往 [Microsoft 下载](https://www.microsoft.com/en-us/download/details.aspx?id=42642) 获取该依赖 .NET Framework 4.5 环境。
+请前往 [Microsoft 下载](https://www.microsoft.com/zh-CN/download/details.aspx?id=53344) 获取 .NET Framework 4.6.2 环境。
 
 -----
 
 ## 关于此项目
 
-本项目使用 Visual Studio 2019 开发，基于 .NET Framework 4.0 。代码采用 MIT 协议开源，欢迎您贡献出您自己的一份力量。您只需要克隆本仓库，然后使用 Visual Studio 打开解决方案文件即可生成、调试。
+本项目使用 Visual Studio 2019 开发，基于 .NET Framework 4.5 。代码采用 MIT 协议开源，欢迎您贡献出您自己的一份力量。您只需要克隆本仓库，然后使用 Visual Studio 打开解决方案文件即可生成、调试。
