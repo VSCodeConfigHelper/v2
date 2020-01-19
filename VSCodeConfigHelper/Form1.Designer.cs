@@ -289,7 +289,7 @@
             this.labelExtensionHint.Name = "labelExtensionHint";
             this.labelExtensionHint.Size = new System.Drawing.Size(275, 36);
             this.labelExtensionHint.TabIndex = 11;
-            this.labelExtensionHint.Text = "点击右侧按钮，选择 Install 。如失败，请检查 VS Code 是否安装。";
+            this.labelExtensionHint.Text = "点击左侧按钮，选择 Install 。如失败，请检查 VS Code 是否安装。";
             // 
             // label5
             // 
