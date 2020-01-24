@@ -44,7 +44,7 @@ xcode-select --install
 }
 ``` -->
 
-按 ⌘+⇧+P，搜索选择 “Tasks: Configure Default Build Task”，选择 “Create tasks.json file from template”，再选择带有 “Clang” 字样的选项。将生成的 `tasks.json` 编辑为这样一个文件：
+按 ⌘+⇧+P，搜索选择 “Tasks: Configure Default Build Task”，选择 “Create tasks.json file from template”，再选择 “Others” 选项。将生成的 `tasks.json` 编辑为这样一个文件：
 
 ```JSON
 {
