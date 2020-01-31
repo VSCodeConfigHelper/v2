@@ -1,8 +1,6 @@
 # 在 Mac 上安装 VS Code
 
-## 安装 Xcode
-
-在 App Store 上搜索下载 Xcode 作为编译器。
+## 安装编译器
 
 打开终端（ Spotlight 搜索 “Terminal.app” ），输入
 
@@ -22,29 +20,8 @@ xcode-select --install
 打开一个保存 C++ 文档的文件夹（Open Folder）。按 ⌘+⇧+P，搜索选择“ C/C++: Edit Configurations... (UI)”。
 
 将“编译器路径”（Compiler Path）设置为 `/usr/bin/clang` ， IntelliSense 模式设置为 `clang-x64` 。
-<!-- 
-最终检查一下`.vscode/c_cpp_properties.json`，应如下：
 
-
-```JSON
-{
-    "configurations": [
-        {
-            "name": "macOS",
-            "includePath": ["${workspaceFolder}/**"],
-            "defines": [],
-            "macFrameworkPath": ["/System/Library/Frameworks", "/Library/Frameworks"],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
-        }
-    ],
-    "version": 4
-}
-``` -->
-
-按 ⌘+⇧+P，搜索选择 “Tasks: Configure Default Build Task”，选择 “Create tasks.json file from template”，再选择 “Others” 选项。将生成的 `tasks.json` 编辑为这样一个文件：
+按 ⌘+⇧+P，搜索选择 “Tasks: Configure Default Build Task”，选择 “Create tasks.json file from template”，再选择 “Others” 选项。将生成的 `tasks.json` 用以下文本覆盖：
 
 ```JSON
 {
@@ -71,7 +48,7 @@ xcode-select --install
 }
 ```
 
-最后，按 ⌘+⇧+P，搜索选择 “Debug: Open launch.json”，选择 “GDB/LLDB” 。将生成的 `launch.json` 编辑为这样一个文件：
+最后，按 ⌘+⇧+P，搜索选择 “Debug: Open launch.json”，选择 “GDB/LLDB” 。将生成的 `launch.json` 用以下文本覆盖：
 
 ```JSON
 {
