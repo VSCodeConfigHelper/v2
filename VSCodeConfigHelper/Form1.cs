@@ -122,8 +122,10 @@ namespace VSCodeConfigHelper
             "的讨论。对此我感到十分抱歉，还请您尝试其它命名，谢谢。" +
             Environment.NewLine + Environment.NewLine +
             "========================================" + Environment.NewLine +
-            "如果您还有相关问题，欢迎通过下方的邮件地址联系开发者" +
-            "谷雨同学。"
+            "如果您在配置成功后的编译、调试环节发生问题，请您浏览 " +
+            "https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md"+
+            " 获取帮助。如果您还有其它方面的问题，欢迎通过下方的邮件地址" +
+            "联系开发者谷雨同学。"
             ;
         readonly string testCode = @"// VS Code C++ 测试代码 ""Hello World""
 // 由 VSCodeConfigHelper 生成
@@ -148,7 +150,9 @@ int main() {
 // 此文件编译运行将输出 ""Hello, world!""。
 // 您将在下方弹出的终端（Terminal）窗口中看到这一行字。
 
-// 如果遇到了问题，请您重试或者咨询开发者。";
+// 如果遇到了问题，请您浏览
+// https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md 
+// 获取帮助。如果问题未能得到解决，请联系开发者。";
 
         public static bool IsRunningOn64Bit { get { return IntPtr.Size == 8; } }
 
