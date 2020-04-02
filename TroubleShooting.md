@@ -56,6 +56,10 @@ g++.exe (x86_64-win32-seh-rev0, Built by MinGW-W64 Project) 8.1.0
 
 如果上述操作未能解决问题，您安装的 VS Code 版本可能与 MinGW-w64 不匹配。请卸载 VS Code，并通过**此工具提供的下载链接**进行安装。
 
+## 终端 shell 路径“cmd.exe”不存在
+
+请检查您的环境变量中是否正确：打开控制面板->系统和安全->系统->高级系统设置->环境变量(N)...，然后确保其中包含 `C:\Windows\System32` 这一路径。若您使用 Windows 7，请您确保路径之间用分号分隔。
+
 ## 代码高亮出现问题
 
 [重新安装](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) `C/C++` 扩展即可。

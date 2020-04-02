@@ -63,6 +63,9 @@
             this.textBoxHelp = new System.Windows.Forms.TextBox();
             this.labelAuthor = new System.Windows.Forms.Label();
             this.tabPageSetting = new System.Windows.Forms.TabPage();
+            this.groupBoxLang = new System.Windows.Forms.GroupBox();
+            this.radioButtonC = new System.Windows.Forms.RadioButton();
+            this.radioButtonCpp = new System.Windows.Forms.RadioButton();
             this.groupBoxPrivil = new System.Windows.Forms.GroupBox();
             this.buttonAuth = new System.Windows.Forms.Button();
             this.labelAuth = new System.Windows.Forms.Label();
@@ -81,6 +84,7 @@
             this.tabPageStart.SuspendLayout();
             this.tabPageHelp.SuspendLayout();
             this.tabPageSetting.SuspendLayout();
+            this.groupBoxLang.SuspendLayout();
             this.groupBoxPrivil.SuspendLayout();
             this.groupBoxArg.SuspendLayout();
             this.groupBoxMinGWSrc.SuspendLayout();
@@ -479,6 +483,7 @@
             // 
             // tabPageSetting
             // 
+            this.tabPageSetting.Controls.Add(this.groupBoxLang);
             this.tabPageSetting.Controls.Add(this.groupBoxPrivil);
             this.tabPageSetting.Controls.Add(this.groupBoxArg);
             this.tabPageSetting.Controls.Add(this.groupBoxMinGWSrc);
@@ -489,11 +494,45 @@
             this.tabPageSetting.Text = "设置";
             this.tabPageSetting.UseVisualStyleBackColor = true;
             // 
+            // groupBoxLang
+            // 
+            this.groupBoxLang.Controls.Add(this.radioButtonC);
+            this.groupBoxLang.Controls.Add(this.radioButtonCpp);
+            this.groupBoxLang.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxLang.Name = "groupBoxLang";
+            this.groupBoxLang.Size = new System.Drawing.Size(421, 66);
+            this.groupBoxLang.TabIndex = 3;
+            this.groupBoxLang.TabStop = false;
+            this.groupBoxLang.Text = "配置语言";
+            // 
+            // radioButtonC
+            // 
+            this.radioButtonC.AutoSize = true;
+            this.radioButtonC.Location = new System.Drawing.Point(219, 24);
+            this.radioButtonC.Name = "radioButtonC";
+            this.radioButtonC.Size = new System.Drawing.Size(59, 19);
+            this.radioButtonC.TabIndex = 1;
+            this.radioButtonC.Text = "仅 C";
+            this.radioButtonC.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonCpp
+            // 
+            this.radioButtonCpp.AutoSize = true;
+            this.radioButtonCpp.Checked = true;
+            this.radioButtonCpp.Location = new System.Drawing.Point(45, 24);
+            this.radioButtonCpp.Name = "radioButtonCpp";
+            this.radioButtonCpp.Size = new System.Drawing.Size(91, 19);
+            this.radioButtonCpp.TabIndex = 1;
+            this.radioButtonCpp.TabStop = true;
+            this.radioButtonCpp.Text = "C++ 和 C";
+            this.radioButtonCpp.UseVisualStyleBackColor = true;
+            this.radioButtonCpp.CheckedChanged += new System.EventHandler(this.radioButtonCpp_CheckedChanged);
+            // 
             // groupBoxPrivil
             // 
             this.groupBoxPrivil.Controls.Add(this.buttonAuth);
             this.groupBoxPrivil.Controls.Add(this.labelAuth);
-            this.groupBoxPrivil.Location = new System.Drawing.Point(3, 99);
+            this.groupBoxPrivil.Location = new System.Drawing.Point(6, 171);
             this.groupBoxPrivil.Name = "groupBoxPrivil";
             this.groupBoxPrivil.Size = new System.Drawing.Size(421, 132);
             this.groupBoxPrivil.TabIndex = 6;
@@ -524,7 +563,7 @@
             this.groupBoxArg.Controls.Add(this.buttonSaveArgs);
             this.groupBoxArg.Controls.Add(this.labelArgWarning);
             this.groupBoxArg.Controls.Add(this.textBoxArgs);
-            this.groupBoxArg.Location = new System.Drawing.Point(3, 237);
+            this.groupBoxArg.Location = new System.Drawing.Point(3, 309);
             this.groupBoxArg.Name = "groupBoxArg";
             this.groupBoxArg.Size = new System.Drawing.Size(421, 224);
             this.groupBoxArg.TabIndex = 1;
@@ -589,7 +628,7 @@
             this.groupBoxMinGWSrc.Controls.Add(this.labelMinGWSrcInstruction);
             this.groupBoxMinGWSrc.Controls.Add(this.radioButtonOffical);
             this.groupBoxMinGWSrc.Controls.Add(this.radioButtonPKU);
-            this.groupBoxMinGWSrc.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxMinGWSrc.Location = new System.Drawing.Point(3, 75);
             this.groupBoxMinGWSrc.Name = "groupBoxMinGWSrc";
             this.groupBoxMinGWSrc.Size = new System.Drawing.Size(421, 90);
             this.groupBoxMinGWSrc.TabIndex = 0;
@@ -648,6 +687,8 @@
             this.tabPageHelp.ResumeLayout(false);
             this.tabPageHelp.PerformLayout();
             this.tabPageSetting.ResumeLayout(false);
+            this.groupBoxLang.ResumeLayout(false);
+            this.groupBoxLang.PerformLayout();
             this.groupBoxPrivil.ResumeLayout(false);
             this.groupBoxArg.ResumeLayout(false);
             this.groupBoxArg.PerformLayout();
@@ -707,6 +748,9 @@
         private System.Windows.Forms.Label labelAuth;
         private System.Windows.Forms.Button buttonAuth;
         private System.Windows.Forms.CheckBox checkBoxGenTest;
+        private System.Windows.Forms.GroupBox groupBoxLang;
+        private System.Windows.Forms.RadioButton radioButtonC;
+        private System.Windows.Forms.RadioButton radioButtonCpp;
     }
 }
 

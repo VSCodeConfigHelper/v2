@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -123,11 +124,15 @@ namespace VSCodeConfigHelper
             Environment.NewLine + Environment.NewLine +
             "========================================" + Environment.NewLine +
             "如果您在配置成功后的编译、调试环节发生问题，请您浏览 " +
-            "https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md"+
+            "https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md" +
             " 获取帮助。如果您还有其它方面的问题，欢迎通过下方的邮件地址" +
             "联系开发者谷雨同学。"
             ;
-        readonly string testCode = @"// VS Code C++ 测试代码 ""Hello World""
+
+        string FileExtension { get { return radioButtonCpp.Checked ? "cpp" : "c"; } }
+        string Compiler { get { return radioButtonCpp.Checked ? "g++.exe" : "gcc.exe"; } }
+
+        readonly string testCppCode = @"// VS Code C++ 测试代码 ""Hello World""
 // 由 VSCodeConfigHelper 生成
 
 // 您可以在当前的文件夹（您第六步输入的文件夹）下编写代码。
@@ -153,6 +158,39 @@ int main() {
 // 如果遇到了问题，请您浏览
 // https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md 
 // 获取帮助。如果问题未能得到解决，请联系开发者。";
+        readonly string testCCode = @"/**
+ * VS Code C 测试代码 ""Hello World""
+ * 由 VSCodeConfigHelper 生成
+ *
+ * 您可以在当前的文件夹（您第六步输入的文件夹）下编写代码。
+ *
+ * 按下 F5（部分设备上可能是 Fn + F5）编译调试。
+ * 按下 Ctrl + Shift + B 编译，但不运行。
+ * 按下 Ctrl + F5（部分设备上可能是 Ctrl + Fn + F5）编译运行，但不调试。
+ *
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ * 程序执行的入口点。
+ */
+int main(void) {
+    /* 在标准输出中打印 ""Hello, world!"" */
+    printf(""Hello, world!"");
+    return EXIT_SUCCESS;
+}
+
+/**
+ * 此文件编译运行将输出 ""Hello, world!""。
+ * 您将在下方弹出的终端（Terminal）窗口中看到这一行字。
+ *
+ * 如果遇到了问题，请您浏览
+ * https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md
+ * 获取帮助。如果问题未能得到解决，请联系开发者。
+ * 
+ */";
 
         public static bool IsRunningOn64Bit { get { return IntPtr.Size == 8; } }
 
@@ -246,7 +284,6 @@ int main() {
                 {
                     labelMinGWState.ForeColor = Color.Red;
                     labelMinGWState.Text = "未检测到编译器，请重试。";
-
                 }
             }
 
@@ -350,7 +387,8 @@ int main() {
                 Process.Start("https://code.visualstudio.com/Download");
             }
             // Hint image (Open by browser)
-            Process.Start("https://s2.ax1x.com/2020/01/18/1pRERI.png");
+            // No use now
+            // Process.Start("https://s2.ax1x.com/2020/01/18/1pRERI.png");
         }
 
         private void ButtonViewWorkspace_Click(object sender, EventArgs e)
@@ -372,7 +410,7 @@ int main() {
             };
             JObject config = new JObject
             {
-                {"name", "g++.exe build and debug active file"},
+                {"name", Compiler + " build and debug active file"},
                 {"type", "cppdbg"},
                 {"request", "launch"},
                 {"program", "${fileDirname}\\${fileBasenameNoExtension}.exe"},
@@ -384,7 +422,7 @@ int main() {
                 {"MIMode", "gdb"},
                 {"miDebuggerPath", minGWPath+"\\bin\\gdb.exe"},
                 {"setupCommands",new JArray{command} },
-                {"preLaunchTask", "g++.exe build active file" },
+                {"preLaunchTask", Compiler + " build active file" },
                 {"internalConsoleOptions", "neverOpen" }
             };
 
@@ -396,7 +434,7 @@ int main() {
             return launch;
         }
 
-        private JObject getTasksJson()
+        private JObject GetTasksJson()
         {
             JObject group = new JObject
             {
@@ -433,8 +471,8 @@ int main() {
                         new JObject
                         {
                             {"type", "shell"},
-                            {"label", "g++.exe build active file"},
-                            {"command", "g++.exe"},
+                            {"label", Compiler + " build active file"},
+                            {"command", Compiler},
                             {"args",args},
                             {"group",group},
                             {"presentation",presentation},
@@ -467,52 +505,73 @@ int main() {
         private string GenerateTestFile(string path)
         {
             labelConfigState.Text += "生成测试文件中...";
-            string filepath = $"{path}\\helloworld.cpp";
+            string filepath = $"{path}\\helloworld." + FileExtension;
             if (File.Exists(filepath))
             {
                 for (int i = 1; ; i++)
                 {
-                    filepath = $"{path}\\helloworld({i}).cpp";
+                    filepath = $"{path}\\helloworld({i})." + FileExtension;
                     if (!File.Exists(filepath)) break;
                 }
             }
-            StreamWriter sw = new StreamWriter(filepath, false, Encoding.UTF8);
-            sw.Write(testCode);
+            // Remove BOM
+            StreamWriter sw = new StreamWriter(filepath, false, new UTF8Encoding(false));
+            if (radioButtonCpp.Checked) sw.Write(testCppCode);
+            else sw.Write(testCCode);
             sw.Flush();
             sw.Close();
             labelConfigState.Text += "成功。";
             return filepath;
         }
 
-        private void LoadVSCode(string path, string filepath = null)
+        private string GetVSCodePath()
+        {
+            RegistryKey root = Registry.ClassesRoot;
+            RegistryKey rk = root.OpenSubKey("vscode\\shell\\open\\command");
+            if (rk == null)
+            {
+                return null;
+            }
+            string value = (string)rk.GetValue("", null);
+            // The value should be like:
+            // "C:\Program Files\Microsoft VS Code\Code.exe" --open-url -- "%1"
+            // and we just use the string inside the first quatation marks
+            value = value.Split('"')[1];
+            return value;
+        }
+
+        private void LoadVSCode(string folderpath, string filepath = null)
         {
             try
             {
                 labelConfigState.Text += "启动 VS Code 中...";
                 using (Process proc = new Process())
                 {
-                    // Must execute by shell to use User PATH
-                    // Hide the Shell Console Window
-                    proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    proc.StartInfo.UseShellExecute = true;
-                    proc.StartInfo.FileName = "code";
+                    // proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    // proc.StartInfo.UseShellExecute = true;
+                    string vsCodePath = GetVSCodePath();
+                    if (string.IsNullOrEmpty(vsCodePath))
+                        throw new Exception("VS Code path not found。");
+                    proc.StartInfo.FileName = vsCodePath;
                     if (string.IsNullOrEmpty(filepath))
                     {
-                        proc.StartInfo.Arguments = $"\"{path}\"";
+                        proc.StartInfo.Arguments = $"\"{folderpath}\"";
                     }
                     else
                     {
-                        proc.StartInfo.Arguments = $"\"{path}\" -g \"{filepath}\"";
+                        proc.StartInfo.Arguments = $"\"{folderpath}\" -g \"{filepath}\"";
                     }
                     proc.Start();
-                    proc.WaitForExit();
+                    // proc.WaitForExit();
                     proc.Close();
                 }
                 labelConfigState.Text += "成功。";
             }
             catch (Exception)
             {
-                MessageBox.Show("暂时无法启动 VS Code，请尝试手动启动或者重新打开本工具。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("暂时无法启动 VS Code。" + Environment.NewLine +
+                    "这可能是您没有完整安装 VS Code 导致的。请尝试通过本工具重新安装。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 throw new Exception("启动 VS Code 失败。");
             }
         }
@@ -525,7 +584,7 @@ int main() {
                 isSuccess = false;
                 workspacePath = textBoxWorkspacePath.Text;
                 JObject launchJson = GetLaunchJson();
-                JObject tasksJson = getTasksJson();
+                JObject tasksJson = GetTasksJson();
                 JObject settingsJson = GetSettingsJson();
                 if (!isWorkspaceOk || !isMinGWOk)
                 {
@@ -541,7 +600,7 @@ int main() {
                 }
 
                 // Kill VS Code process to apply PATH env and prevent occupy
-                Process[] processList = System.Diagnostics.Process.GetProcesses();
+                Process[] processList = Process.GetProcesses();
                 foreach (var process in processList)
                 {
                     if (process.ProcessName.ToLower() == "code")
@@ -609,6 +668,12 @@ int main() {
                 isWorkspaceOk = true;
                 labelWorkspaceStatus.Visible = false;
             }
+            // If the helloworld.cpp exists already, then do not generate by default
+            if (Directory.Exists(textBoxWorkspacePath.Text) &&
+                File.Exists(textBoxWorkspacePath.Text + "\\helloworld." + FileExtension))
+            {
+                checkBoxGenTest.Checked = false;
+            }
         }
 
         private void GenerateArgs()
@@ -628,6 +693,19 @@ int main() {
             textBoxArgs.Text = text.ToString().Trim();
         }
 
+        private void SetDefaultArgs()
+        {
+            groupBoxArg.Text = radioButtonCpp.Checked ? "配置 g++ 编译参数" : "配置 gcc 编译参数";
+            args = new JArray {
+                "-g",
+                radioButtonCpp.Checked ? "-std=c++17" : "-std=c17",
+                "\"${file}\"",
+                "-o",
+                "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+            };
+            ShowArgs();
+        }
+
         private void buttonSaveArgs_Click(object sender, EventArgs e)
         {
             GenerateArgs();
@@ -636,14 +714,7 @@ int main() {
 
         private void buttonArgDefault_Click(object sender, EventArgs e)
         {
-            args = new JArray {
-                "-g",
-                "-std=c++17",
-                "\"${file}\"",
-                "-o",
-                "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
-            };
-            ShowArgs();
+            SetDefaultArgs();
         }
 
         private void buttonAuth_Click(object sender, EventArgs e)
@@ -676,6 +747,11 @@ int main() {
             }
         }
 
+        private void radioButtonCpp_CheckedChanged(object sender, EventArgs e)
+        {
+            SetDefaultArgs();
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!isSuccess)
@@ -694,5 +770,6 @@ int main() {
                 }
             }
         }
+
     }
 }
