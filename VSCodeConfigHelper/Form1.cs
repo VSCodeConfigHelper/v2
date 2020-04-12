@@ -106,10 +106,10 @@ namespace VSCodeConfigHelper
             "----------------------------------------" + Environment.NewLine +
             " VS Code 的核心理念和 Visual Studio 类似也是基于" +
             "“项目”这一基本单位的。在 VS Code 中，项目的表现形" +
-            "式就是“工作区”（Workspace）。您的一切编译、运行配" +
-            "置都只适用于工作区内部，这样您可以针对不同的语言、" +
+            "式就是文件夹。您的一切编译、运行配置都只适用于" +
+            "这个文件夹内部，这样您可以针对不同的语言、" +
             "不同的用途进行个性化的配置。" + Environment.NewLine +
-            "当 VS Code 打开工作区文件夹时，会读取 `.vscode` 子" +
+            "当 VS Code 打开工作文件夹时，会读取 `.vscode` 子" +
             "文件夹内部的数个 JSON 文件作为配置信息。这些 JSON " +
             "文件将通过固定的格式指示 VS Code 如何调用编译器，" +
             "如何调试，并提供运行路径等必要的信息。本工具所做的就" +
@@ -118,7 +118,7 @@ namespace VSCodeConfigHelper
             "========================================" + Environment.NewLine +
             "为什么工作文件夹不支持中文？" + Environment.NewLine +
             "----------------------------------------" + Environment.NewLine +
-            "由于 MinGW 中 gdb 调试器并不支持 Unicode (UTF-16) 编码" +
+            "由于 MinGW 中 gdb 调试器并不支持 Unicode 编码" +
             "的路径参数，详情可见 https://github.com/Microsoft/vscode-cpptools/issues/1998 " +
             "的讨论。对此我感到十分抱歉，还请您尝试其它命名，谢谢。" +
             Environment.NewLine + Environment.NewLine +
@@ -420,7 +420,7 @@ int main(void) {
                 {"environment", new JArray()},
                 {"externalConsole", false},
                 {"MIMode", "gdb"},
-                {"miDebuggerPath", minGWPath+"\\bin\\gdb.exe"},
+                {"miDebuggerPath", minGWPath + "\\bin\\gdb.exe"},
                 {"setupCommands",new JArray{command} },
                 {"preLaunchTask", Compiler + " build active file" },
                 {"internalConsoleOptions", "neverOpen" }
@@ -497,9 +497,14 @@ int main(void) {
         private JObject GetSettingsJson()
         {
             return new JObject
-            {{
-                "C_Cpp.default.intelliSenseMode", "gcc-x64"
-            }};
+            {
+                {
+                    "C_Cpp.default.intelliSenseMode", IsRunningOn64Bit? "gcc-x64" : "gcc-x86"
+                },
+                {
+                    "C_Cpp.default.compilerPath", minGWPath +  "\\bin\\" + Compiler
+                }
+            };
         }
 
         private string GenerateTestFile(string path)
