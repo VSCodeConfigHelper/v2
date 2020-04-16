@@ -83,7 +83,7 @@ namespace VSCodeConfigHelper
             "-o",
             "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
         };
-        
+
         public static bool isCpp = true;
         string FileExtension { get { return isCpp ? "cpp" : "c"; } }
         string Compiler { get { return isCpp ? "g++.exe" : "gcc.exe"; } }
@@ -317,7 +317,7 @@ int main(int argc, char** argv) {
             // 北大网盘有效期截止至此
             isMinGWPku = DateTime.Now.Date < new DateTime(2024, 10, 1);
 
-            if(IsAdministrator) Text = "管理员: VS Code C++配置工具";
+            if (IsAdministrator) Text = "管理员: VS Code C++配置工具";
 
             if (File.Exists("VSCHcache.txt"))
             {
@@ -768,7 +768,7 @@ int main(int argc, char** argv) {
                     }
                     else
                     {
-                        proc.StartInfo.Arguments = $" -g \"{filepath}:0\" \"{folderpath}\"";
+                        proc.StartInfo.Arguments = $" -g \"{filepath}:1\" \"{folderpath}\"";
                     }
                     proc.Start();
                     // proc.WaitForExit();
@@ -901,54 +901,60 @@ int main(int argc, char** argv) {
 
         private void buttonMinGWNext_Click(object sender, EventArgs e)
         {
-            buttonMinGWNext.Enabled = false;
-            buttonMinGWNext.Text = "正在设置...";
-            Application.DoEvents();
-            EnvironmentVariableTarget current = IsAdministrator ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.User;
-            string path = Environment.GetEnvironmentVariable("Path", current);
-            if (isMinGWFirstTime)
+            try
             {
-                GuessDescription(minGWPath + "\\bin\\" + Compiler, out string hint);
-                if (hint != null)
+                buttonMinGWNext.Enabled = false;
+                buttonMinGWNext.Text = "正在设置...";
+                Application.DoEvents();
+                EnvironmentVariableTarget current = IsAdministrator ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.User;
+                string path = Environment.GetEnvironmentVariable("Path", current);
+                if (isMinGWFirstTime)
                 {
-                    DialogResult dr = MessageBox.Show($"您选择的 MinGW 环境不推荐，因为：{hint} 确定继续吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                    if (dr == DialogResult.Cancel) return;
+                    GuessDescription(minGWPath + "\\bin\\" + Compiler, out string hint);
+                    if (hint != null)
+                    {
+                        DialogResult dr = MessageBox.Show($"您选择的 MinGW 环境不推荐，因为：{hint} 确定继续吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.Cancel) return;
+                    }
+                    Environment.SetEnvironmentVariable("Path", path + ";" + minGWPath + "\\bin", current);
                 }
-                Environment.SetEnvironmentVariable("Path", path + ";" + minGWPath + "\\bin", current);
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(listViewMinGW.SelectedItems[0].ToolTipText))
+                else
                 {
-                    DialogResult dr = MessageBox.Show($"您选择的 MinGW 环境不推荐，因为：{listViewMinGW.SelectedItems[0].ToolTipText} 确定继续吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                    if (dr == DialogResult.Cancel) return;
-                }
-                minGWPath = listViewMinGW.SelectedItems[0].SubItems[1].Text;
-                // If only one in the list, just ignore.
-                // Because the ony one is detected from PATH, and there is no need to remove or add.
-                if (minGWPathList.Count > 1)
-                {
-                    DialogResult dr = MessageBox.Show("程序将从 PATH 环境变量中移除其余 MinGW 环境，但不会删除您的任何文件。确定继续吗？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                    if (dr == DialogResult.Cancel) return;
+                    if (!string.IsNullOrEmpty(listViewMinGW.SelectedItems[0].ToolTipText))
+                    {
+                        DialogResult dr = MessageBox.Show($"您选择的 MinGW 环境不推荐，因为：{listViewMinGW.SelectedItems[0].ToolTipText} 确定继续吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.Cancel) return;
+                    }
+                    minGWPath = listViewMinGW.SelectedItems[0].SubItems[1].Text;
+                    // If only one in the list, just ignore.
+                    // Because the ony one is detected from PATH, and there is no need to remove or add.
+                    if (minGWPathList.Count > 1)
+                    {
+                        DialogResult dr = MessageBox.Show("程序将从 PATH 环境变量中移除其余 MinGW 环境，但不会删除您的任何文件。确定继续吗？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.Cancel) return;
 
-                    List<string> splitedPath = new List<string>(path.Split(Path.PathSeparator));
-                    for (int i = 0; i < splitedPath.Count;)
-                    {
-                        if (minGWPathList.Contains(splitedPath[i])) splitedPath.RemoveAt(i);
-                        else i++;
+                        List<string> splitedPath = new List<string>(path.Split(Path.PathSeparator));
+                        for (int i = 0; i < splitedPath.Count;)
+                        {
+                            if (minGWPathList.Contains(splitedPath[i])) splitedPath.RemoveAt(i);
+                            else i++;
+                        }
+                        string result = string.Empty;
+                        foreach (var i in splitedPath)
+                        {
+                            result += i + Path.PathSeparator;
+                        }
+                        result += minGWPath + "\\bin";
+                        Environment.SetEnvironmentVariable("Path", result, current);
                     }
-                    string result = string.Empty;
-                    foreach (var i in splitedPath)
-                    {
-                        result += i + Path.PathSeparator;
-                    }
-                    result += minGWPath + "\\bin";
-                    Environment.SetEnvironmentVariable("Path", result, current);
                 }
+                tabControlMain.SelectedIndex++;
             }
-            tabControlMain.SelectedIndex++;
-            buttonMinGWNext.Enabled = true;
-            buttonMinGWNext.Text = "下一步";
+            finally
+            {
+                buttonMinGWNext.Enabled = true;
+                buttonMinGWNext.Text = "下一步";
+            }
         }
 
         void CheckExtension()
@@ -1016,7 +1022,7 @@ int main(int argc, char** argv) {
             }
             else
             {
-                labelCodeHint.Text = "未检测到已安装的VS Code。" + Environment.NewLine + "请点击右侧地址下载安装。";
+                labelCodeHint.Text = "未检测到已安装的VS Code。" + Environment.NewLine + "请点击右侧地址下载安装。" + Environment.NewLine + "（若您已安装但未检测到，请您卸载并通过右侧地址重新安装。）";
                 labelExtensionHint.Text = "请点击左侧按钮安装 C/C++ 扩展。";
                 buttonExtension.Enabled = false;
                 buttonExtension.Text = "安装扩展";
@@ -1140,6 +1146,32 @@ int main(int argc, char** argv) {
             }
         }
 
+        public bool CreateDesktopShortcut()
+        {
+            try
+            {
+                string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Visual Studio Code.lnk";
+                if (File.Exists(desktop))
+                {
+                    File.Delete(desktop);
+                }
+                IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+                IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(desktop);
+                shortcut.TargetPath = vsCodePath;
+                shortcut.WorkingDirectory = Path.GetDirectoryName(vsCodePath);
+                shortcut.WindowStyle = 1; // normal size
+                shortcut.Description = "Visual Studio Code";
+                shortcut.IconLocation = vsCodePath;
+                shortcut.Arguments = $"\"{workspacePath}\"";
+                shortcut.Save();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         private void buttonFinishAll_Click(object sender, EventArgs e)
         {
             if (checkBoxGenTest.Checked)
@@ -1148,6 +1180,7 @@ int main(int argc, char** argv) {
                 if (checkBoxOpen.Checked) LoadVSCode(workspacePath, filepath);
             }
             else if (checkBoxOpen.Checked) LoadVSCode(workspacePath);
+            if (checkBoxDesktopShortcut.Checked) CreateDesktopShortcut();
             Close();
         }
 

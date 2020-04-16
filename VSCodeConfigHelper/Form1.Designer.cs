@@ -90,6 +90,7 @@
             this.buttonSettings = new System.Windows.Forms.Button();
             this.panelNavigate = new System.Windows.Forms.Panel();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.checkBoxDesktopShortcut = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageWelcome.SuspendLayout();
             this.tabPageMinGW.SuspendLayout();
@@ -707,6 +708,7 @@
             // tabPageFinish
             // 
             this.tabPageFinish.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageFinish.Controls.Add(this.checkBoxDesktopShortcut);
             this.tabPageFinish.Controls.Add(this.labelFinishHint);
             this.tabPageFinish.Controls.Add(this.labelFinishTitle);
             this.tabPageFinish.Controls.Add(this.checkBoxGenTest);
@@ -777,6 +779,16 @@
             this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxLogo.TabIndex = 6;
             this.pictureBoxLogo.TabStop = false;
+            // 
+            // checkBoxDesktopShortcut
+            // 
+            this.checkBoxDesktopShortcut.AutoSize = true;
+            this.checkBoxDesktopShortcut.Location = new System.Drawing.Point(34, 158);
+            this.checkBoxDesktopShortcut.Name = "checkBoxDesktopShortcut";
+            this.checkBoxDesktopShortcut.Size = new System.Drawing.Size(299, 19);
+            this.checkBoxDesktopShortcut.TabIndex = 38;
+            this.checkBoxDesktopShortcut.Text = "创建桌面快捷方式（建议“小白”勾选）";
+            this.checkBoxDesktopShortcut.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -880,6 +892,7 @@
         private System.Windows.Forms.PictureBox pictureBoxExternal;
         private System.Windows.Forms.PictureBox pictureBoxInternal;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.CheckBox checkBoxDesktopShortcut;
     }
 }
 
