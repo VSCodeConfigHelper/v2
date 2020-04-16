@@ -1,4 +1,21 @@
-﻿using System;
+﻿// Copyright (C) 2020 Guyutongxue
+// 
+// This file is part of VSCodeConfigHelper.
+// 
+// VSCodeConfigHelper is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// VSCodeConfigHelper is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with VSCodeConfigHelper.  If not, see<http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,122 +41,65 @@ namespace VSCodeConfigHelper
     public partial class Form1 : Form
     {
 
-        #region Add Shield Icon
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(HandleRef hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-
-        /// <summary>
-        ///     Enables the elevated shield icon on the given button control
-        /// </summary>
-        /// <param name="ThisButton">
-        ///     Button control to enable the elevated shield icon on.
-        /// </param>
-        private void EnableElevateIcon_BCM_SETSHIELD(Button ThisButton)
-        {
-            // Input validation, validate that ThisControl is not null
-            if (ThisButton == null) return;
-
-            // Define BCM_SETSHIELD locally, declared originally in Commctrl.h
-            uint BCM_SETSHIELD = 0x0000160C;
-
-            // Set button style to the system style
-            ThisButton.FlatStyle = FlatStyle.System;
-
-            // Send the BCM_SETSHIELD message to the button control
-            SendMessage(new HandleRef(ThisButton, ThisButton.Handle), BCM_SETSHIELD, new IntPtr(0), new IntPtr(1));
-        }
-        #endregion
 
         public Form1()
         {
             InitializeComponent();
+            // 防止TabControl 切换时卡顿闪烁
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
         }
+        // 防止TabControl 切换时卡顿闪烁
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
+
+        #region 路径们
 
         string workspacePath = string.Empty;
         string minGWPath = string.Empty;
-        bool isMinGWOk = false;
-        bool isWorkspaceOk = false;
-        bool isSuccess = false;
-        JArray args = new JArray {
+        string vsCodePath = null;
+
+        #endregion
+
+        /// <summary>
+        /// 存储所有可能的 MinGW 路径。
+        /// </summary>
+        List<string> minGWPathList = new List<string>();
+
+        public static bool isMinGWPku = true;
+        bool isMinGWFirstTime = true;
+
+        public static bool isSuccess = false;
+        public static JArray args = new JArray {
             "-g",
             "-std=c++17",
             "\"${file}\"",
             "-o",
             "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
         };
-        static readonly string helpText =
-            "========================================" + Environment.NewLine +
-            "什么是 MinGW-w64 ？" + Environment.NewLine +
-            "----------------------------------------" + Environment.NewLine +
-            "MinGW (Minimalist GNU for Windows)，是一个适用于" +
-            "Windows 应用程序的极简开发环境， 提供了一个完整的" +
-            "开源编程工具集，Mingw-w64 则是 MinGW 的“升级版” " +
-            "，提供了对 64 位计算机的支持。" + Environment.NewLine +
-             Environment.NewLine + Environment.NewLine +
-            "========================================" + Environment.NewLine +
-            "下载下来的 MinGW-w64 文件打不开，怎么办？" + Environment.NewLine +
-            "----------------------------------------" + Environment.NewLine +
-            "您刚刚所下载的文件是 7-Zip 格式，一种效率较高的压" +
-            "缩文件。您可以通过任何主流的解压缩工具（如 WinRAR、" +
-            "Bandizip 等）解压，也可以使用专门的 7-Zip 工具（ht" +
-            "tps://www.7-zip.org/）解压。" + Environment.NewLine +
-            Environment.NewLine + Environment.NewLine +
-            "========================================" + Environment.NewLine +
-            "设置环境变量是什么意思？" + Environment.NewLine +
-            "----------------------------------------" + Environment.NewLine +
-            "环境变量是指在操作系统中用来指定操作系统运行环境" +
-            "的一些参数。这里的设置是将 MinGW 相关程序添加到 " +
-            "Path 这一环境变量当中，允许用户可以轻松地键入 `g" +
-            "++` 等命令直接编译。" + Environment.NewLine +
-            Environment.NewLine + Environment.NewLine +
-            "========================================" + Environment.NewLine +
-            "“安装插件”是在做什么？" + Environment.NewLine +
-            "----------------------------------------" + Environment.NewLine +
-            "VS Code 本身仅仅是一个文本编辑器，正是由于它强大的" +
-            "插件生态，才能让它实现程序的编译、运行和调试。这里" +
-            "安装的插件是微软官方制作的 C/C++ 插件，提供了简洁易" +
-            "用的调试和 IntelliSense 智能提示功能。" + Environment.NewLine +
-            Environment.NewLine + Environment.NewLine +
-            "========================================" + Environment.NewLine +
-            "为什么要选择工作文件夹？“一键配置”都做了什么？" + Environment.NewLine +
-            "----------------------------------------" + Environment.NewLine +
-            " VS Code 的核心理念和 Visual Studio 类似也是基于" +
-            "“项目”这一基本单位的。在 VS Code 中，项目的表现形" +
-            "式就是“工作区”（Workspace）。您的一切编译、运行配" +
-            "置都只适用于工作区内部，这样您可以针对不同的语言、" +
-            "不同的用途进行个性化的配置。" + Environment.NewLine +
-            "当 VS Code 打开工作区文件夹时，会读取 `.vscode` 子" +
-            "文件夹内部的数个 JSON 文件作为配置信息。这些 JSON " +
-            "文件将通过固定的格式指示 VS Code 如何调用编译器，" +
-            "如何调试，并提供运行路径等必要的信息。本工具所做的就" +
-            "是通过您输入的 MinGW 路径自动配置好上述 JSON 文件。" +
-            Environment.NewLine + Environment.NewLine +
-            "========================================" + Environment.NewLine +
-            "为什么工作文件夹不支持中文？" + Environment.NewLine +
-            "----------------------------------------" + Environment.NewLine +
-            "由于 MinGW 中 gdb 调试器并不支持 Unicode (UTF-16) 编码" +
-            "的路径参数，详情可见 https://github.com/Microsoft/vscode-cpptools/issues/1998 " +
-            "的讨论。对此我感到十分抱歉，还请您尝试其它命名，谢谢。" +
-            Environment.NewLine + Environment.NewLine +
-            "========================================" + Environment.NewLine +
-            "如果您在配置成功后的编译、调试环节发生问题，请您浏览 " +
-            "https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md" +
-            " 获取帮助。如果您还有其它方面的问题，欢迎通过下方的邮件地址" +
-            "联系开发者谷雨同学。"
-            ;
+        
+        public static bool isCpp = true;
+        string FileExtension { get { return isCpp ? "cpp" : "c"; } }
+        string Compiler { get { return isCpp ? "g++.exe" : "gcc.exe"; } }
 
-        string FileExtension { get { return radioButtonCpp.Checked ? "cpp" : "c"; } }
-        string Compiler { get { return radioButtonCpp.Checked ? "g++.exe" : "gcc.exe"; } }
-
-        readonly string testCppCode = @"// VS Code C++ 测试代码 ""Hello World""
+        string TestCppCode
+        {
+            get
+            {
+                return @"// VS Code C++ 测试代码 ""Hello World""
 // 由 VSCodeConfigHelper 生成
 
 // 您可以在当前的文件夹（您第六步输入的文件夹）下编写代码。
 
 // 按下 F5（部分设备上可能是 Fn + F5）编译调试。
 // 按下 Ctrl + Shift + B 编译，但不运行。
-// 按下 Ctrl + F5（部分设备上可能是 Ctrl + Fn + F5）编译运行，但不调试。
+// 按下 " + (IsInternal ? "Ctrl + F5（部分设备上可能是 Ctrl +Fn + F5）" : "F6（部分设备上可能是）") + @"编译运行，但不调试。
 
 #include <iostream>
 
@@ -153,12 +113,18 @@ int main() {
 }
 
 // 此文件编译运行将输出 ""Hello, world!""。
-// 您将在下方弹出的终端（Terminal）窗口中看到这一行字。
+// 按下 " + (IsInternal ? "F5 后，您将在下方弹出的终端（Terminal）" : "F6 后，您将在弹出的") + @"窗口中看到这一行字。
 
 // 如果遇到了问题，请您浏览
 // https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md 
 // 获取帮助。如果问题未能得到解决，请联系开发者。";
-        readonly string testCCode = @"/**
+            }
+        }
+        string TestCCode
+        {
+            get
+            {
+                return @"/**
  * VS Code C 测试代码 ""Hello World""
  * 由 VSCodeConfigHelper 生成
  *
@@ -166,7 +132,7 @@ int main() {
  *
  * 按下 F5（部分设备上可能是 Fn + F5）编译调试。
  * 按下 Ctrl + Shift + B 编译，但不运行。
- * 按下 Ctrl + F5（部分设备上可能是 Ctrl + Fn + F5）编译运行，但不调试。
+ * 按下 " + (IsInternal ? "Ctrl + F5（部分设备上可能是 Ctrl +Fn + F5）" : "F6（部分设备上可能是）") + @"编译运行，但不调试。
  *
  */
 
@@ -184,17 +150,143 @@ int main(void) {
 
 /**
  * 此文件编译运行将输出 ""Hello, world!""。
- * 您将在下方弹出的终端（Terminal）窗口中看到这一行字。
+ * 按下 " + (IsInternal ? "F5 后，您将在下方弹出的终端（Terminal）" : "F6 后，您将在弹出的") + @"窗口中看到这一行字。
  *
  * 如果遇到了问题，请您浏览
  * https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md
  * 获取帮助。如果问题未能得到解决，请联系开发者。
  * 
  */";
+            }
+        }
+
+        readonly string consolePauserSrcCode = @"// This Code was licensed under GPL v2 by Bloodshed Dev-C++
+
+// Execute & Pause
+// Runs a program, then keeps the console window open after it finishes
+
+#include <string>
+using std::string;
+#include <stdio.h>
+#include <windows.h>
+
+#define MAX_COMMAND_LENGTH 32768
+#define MAX_ERROR_LENGTH 2048
+
+LONGLONG GetClockTick() {
+    LARGE_INTEGER dummy;
+    QueryPerformanceCounter(&dummy);
+    return dummy.QuadPart;
+}
+
+LONGLONG GetClockFrequency() {
+    LARGE_INTEGER dummy;
+    QueryPerformanceFrequency(&dummy);
+    return dummy.QuadPart;
+}
+
+void PauseExit(int exitcode) {
+    system(""pause"");
+    exit(exitcode);
+}
+
+string GetErrorMessage() {
+    string result(MAX_ERROR_LENGTH,0);
+    
+    FormatMessage(
+        FORMAT_MESSAGE_FROM_SYSTEM|FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,GetLastError(),MAKELANGID(LANG_NEUTRAL,SUBLANG_DEFAULT),&result[0],result.size(),NULL);
+    
+    // Clear newlines at end of string
+    for(int i = result.length()-1;i >= 0;i--) {
+        if(isspace(result[i])) {
+            result[i] = 0;
+        } else {
+            break;
+        }
+    }
+    return result;
+}
+
+string GetCommand(int argc,char** argv) {
+    string result;
+    for(int i = 1;i < argc;i++) {
+        // Quote the first argument in case the path name contains spaces
+//        if(i == 1) {
+//            result += string(""\"""") + string(argv[i]) + string(""\"""");
+//        } else {
+            result += string(argv[i]);
+//        }
+        
+        // Add a space except for the last argument
+        if(i != (argc-1)) {
+            result += string("" "");
+        }
+    }
+    
+    if(result.length() > MAX_COMMAND_LENGTH) {
+        printf(""\n--------------------------------"");
+        printf(""\nError: Length of command line string is over %d characters\n"",MAX_COMMAND_LENGTH);
+        PauseExit(EXIT_FAILURE);
+    }
+    
+    return result;
+}
+
+DWORD ExecuteCommand(string& command) {
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+    memset(&si,0,sizeof(si));
+    si.cb = sizeof(si);
+    memset(&pi,0,sizeof(pi));
+    
+    if(!CreateProcess(NULL, (LPSTR)command.c_str(), NULL, NULL, false, 0, NULL, NULL, &si, &pi)) {
+        printf(""\n--------------------------------"");
+        printf(""\nFailed to execute \""%s\"":"",command.c_str());
+        printf(""\nError %lu: %s\n"",GetLastError(),GetErrorMessage().c_str());
+        PauseExit(EXIT_FAILURE);
+    }
+    WaitForSingleObject(pi.hProcess, INFINITE); // Wait for it to finish
+    
+    DWORD result = 0;
+    GetExitCodeProcess(pi.hProcess, &result);
+    return result;
+}
+
+int main(int argc, char** argv) {
+    
+    // First make sure we aren't going to read nonexistent arrays
+    if(argc < 2) {
+        printf(""\n--------------------------------"");
+        printf(""\nUsage: ConsolePauser.exe <filename> <parameters>\n"");
+        PauseExit(EXIT_SUCCESS);
+    }
+    
+    // Make us look like the paused program
+    SetConsoleTitle(argv[1]);
+    
+    // Then build the to-run application command
+    string command = GetCommand(argc,argv);
+    
+    // Save starting timestamp
+    LONGLONG starttime = GetClockTick();
+    
+    // Then execute said command
+    DWORD returnvalue = ExecuteCommand(command);
+    
+    // Get ending timestamp
+    LONGLONG endtime = GetClockTick();
+    double seconds = (endtime - starttime) / (double)GetClockFrequency();
+
+    // Done? Print return value of executed program
+    printf(""\n--------------------------------"");
+    printf(""\nProcess exited after %.4g seconds with return value %lu\n"",seconds,returnvalue);
+    PauseExit(EXIT_SUCCESS);
+}";
 
         public static bool IsRunningOn64Bit { get { return IntPtr.Size == 8; } }
 
-        private static bool IsAdministrator
+        public static bool IsAdministrator
         {
             get
             {
@@ -205,45 +297,27 @@ int main(void) {
             }
         }
 
+        public bool IsInternal { get { return radioButtonInternal.Checked; } }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (IsAdministrator)
-            {
-                labelAuth.Width = 409;
-                labelAuth.Text = "当前权限：系统管理员" + Environment.NewLine;
-                labelAuth.Text += "您在此工具进行的操作（包括安装、设置环境变量和启动等）" +
-                    "将适用于所有用户，请谨慎操作。" + Environment.NewLine;
-                labelAuth.Text += "若要使用普通用户权限，请重新使用非管理员权限运行此程序。";
-                buttonAuth.Visible = false;
-
-                Text = "管理员: VS Code C++配置工具";
-
-            }
-            else
-            {
-                labelAuth.Text = "当前权限：普通用户" + Environment.NewLine;
-                labelAuth.Text += "您在此工具进行的操作（包括安装、设置环境变量和启动等）" +
-                    "将仅适用于此账户。" + Environment.NewLine;
-                labelAuth.Text += "若要使用系统管理员权限，请点击右侧按钮。";
-                EnableElevateIcon_BCM_SETSHIELD(buttonAuth);
-            }
-
-            textBoxHelp.Text = helpText;
-
+            tabControlMain.ItemSize = new Size(0, 1);
             labelAuthor.Text = $"v{Application.ProductVersion} 谷雨同学制作 guyutongxue@163.com";
 
             string specify = IsRunningOn64Bit ? "64" : "32";
             labelMinGWPathHint.Text = $"您解压后可以得到一个 mingw{specify} 文件夹。这里面包含着重要的编译必需文件，建议您将它移动到妥善的位置，如 C 盘根目录下。将它的路径输入在下面：";
 
-            // 北大网盘有效期截止至此
-            if (DateTime.Now.Date < new DateTime(2024, 10, 1)) radioButtonPKU.Select();
-            else
-            {
-                radioButtonPKU.Enabled = false;
-                radioButtonOffical.Select();
-            }
+            labelInternalHint.Text = "将使用 VS Code 自带的终端显示程序的输出。您将在代码区的下方看到这个内置终端，从而查看运行和调试的输出。" + Environment.NewLine +
+                "因此您无需手动在程序结束之后暂停，您可以随时查看已有的程序输出。但是您可能在查看较长的输出时略显费力。" + Environment.NewLine +
+                "这是 VS Code 推荐的输出方式。除非您特有需求，否则建议您选择此样式。";
+            labelExternalHint.Text = "将使用 Windows 的终端窗口显示程序的输出。当您运行或调试时，将弹出终端窗口以显示程序输出。" + Environment.NewLine +
+                "程序将在运行结束后暂停，但调试结束时不会暂停。这种方式方便您查看长输出以及代码运行的时间。" + Environment.NewLine +
+                "这种样式会改变您的全局快捷键设置，因此可能导致冲突。请谨慎使用。";
 
-            ShowArgs();
+            // 北大网盘有效期截止至此
+            isMinGWPku = DateTime.Now.Date < new DateTime(2024, 10, 1);
+
+            if(IsAdministrator) Text = "管理员: VS Code C++配置工具";
 
             if (File.Exists("VSCHcache.txt"))
             {
@@ -266,7 +340,7 @@ int main(void) {
 
         private void TextBoxMinGWPath_TextChanged(object sender, EventArgs e)
         {
-            isMinGWOk = false;
+            buttonMinGWNext.Enabled = false;
             minGWPath = textBoxMinGWPath.Text;
             if (!string.IsNullOrWhiteSpace(minGWPath))
             {
@@ -276,9 +350,7 @@ int main(void) {
                     labelMinGWState.Text = "检测到编译器：";
                     string version = GetGxxVersion(minGWPath + "\\bin\\g++.exe");
                     labelMinGWState.Text += '\n' + version;
-                    // prevent duplicate
-                    minGWPath = minGWPath.ToLower();
-                    isMinGWOk = true;
+                    buttonMinGWNext.Enabled = true;
                 }
                 else
                 {
@@ -289,39 +361,111 @@ int main(void) {
 
         }
 
-        private void ButtonSetEnv_Click(object sender, EventArgs e)
+        private void listViewMinGW_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!isMinGWOk)
+            if (!isMinGWFirstTime)
             {
-                labelPathState.ForeColor = Color.Red;
-                labelPathState.Text = "MinGW 路径尚未配置完成。";
-                return;
-            }
-            // If admin, set PATH to machine; else set PATH to user.
-            EnvironmentVariableTarget current = IsAdministrator ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.User;
-            string path = Environment.GetEnvironmentVariable("Path", current);
-            if (path.Contains(minGWPath + "\\bin"))
-            {
-                labelPathState.ForeColor = Color.Green;
-                labelPathState.Text = "环境变量已设置。";
-                return;
-            }
-            Environment.SetEnvironmentVariable("Path", path + ";" + minGWPath + "\\bin", current);
-            // Check
-            path = Environment.GetEnvironmentVariable("Path", current);
-            if (path.Contains(minGWPath + "\\bin"))
-            {
-                labelPathState.ForeColor = Color.Green;
-                labelPathState.Text = "设置环境变量成功。";
-            }
-            else
-            {
-                labelPathState.ForeColor = Color.Red;
-                labelPathState.Text = "设置环境变量失败，请重试。";
+                buttonMinGWNext.Enabled = listViewMinGW.SelectedItems.Count == 1;
             }
         }
 
-        private static string GetGxxVersion(string path)
+        private void CheckCurrentMinGW()
+        {
+            EnvironmentVariableTarget current = IsAdministrator ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.User;
+            string[] paths = Environment.GetEnvironmentVariable("Path", current).Split(Path.PathSeparator);
+            minGWPathList.Clear();
+            foreach (var i in paths)
+            {
+                if (File.Exists(i + "\\" + Compiler)) minGWPathList.Add(i);
+            }
+            isMinGWFirstTime = minGWPathList.Count == 0;
+            panelMinGWTable.Visible = !isMinGWFirstTime;
+            if (isMinGWFirstTime)
+            {
+                labelMinGWHint.Text = "您还没有安装 MinGW，请您点击右侧链接下载。";
+            }
+            else
+            {
+                labelMinGWHint.Text = "您已安装下列编译环境。您也可以点击右侧链接下载推荐的 MinGW-w64 环境。";
+                listViewMinGW.Items.Clear();
+                foreach (var i in minGWPathList)
+                {
+                    listViewMinGW.Items.Add(GenerateMinGWLVItem(i));
+                }
+                buttonMinGWNext.Enabled = listViewMinGW.SelectedItems.Count == 1;
+            }
+        }
+
+        ListViewItem GenerateMinGWLVItem(string path)
+        {
+
+            ListViewItem lvi = new ListViewItem();
+            lvi.Text = GuessDescription(path + "\\" + Compiler, out string hint);
+            if (hint != null)
+            {
+                lvi.ForeColor = Color.Red;
+                lvi.ToolTipText = hint;
+            }
+            lvi.SubItems.Add(path.Substring(0, path.Length - 4));
+            lvi.SubItems.Add(GetGxxVersion(path + "\\" + Compiler));
+            return lvi;
+        }
+
+        /// <summary>
+        /// 输出某编译环境猜测的版本（发行版）
+        /// </summary>
+        /// <param name="path">编译器的路径</param>
+        /// <param name="hint">如果该编译器兼容性较差，则输出提示</param>
+        /// <returns></returns>
+        private string GuessDescription(string path, out string hint)
+        {
+            string shortVersion = GetGxxVersion(path);
+            string distribute;
+            string versionNumber = Regex.Match(shortVersion, " [^ ]+$").Value;
+            hint = null;
+            if (shortVersion.Contains("tdm64"))
+            {
+                distribute = "TDM-GCC64";
+                if (!IsRunningOn64Bit) hint = "该编译环境并非为 32 位系统设计，可能导致错误。";
+            }
+            else if (shortVersion.Contains("tdm"))
+            {
+                distribute = "TDM-GCC";
+                if (IsRunningOn64Bit) hint = "该编译环境并非为 64 位系统设计，可能导致错误。";
+            }
+            else if (shortVersion.Contains("MinGW-W64"))
+            {
+                if (shortVersion.Contains("x86_64"))
+                {
+
+                    distribute = "MinGW-w64";
+                    if (!IsRunningOn64Bit) hint = "该编译环境并非为 32 位系统设计，可能导致错误。";
+                }
+                else
+                {
+                    distribute = "MinGW-w64(i686)";
+                    if (IsRunningOn64Bit) hint = "该编译环境并非为 64 位系统设计，可能导致错误。";
+                }
+            }
+            else if (shortVersion.Contains("MinGW.org"))
+            {
+                distribute = "MinGW.org";
+                if (IsRunningOn64Bit) hint = "该编译环境并非为 64 位系统设计，可能导致错误。";
+            }
+            else
+            {
+                string longVersion = GetGxxVersion(path, true);
+                distribute = Regex.Match(longVersion, "(?<=Target: ).*$", RegexOptions.Multiline).Value.Split('-').Last();
+                distribute = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(distribute);
+            }
+            if (int.Parse(versionNumber.Split('.').First()) < 5)
+            {
+                hint = "编译器版本较老，可能无法正常工作。";
+            }
+            return distribute + " " + versionNumber;
+        }
+
+        private static string GetGxxVersion(string path, bool verbose = false)
         {
 
             string result = string.Empty;
@@ -329,25 +473,56 @@ int main(void) {
             {
                 proc.StartInfo.CreateNoWindow = true;
                 proc.StartInfo.FileName = path;
-                proc.StartInfo.Arguments = "--version";
+                proc.StartInfo.Arguments = verbose ? "-v" : "--version";
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardError = true;
                 proc.StartInfo.RedirectStandardInput = true;
                 proc.StartInfo.RedirectStandardOutput = true;
                 proc.Start();
-                result = proc.StandardOutput.ReadLine();
                 proc.WaitForExit();
+                if (verbose) result = proc.StandardError.ReadToEnd();
+                else result = proc.StandardOutput.ReadLine();
                 proc.Close();
             }
             return result;
         }
 
+        private void buttonMinGWAdd_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() != DialogResult.OK) return;
+
+            string result = folderBrowserDialog1.SelectedPath;
+            if (File.Exists(result + "\\bin\\" + Compiler))
+            {
+                listViewMinGW.Items.Add(GenerateMinGWLVItem(result + "\\bin"));
+                minGWPathList.Add(result);
+            }
+            else if (File.Exists(result + "\\" + Compiler))
+            {
+                listViewMinGW.Items.Add(GenerateMinGWLVItem(result));
+                minGWPathList.Add(result.Substring(0, result.Length - 4));
+            }
+            else
+            {
+                MessageBox.Show("未检测到有效编译器。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
         private void ButtonExtension_Click(object sender, EventArgs e)
         {
-            string cppLink = @"https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools";
-            Process.Start(cppLink);
+            // string cppLink = @"https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools";
+            // Process.Start(cppLink);
+            using (Process proc = new Process())
+            {
+                proc.StartInfo.FileName = "cmd";
+                proc.StartInfo.Arguments = "/C \"" + vsCodePath.ToLower().Replace("code.exe", "bin\\code.cmd") + "\" --install-extension ms-vscode.cpptools & pause";
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();
+                proc.WaitForExit(30000);
+                proc.Close();
+            }
+            CheckExtension();
         }
 
         private void LinkLabelMinGW_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -355,14 +530,14 @@ int main(void) {
             string mingwLink;
             if (IsRunningOn64Bit)
             {
-                if (radioButtonPKU.Checked)
+                if (isMinGWPku)
                     mingwLink = @"https://disk.pku.edu.cn:443/link/B897756E8392A02AD20F56C6A17E0655";
                 else
                     mingwLink = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z";
             }
             else
             {
-                if (radioButtonPKU.Checked)
+                if (isMinGWPku)
                     mingwLink = @"https://disk.pku.edu.cn:443/link/E9E6D208F9AEC29D7D77BA2A923A6400";
                 else
                     mingwLink = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-win32/dwarf/i686-8.1.0-release-win32-dwarf-rt_v6-rev0.7z";
@@ -418,7 +593,7 @@ int main(void) {
                 {"stopAtEntry", false},
                 {"cwd", "${workspaceFolder}"},
                 {"environment", new JArray()},
-                {"externalConsole", false},
+                {"externalConsole", !IsInternal},
                 {"MIMode", "gdb"},
                 {"miDebuggerPath", minGWPath+"\\bin\\gdb.exe"},
                 {"setupCommands",new JArray{command} },
@@ -463,23 +638,50 @@ int main(void) {
                     {"message", 5}
                 } }
             };
+
+            JArray taskList = new JArray
+            {
+                new JObject
+                    {
+                        {"type", "shell"},
+                        {"label", Compiler + " build active file"},
+                        {"command", Compiler},
+                        {"args",args},
+                        {"group",group},
+                        {"presentation",presentation},
+                        {"problemMatcher",problemMatcher}
+                    }
+            };
+            // Add another task for external running
+            if (!IsInternal)
+            {
+                taskList.Add(new JObject
+                {
+                    { "label", "run_pause" },
+                    { "type", "shell" },
+                    { "command", "cmd"},
+                    { "dependsOn", Compiler + " build active file"},
+                    { "args", new JArray {
+                        "/C",
+                        "START",
+                        minGWPath + "\\bin\\ConsolePauser.exe",
+                        "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+                    }},
+                    { "presentation", new JObject {
+                        { "reveal", "never" }
+                    }},
+                    { "problemMatcher", new JArray()},
+                    { "group", new JObject{
+                        { "kind", "test" },
+                        { "isDefault", true }
+                    }}
+                });
+            }
+
             JObject tasks = new JObject
             {
                 { "version","2.0.0" },
-                { "tasks",new JArray
-                    {
-                        new JObject
-                        {
-                            {"type", "shell"},
-                            {"label", Compiler + " build active file"},
-                            {"command", Compiler},
-                            {"args",args},
-                            {"group",group},
-                            {"presentation",presentation},
-                            {"problemMatcher",problemMatcher}
-                        }
-                    }
-                },
+                { "tasks",taskList },
                 // https://github.com/microsoft/vscode/issues/70509
                 { "options",new JObject
                     { {
@@ -497,14 +699,14 @@ int main(void) {
         private JObject GetSettingsJson()
         {
             return new JObject
-            {{
-                "C_Cpp.default.intelliSenseMode", "gcc-x64"
-            }};
+            {
+                {"C_Cpp.default.intelliSenseMode", "gcc-x" + (IsRunningOn64Bit ? "64" : "86")},
+                {"C_Cpp.default.compilerPath", minGWPath + "\\bin\\" + Compiler}
+            };
         }
 
         private string GenerateTestFile(string path)
         {
-            labelConfigState.Text += "生成测试文件中...";
             string filepath = $"{path}\\helloworld." + FileExtension;
             if (File.Exists(filepath))
             {
@@ -516,18 +718,25 @@ int main(void) {
             }
             // Remove BOM
             StreamWriter sw = new StreamWriter(filepath, false, new UTF8Encoding(false));
-            if (radioButtonCpp.Checked) sw.Write(testCppCode);
-            else sw.Write(testCCode);
+            if (isCpp) sw.Write(TestCppCode);
+            else sw.Write(TestCCode);
             sw.Flush();
             sw.Close();
-            labelConfigState.Text += "成功。";
             return filepath;
         }
 
-        private string GetVSCodePath()
+        private string GetVSCodePath(bool crossTest = false)
         {
-            RegistryKey root = Registry.ClassesRoot;
-            RegistryKey rk = root.OpenSubKey("vscode\\shell\\open\\command");
+            RegistryKey root;
+            if (IsAdministrator ^ crossTest)
+            {
+                root = Registry.LocalMachine;
+            }
+            else
+            {
+                root = Registry.CurrentUser;
+            }
+            RegistryKey rk = root.OpenSubKey("SOFTWARE\\Classes\\Applications\\Code.exe\\shell\\open\\command");
             if (rk == null)
             {
                 return null;
@@ -537,6 +746,7 @@ int main(void) {
             // "C:\Program Files\Microsoft VS Code\Code.exe" --open-url -- "%1"
             // and we just use the string inside the first quatation marks
             value = value.Split('"')[1];
+            if (!File.Exists(value)) return null;
             return value;
         }
 
@@ -544,14 +754,13 @@ int main(void) {
         {
             try
             {
-                labelConfigState.Text += "启动 VS Code 中...";
                 using (Process proc = new Process())
                 {
                     // proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    proc.StartInfo.CreateNoWindow = true;
                     // proc.StartInfo.UseShellExecute = true;
-                    string vsCodePath = GetVSCodePath();
                     if (string.IsNullOrEmpty(vsCodePath))
-                        throw new Exception("VS Code path not found。");
+                        throw new Exception("VS Code path not found.");
                     proc.StartInfo.FileName = vsCodePath;
                     if (string.IsNullOrEmpty(filepath))
                     {
@@ -559,13 +768,12 @@ int main(void) {
                     }
                     else
                     {
-                        proc.StartInfo.Arguments = $"\"{folderpath}\" -g \"{filepath}\"";
+                        proc.StartInfo.Arguments = $" -g \"{filepath}:0\" \"{folderpath}\"";
                     }
                     proc.Start();
                     // proc.WaitForExit();
                     proc.Close();
                 }
-                labelConfigState.Text += "成功。";
             }
             catch (Exception)
             {
@@ -575,72 +783,6 @@ int main(void) {
                 throw new Exception("启动 VS Code 失败。");
             }
         }
-
-
-        private void ButtonConfig_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                isSuccess = false;
-                workspacePath = textBoxWorkspacePath.Text;
-                JObject launchJson = GetLaunchJson();
-                JObject tasksJson = GetTasksJson();
-                JObject settingsJson = GetSettingsJson();
-                if (!isWorkspaceOk || !isMinGWOk)
-                {
-                    labelConfigState.ForeColor = Color.Red;
-                    labelConfigState.Text = "MinGW 路径或工作文件夹尚未配置完成。";
-                    return;
-                }
-                if (Directory.Exists(workspacePath + "\\.vscode"))
-                {
-                    DialogResult result = MessageBox.Show("检测到已有配置，是否覆盖？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                    if (result == DialogResult.Cancel) return;
-                    Directory.Delete(workspacePath + "\\.vscode", true);
-                }
-
-                // Kill VS Code process to apply PATH env and prevent occupy
-                Process[] processList = Process.GetProcesses();
-                foreach (var process in processList)
-                {
-                    if (process.ProcessName.ToLower() == "code")
-                    {
-                        process.Kill();
-                    }
-                }
-
-                Directory.CreateDirectory(workspacePath + "\\.vscode");
-                File.SetAttributes(workspacePath + "\\.vscode", FileAttributes.Hidden);
-                StreamWriter launchsw = new StreamWriter(workspacePath + "\\.vscode\\launch.json");
-                launchsw.Write(launchJson.ToString());
-                launchsw.Flush();
-                launchsw.Close();
-                StreamWriter taskssw = new StreamWriter(workspacePath + "\\.vscode\\tasks.json");
-                taskssw.Write(tasksJson.ToString());
-                taskssw.Flush();
-                taskssw.Close();
-                StreamWriter settingssw = new StreamWriter(workspacePath + "\\.vscode\\settings.json");
-                settingssw.Write(settingsJson.ToString());
-                settingssw.Flush();
-                settingssw.Close();
-                labelConfigState.ForeColor = Color.Green;
-                labelConfigState.Text = "配置成功。";
-
-                if (checkBoxGenTest.Checked)
-                {
-                    string filepath = GenerateTestFile(workspacePath);
-                    if (checkBoxOpen.Checked) LoadVSCode(workspacePath, filepath);
-                }
-                else if (checkBoxOpen.Checked) LoadVSCode(workspacePath);
-                isSuccess = true;
-            }
-            catch (Exception ex)
-            {
-                labelConfigState.ForeColor = Color.Red;
-                labelConfigState.Text += "配置失败：" + ex.Message;
-            }
-        }
-
 
 
         private void LinkLabelManual_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -654,18 +796,18 @@ int main(void) {
             workspacePath = textBoxWorkspacePath.Text;
             if (string.IsNullOrWhiteSpace(workspacePath))
             {
-                isWorkspaceOk = false;
+                buttonWelcomeNext.Enabled = false;
                 labelWorkspaceStatus.Visible = false;
                 return;
             }
             if (!Regex.IsMatch(workspacePath, "^[ -~]*$"))
             {
-                isWorkspaceOk = false;
+                buttonWelcomeNext.Enabled = false;
                 labelWorkspaceStatus.Visible = true;
             }
             else
             {
-                isWorkspaceOk = true;
+                buttonWelcomeNext.Enabled = true;
                 labelWorkspaceStatus.Visible = false;
             }
             // If the helloworld.cpp exists already, then do not generate by default
@@ -676,46 +818,8 @@ int main(void) {
             }
         }
 
-        private void GenerateArgs()
-        {
-            string text = textBoxArgs.Text.Trim();
-            string[] argtext = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            args = new JArray(argtext);
-        }
 
-        private void ShowArgs()
-        {
-            StringBuilder text = new StringBuilder();
-            foreach (object i in args)
-            {
-                text.AppendLine(i.ToString());
-            }
-            textBoxArgs.Text = text.ToString().Trim();
-        }
 
-        private void SetDefaultArgs()
-        {
-            groupBoxArg.Text = radioButtonCpp.Checked ? "配置 g++ 编译参数" : "配置 gcc 编译参数";
-            args = new JArray {
-                "-g",
-                radioButtonCpp.Checked ? "-std=c++17" : "-std=c17",
-                "\"${file}\"",
-                "-o",
-                "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
-            };
-            ShowArgs();
-        }
-
-        private void buttonSaveArgs_Click(object sender, EventArgs e)
-        {
-            GenerateArgs();
-            ShowArgs();
-        }
-
-        private void buttonArgDefault_Click(object sender, EventArgs e)
-        {
-            SetDefaultArgs();
-        }
 
         private void buttonAuth_Click(object sender, EventArgs e)
         {
@@ -737,7 +841,7 @@ int main(void) {
 
         private void radioButtonPKU_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButtonOffical.Checked)
+            if (isMinGWPku)
             {
                 linkLabelMinGW.Text = "下载地址";
             }
@@ -747,15 +851,17 @@ int main(void) {
             }
         }
 
-        private void radioButtonCpp_CheckedChanged(object sender, EventArgs e)
-        {
-            SetDefaultArgs();
-        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!isSuccess)
             {
+                DialogResult dr = MessageBox.Show("确定中止本次配置？您所有已进行的配置将被保存。", "确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (dr == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
                 StreamWriter sw = new StreamWriter("VSCHcache.txt");
                 sw.WriteLine(minGWPath);
                 sw.WriteLine(workspacePath);
@@ -771,5 +877,305 @@ int main(void) {
             }
         }
 
+        private void buttonWelcomeNext_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(workspacePath + "\\.vscode"))
+            {
+                DialogResult result = MessageBox.Show("检测到已有配置，是否立即移除它们？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.Cancel) return;
+                Directory.Delete(workspacePath + "\\.vscode", true);
+            }
+            workspacePath = textBoxWorkspacePath.Text;
+            tabControlMain.SelectedIndex++;
+        }
+
+        private void buttonPrev_Click(object sender, EventArgs e)
+        {
+            tabControlMain.SelectedIndex--;
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void buttonMinGWNext_Click(object sender, EventArgs e)
+        {
+            buttonMinGWNext.Enabled = false;
+            buttonMinGWNext.Text = "正在设置...";
+            Application.DoEvents();
+            EnvironmentVariableTarget current = IsAdministrator ? EnvironmentVariableTarget.Machine : EnvironmentVariableTarget.User;
+            string path = Environment.GetEnvironmentVariable("Path", current);
+            if (isMinGWFirstTime)
+            {
+                GuessDescription(minGWPath + "\\bin\\" + Compiler, out string hint);
+                if (hint != null)
+                {
+                    DialogResult dr = MessageBox.Show($"您选择的 MinGW 环境不推荐，因为：{hint} 确定继续吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (dr == DialogResult.Cancel) return;
+                }
+                Environment.SetEnvironmentVariable("Path", path + ";" + minGWPath + "\\bin", current);
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(listViewMinGW.SelectedItems[0].ToolTipText))
+                {
+                    DialogResult dr = MessageBox.Show($"您选择的 MinGW 环境不推荐，因为：{listViewMinGW.SelectedItems[0].ToolTipText} 确定继续吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (dr == DialogResult.Cancel) return;
+                }
+                minGWPath = listViewMinGW.SelectedItems[0].SubItems[1].Text;
+                // If only one in the list, just ignore.
+                // Because the ony one is detected from PATH, and there is no need to remove or add.
+                if (minGWPathList.Count > 1)
+                {
+                    DialogResult dr = MessageBox.Show("程序将从 PATH 环境变量中移除其余 MinGW 环境，但不会删除您的任何文件。确定继续吗？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (dr == DialogResult.Cancel) return;
+
+                    List<string> splitedPath = new List<string>(path.Split(Path.PathSeparator));
+                    for (int i = 0; i < splitedPath.Count;)
+                    {
+                        if (minGWPathList.Contains(splitedPath[i])) splitedPath.RemoveAt(i);
+                        else i++;
+                    }
+                    string result = string.Empty;
+                    foreach (var i in splitedPath)
+                    {
+                        result += i + Path.PathSeparator;
+                    }
+                    result += minGWPath + "\\bin";
+                    Environment.SetEnvironmentVariable("Path", result, current);
+                }
+            }
+            tabControlMain.SelectedIndex++;
+            buttonMinGWNext.Enabled = true;
+            buttonMinGWNext.Text = "下一步";
+        }
+
+        void CheckExtension()
+        {
+            bool isExtensionOk = false;
+            using (Process proc = new Process())
+            {
+                proc.StartInfo.CreateNoWindow = true;
+                proc.StartInfo.UseShellExecute = false;
+                // The command line aparameter should be passed to batch file not the exe
+                proc.StartInfo.FileName = vsCodePath.ToLower().Replace("code.exe", "bin\\code.cmd");
+                proc.StartInfo.Arguments = "--list-extensions";
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.Start();
+                // System.Threading.Thread.Sleep(1000);
+                proc.WaitForExit(5000);
+                while (!proc.StandardOutput.EndOfStream)
+                {
+                    if (proc.StandardOutput.ReadLine() == "ms-vscode.cpptools")
+                    {
+                        isExtensionOk = true;
+                        break;
+                    }
+                }
+                proc.Close();
+            }
+            if (isExtensionOk)
+            {
+                labelExtensionHint.Text = "C/C++ 扩展已安装好。点击下一步以继续。";
+                buttonExtension.Enabled = false;
+                buttonExtension.Text = "已安装";
+                buttonCodeNext.Enabled = true;
+            }
+            else
+            {
+                labelExtensionHint.Text = "请点击左侧按钮安装 C/C++ 扩展。";
+                buttonExtension.Enabled = true;
+                buttonExtension.Text = "安装扩展";
+                buttonCodeNext.Enabled = false;
+            }
+        }
+
+        void CheckCodeAndExtension()
+        {
+            labelCodeHint.Text = labelExtensionHint.Text = "正在自动检测，请稍候...";
+            labelCodeHint.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+            buttonCodeNext.Enabled = buttonExtension.Enabled = buttonRefresh.Enabled = false;
+            vsCodePath = GetVSCodePath();
+            string alternativePathToVSCode = GetVSCodePath(true);
+            if (!string.IsNullOrEmpty(vsCodePath))
+            {
+                labelCodeHint.Text = "检测到已安装VS Code。位于：" + Environment.NewLine + vsCodePath;
+                buttonRefresh.Enabled = false;
+                buttonRefresh.Text = "已安装";
+                CheckExtension();
+            }
+            else if (!string.IsNullOrEmpty(alternativePathToVSCode))
+            {
+                vsCodePath = GetVSCodePath(true);
+                labelCodeHint.Text = "检测到 VS Code，但是该版本可能与 MinGW 配置发生冲突。建议您点击右侧链接重新安装。";
+                labelCodeHint.ForeColor = Color.Red;
+                buttonRefresh.Enabled = true;
+                buttonRefresh.Text = "刷新";
+                CheckExtension();
+            }
+            else
+            {
+                labelCodeHint.Text = "未检测到已安装的VS Code。" + Environment.NewLine + "请点击右侧地址下载安装。";
+                labelExtensionHint.Text = "请点击左侧按钮安装 C/C++ 扩展。";
+                buttonExtension.Enabled = false;
+                buttonExtension.Text = "安装扩展";
+                buttonRefresh.Enabled = true;
+                buttonRefresh.Text = "刷新";
+                buttonCodeNext.Enabled = false;
+            }
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            FormSettings formSettings = new FormSettings();
+            formSettings.ShowDialog();
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelNavigate.Refresh();
+            switch (tabControlMain.SelectedIndex)
+            {
+                // If switch to page MinGW, check the Path
+                case 1:
+                    CheckCurrentMinGW();
+                    break;
+                // If switch to page Code, check the installation
+                case 2:
+                    CheckCodeAndExtension();
+                    break;
+            }
+        }
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            CheckCodeAndExtension();
+        }
+
+        private void buttonCodeNext_Click(object sender, EventArgs e)
+        {
+            tabControlMain.SelectedIndex++;
+        }
+
+        void CompileConsolePauser()
+        {
+            StreamWriter sw = new StreamWriter(Path.GetTempPath() + "\\ConsolePauser.cpp");
+            sw.Write(consolePauserSrcCode);
+            sw.Flush();
+            sw.Close();
+
+            using (Process proc = new Process())
+            {
+                proc.StartInfo.FileName = minGWPath + "\\bin\\g++.exe";
+                proc.StartInfo.Arguments = $"\"{Path.GetTempPath()}\\ConsolePauser.cpp\" -o \"{minGWPath}\\bin\\ConsolePauser.exe\"";
+                proc.StartInfo.CreateNoWindow = true;
+                proc.Start();
+                proc.WaitForExit();
+                if (proc.ExitCode != 0) throw new Exception("Compilation Error.");
+            }
+
+        }
+
+        JArray GetKeyboardBindingJson()
+        {
+            return new JArray
+            {
+                new JObject{
+                    { "key", "f6" },
+                    { "command", "workbench.action.tasks.runTask" },
+                    { "args", "run_pause" }
+                }
+            };
+        }
+
+        private void buttonConfigNext_Click(object sender, EventArgs e)
+        {
+            isSuccess = false;
+            try
+            {
+                JObject launchJson = GetLaunchJson();
+                JObject tasksJson = GetTasksJson();
+                JObject settingsJson = GetSettingsJson();
+
+                // Kill VS Code process to apply PATH env and prevent occupy
+                Process[] processList = Process.GetProcesses();
+                foreach (var process in processList)
+                {
+                    if (process.ProcessName.ToLower() == "code")
+                    {
+                        process.Kill();
+                    }
+                }
+
+                if (!IsInternal)
+                {
+                    if (!File.Exists(minGWPath + "\\bin\\ConsolePauser.exe")) CompileConsolePauser();
+                    JArray keybindJson = GetKeyboardBindingJson();
+                    StreamWriter keybindsw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Code\\User\\keybindings.json");
+                    keybindsw.Write(keybindJson.ToString());
+                    keybindsw.Flush();
+                    keybindsw.Close();
+                }
+
+                Directory.CreateDirectory(workspacePath + "\\.vscode");
+                File.SetAttributes(workspacePath + "\\.vscode", FileAttributes.Hidden);
+                StreamWriter launchsw = new StreamWriter(workspacePath + "\\.vscode\\launch.json");
+                launchsw.Write(launchJson.ToString());
+                launchsw.Flush();
+                launchsw.Close();
+                StreamWriter taskssw = new StreamWriter(workspacePath + "\\.vscode\\tasks.json");
+                taskssw.Write(tasksJson.ToString());
+                taskssw.Flush();
+                taskssw.Close();
+                StreamWriter settingssw = new StreamWriter(workspacePath + "\\.vscode\\settings.json");
+                settingssw.Write(settingsJson.ToString());
+                settingssw.Flush();
+                settingssw.Close();
+                isSuccess = true;
+                tabControlMain.SelectedIndex++;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void buttonFinishAll_Click(object sender, EventArgs e)
+        {
+            if (checkBoxGenTest.Checked)
+            {
+                string filepath = GenerateTestFile(workspacePath);
+                if (checkBoxOpen.Checked) LoadVSCode(workspacePath, filepath);
+            }
+            else if (checkBoxOpen.Checked) LoadVSCode(workspacePath);
+            Close();
+        }
+
+        private void panelNavigate_Paint(object sender, PaintEventArgs e)
+        {
+            string[] texts =
+            {
+                "- 欢迎",
+                "- 配置 MinGW",
+                "- 安装扩展",
+                "- 选择样式",
+                "- 完成"
+            };
+            Point pt;
+            int index = tabControlMain.SelectedIndex;
+            int height = 20;
+            for (int i = 0; i < index; i++)
+            {
+                pt = new Point(0, i * height);
+                TextRenderer.DrawText(e.Graphics, texts[i] + Environment.NewLine, new Font(FontFamily.GenericSerif, 9, FontStyle.Regular), pt, Color.Black);
+            }
+            pt = new Point(0, index * height);
+            TextRenderer.DrawText(e.Graphics, texts[index] + Environment.NewLine, new Font(FontFamily.GenericSerif, 9, FontStyle.Bold), pt, Color.Black);
+            for (int i = index + 1; i < 5; i++)
+            {
+                pt = new Point(0, i * height);
+                TextRenderer.DrawText(e.Graphics, texts[i] + Environment.NewLine, new Font(FontFamily.GenericSerif, 9, FontStyle.Regular), pt, Color.Gray);
+            }
+        }
     }
 }

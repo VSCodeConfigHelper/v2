@@ -29,121 +29,109 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.tabPageStart = new System.Windows.Forms.TabPage();
+            this.linkLabelManual = new System.Windows.Forms.LinkLabel();
+            this.labelAuthor = new System.Windows.Forms.Label();
             this.checkBoxGenTest = new System.Windows.Forms.CheckBox();
             this.checkBoxOpen = new System.Windows.Forms.CheckBox();
+            this.buttonExtension = new System.Windows.Forms.Button();
+            this.labelMinGWState = new System.Windows.Forms.Label();
+            this.linkLabelVSCode = new System.Windows.Forms.LinkLabel();
             this.labelWorkspaceStatus = new System.Windows.Forms.Label();
-            this.labelConfigState = new System.Windows.Forms.Label();
-            this.buttonConfig = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.buttonViewWorkspace = new System.Windows.Forms.Button();
             this.textBoxWorkspacePath = new System.Windows.Forms.TextBox();
-            this.labelWorkspaceHint = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.linkLabelVSCode = new System.Windows.Forms.LinkLabel();
             this.linkLabelMinGW = new System.Windows.Forms.LinkLabel();
             this.labelMinGWPathHint = new System.Windows.Forms.Label();
-            this.labelExtensionHint = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.buttonExtension = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelMinGWState = new System.Windows.Forms.Label();
-            this.labelPathState = new System.Windows.Forms.Label();
-            this.buttonSetEnv = new System.Windows.Forms.Button();
             this.textBoxMinGWPath = new System.Windows.Forms.TextBox();
             this.buttonViewMinGW = new System.Windows.Forms.Button();
-            this.tabPageHelp = new System.Windows.Forms.TabPage();
-            this.linkLabelManual = new System.Windows.Forms.LinkLabel();
-            this.labelFAQ = new System.Windows.Forms.Label();
-            this.labelManual = new System.Windows.Forms.Label();
-            this.textBoxHelp = new System.Windows.Forms.TextBox();
-            this.labelAuthor = new System.Windows.Forms.Label();
-            this.tabPageSetting = new System.Windows.Forms.TabPage();
-            this.groupBoxLang = new System.Windows.Forms.GroupBox();
-            this.radioButtonC = new System.Windows.Forms.RadioButton();
-            this.radioButtonCpp = new System.Windows.Forms.RadioButton();
-            this.groupBoxPrivil = new System.Windows.Forms.GroupBox();
-            this.buttonAuth = new System.Windows.Forms.Button();
-            this.labelAuth = new System.Windows.Forms.Label();
-            this.groupBoxArg = new System.Windows.Forms.GroupBox();
-            this.buttonArgDefault = new System.Windows.Forms.Button();
-            this.labelArgInstruction = new System.Windows.Forms.Label();
-            this.buttonSaveArgs = new System.Windows.Forms.Button();
-            this.labelArgWarning = new System.Windows.Forms.Label();
-            this.textBoxArgs = new System.Windows.Forms.TextBox();
-            this.groupBoxMinGWSrc = new System.Windows.Forms.GroupBox();
-            this.labelMinGWSrcInstruction = new System.Windows.Forms.Label();
-            this.radioButtonOffical = new System.Windows.Forms.RadioButton();
-            this.radioButtonPKU = new System.Windows.Forms.RadioButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
+            this.tabPageWelcome = new System.Windows.Forms.TabPage();
+            this.labelWelcomeTitle = new System.Windows.Forms.Label();
+            this.buttonWelcomCancel = new System.Windows.Forms.Button();
+            this.buttonWelcomeNext = new System.Windows.Forms.Button();
+            this.labelFolderHelp = new System.Windows.Forms.Label();
+            this.labelFolderHint = new System.Windows.Forms.Label();
+            this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.tabPageMinGW = new System.Windows.Forms.TabPage();
+            this.labelMinGWTitle = new System.Windows.Forms.Label();
+            this.panelMinGWTable = new System.Windows.Forms.Panel();
+            this.buttonMinGWAdd = new System.Windows.Forms.Button();
+            this.listViewMinGW = new System.Windows.Forms.ListView();
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.labelMinGWHint = new System.Windows.Forms.Label();
+            this.buttonMinGWPrev = new System.Windows.Forms.Button();
+            this.buttonMinGWCancel = new System.Windows.Forms.Button();
+            this.buttonMinGWNext = new System.Windows.Forms.Button();
+            this.tabPageCode = new System.Windows.Forms.TabPage();
+            this.labelCodeTitle = new System.Windows.Forms.Label();
+            this.labelExtensionHint = new System.Windows.Forms.Label();
+            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.labelCodeHint = new System.Windows.Forms.Label();
+            this.buttonCodePrev = new System.Windows.Forms.Button();
+            this.buttonCodeCancel = new System.Windows.Forms.Button();
+            this.buttonCodeNext = new System.Windows.Forms.Button();
+            this.tabPageStyle = new System.Windows.Forms.TabPage();
+            this.pictureBoxExternal = new System.Windows.Forms.PictureBox();
+            this.pictureBoxInternal = new System.Windows.Forms.PictureBox();
+            this.labelExternalHint = new System.Windows.Forms.Label();
+            this.labelInternalHint = new System.Windows.Forms.Label();
+            this.radioButtonExternal = new System.Windows.Forms.RadioButton();
+            this.radioButtonInternal = new System.Windows.Forms.RadioButton();
+            this.labelStyleTitle = new System.Windows.Forms.Label();
+            this.buttonConfigPrev = new System.Windows.Forms.Button();
+            this.buttonConfigCancel = new System.Windows.Forms.Button();
+            this.buttonConfigNext = new System.Windows.Forms.Button();
+            this.tabPageFinish = new System.Windows.Forms.TabPage();
+            this.labelFinishHint = new System.Windows.Forms.Label();
+            this.labelFinishTitle = new System.Windows.Forms.Label();
+            this.buttonFinishAll = new System.Windows.Forms.Button();
+            this.buttonSettings = new System.Windows.Forms.Button();
+            this.panelNavigate = new System.Windows.Forms.Panel();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.tabControlMain.SuspendLayout();
-            this.tabPageStart.SuspendLayout();
-            this.tabPageHelp.SuspendLayout();
-            this.tabPageSetting.SuspendLayout();
-            this.groupBoxLang.SuspendLayout();
-            this.groupBoxPrivil.SuspendLayout();
-            this.groupBoxArg.SuspendLayout();
-            this.groupBoxMinGWSrc.SuspendLayout();
+            this.tabPageWelcome.SuspendLayout();
+            this.tabPageMinGW.SuspendLayout();
+            this.panelMinGWTable.SuspendLayout();
+            this.tabPageCode.SuspendLayout();
+            this.tabPageStyle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExternal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInternal)).BeginInit();
+            this.tabPageFinish.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControlMain
+            // linkLabelManual
             // 
-            this.tabControlMain.Controls.Add(this.tabPageStart);
-            this.tabControlMain.Controls.Add(this.tabPageHelp);
-            this.tabControlMain.Controls.Add(this.tabPageSetting);
-            this.tabControlMain.Location = new System.Drawing.Point(16, 15);
-            this.tabControlMain.Margin = new System.Windows.Forms.Padding(4);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(435, 591);
-            this.tabControlMain.TabIndex = 0;
+            this.linkLabelManual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.linkLabelManual.AutoSize = true;
+            this.linkLabelManual.Location = new System.Drawing.Point(84, 366);
+            this.linkLabelManual.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkLabelManual.Name = "linkLabelManual";
+            this.linkLabelManual.Size = new System.Drawing.Size(67, 15);
+            this.linkLabelManual.TabIndex = 4;
+            this.linkLabelManual.TabStop = true;
+            this.linkLabelManual.Text = "使用帮助";
+            this.linkLabelManual.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelManual_LinkClicked);
             // 
-            // tabPageStart
+            // labelAuthor
             // 
-            this.tabPageStart.Controls.Add(this.checkBoxGenTest);
-            this.tabPageStart.Controls.Add(this.checkBoxOpen);
-            this.tabPageStart.Controls.Add(this.labelWorkspaceStatus);
-            this.tabPageStart.Controls.Add(this.labelConfigState);
-            this.tabPageStart.Controls.Add(this.buttonConfig);
-            this.tabPageStart.Controls.Add(this.label7);
-            this.tabPageStart.Controls.Add(this.buttonViewWorkspace);
-            this.tabPageStart.Controls.Add(this.textBoxWorkspacePath);
-            this.tabPageStart.Controls.Add(this.labelWorkspaceHint);
-            this.tabPageStart.Controls.Add(this.label6);
-            this.tabPageStart.Controls.Add(this.linkLabelVSCode);
-            this.tabPageStart.Controls.Add(this.linkLabelMinGW);
-            this.tabPageStart.Controls.Add(this.labelMinGWPathHint);
-            this.tabPageStart.Controls.Add(this.labelExtensionHint);
-            this.tabPageStart.Controls.Add(this.label5);
-            this.tabPageStart.Controls.Add(this.label4);
-            this.tabPageStart.Controls.Add(this.buttonExtension);
-            this.tabPageStart.Controls.Add(this.label3);
-            this.tabPageStart.Controls.Add(this.label2);
-            this.tabPageStart.Controls.Add(this.label1);
-            this.tabPageStart.Controls.Add(this.labelMinGWState);
-            this.tabPageStart.Controls.Add(this.labelPathState);
-            this.tabPageStart.Controls.Add(this.buttonSetEnv);
-            this.tabPageStart.Controls.Add(this.textBoxMinGWPath);
-            this.tabPageStart.Controls.Add(this.buttonViewMinGW);
-            this.tabPageStart.Location = new System.Drawing.Point(4, 25);
-            this.tabPageStart.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPageStart.Name = "tabPageStart";
-            this.tabPageStart.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageStart.Size = new System.Drawing.Size(427, 562);
-            this.tabPageStart.TabIndex = 0;
-            this.tabPageStart.Text = "开始";
-            this.tabPageStart.UseVisualStyleBackColor = true;
+            this.labelAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelAuthor.Location = new System.Drawing.Point(183, 366);
+            this.labelAuthor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelAuthor.Name = "labelAuthor";
+            this.labelAuthor.Size = new System.Drawing.Size(582, 21);
+            this.labelAuthor.TabIndex = 0;
+            this.labelAuthor.Text = "版权";
+            this.labelAuthor.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // checkBoxGenTest
             // 
             this.checkBoxGenTest.AutoSize = true;
             this.checkBoxGenTest.Checked = true;
             this.checkBoxGenTest.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxGenTest.Location = new System.Drawing.Point(139, 468);
+            this.checkBoxGenTest.Location = new System.Drawing.Point(34, 108);
             this.checkBoxGenTest.Name = "checkBoxGenTest";
             this.checkBoxGenTest.Size = new System.Drawing.Size(119, 19);
             this.checkBoxGenTest.TabIndex = 26;
@@ -155,18 +143,51 @@
             this.checkBoxOpen.AutoSize = true;
             this.checkBoxOpen.Checked = true;
             this.checkBoxOpen.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxOpen.Location = new System.Drawing.Point(274, 468);
+            this.checkBoxOpen.Location = new System.Drawing.Point(34, 133);
             this.checkBoxOpen.Name = "checkBoxOpen";
-            this.checkBoxOpen.Size = new System.Drawing.Size(134, 19);
+            this.checkBoxOpen.Size = new System.Drawing.Size(123, 19);
             this.checkBoxOpen.TabIndex = 25;
-            this.checkBoxOpen.Text = "配置成功后启动";
+            this.checkBoxOpen.Text = "启动 VS Code";
             this.checkBoxOpen.UseVisualStyleBackColor = true;
+            // 
+            // buttonExtension
+            // 
+            this.buttonExtension.Location = new System.Drawing.Point(39, 184);
+            this.buttonExtension.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonExtension.Name = "buttonExtension";
+            this.buttonExtension.Size = new System.Drawing.Size(100, 29);
+            this.buttonExtension.TabIndex = 8;
+            this.buttonExtension.Text = "安装扩展";
+            this.buttonExtension.UseVisualStyleBackColor = true;
+            this.buttonExtension.Click += new System.EventHandler(this.ButtonExtension_Click);
+            // 
+            // labelMinGWState
+            // 
+            this.labelMinGWState.Location = new System.Drawing.Point(60, 232);
+            this.labelMinGWState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMinGWState.Name = "labelMinGWState";
+            this.labelMinGWState.Size = new System.Drawing.Size(411, 45);
+            this.labelMinGWState.TabIndex = 4;
+            this.labelMinGWState.Text = "     ";
+            // 
+            // linkLabelVSCode
+            // 
+            this.linkLabelVSCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabelVSCode.Location = new System.Drawing.Point(445, 97);
+            this.linkLabelVSCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkLabelVSCode.Name = "linkLabelVSCode";
+            this.linkLabelVSCode.Size = new System.Drawing.Size(91, 15);
+            this.linkLabelVSCode.TabIndex = 16;
+            this.linkLabelVSCode.TabStop = true;
+            this.linkLabelVSCode.Text = "下载地址";
+            this.linkLabelVSCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.linkLabelVSCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelVSCode_LinkClicked);
             // 
             // labelWorkspaceStatus
             // 
             this.labelWorkspaceStatus.AutoSize = true;
             this.labelWorkspaceStatus.ForeColor = System.Drawing.Color.Red;
-            this.labelWorkspaceStatus.Location = new System.Drawing.Point(8, 439);
+            this.labelWorkspaceStatus.Location = new System.Drawing.Point(31, 159);
             this.labelWorkspaceStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelWorkspaceStatus.Name = "labelWorkspaceStatus";
             this.labelWorkspaceStatus.Size = new System.Drawing.Size(277, 15);
@@ -174,42 +195,10 @@
             this.labelWorkspaceStatus.Text = "路径中不能包含中文或者其它特殊字符。";
             this.labelWorkspaceStatus.Visible = false;
             // 
-            // labelConfigState
-            // 
-            this.labelConfigState.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelConfigState.Location = new System.Drawing.Point(152, 500);
-            this.labelConfigState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelConfigState.Name = "labelConfigState";
-            this.labelConfigState.Size = new System.Drawing.Size(258, 50);
-            this.labelConfigState.TabIndex = 23;
-            this.labelConfigState.Text = "     ";
-            // 
-            // buttonConfig
-            // 
-            this.buttonConfig.Location = new System.Drawing.Point(8, 493);
-            this.buttonConfig.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonConfig.Name = "buttonConfig";
-            this.buttonConfig.Size = new System.Drawing.Size(113, 29);
-            this.buttonConfig.TabIndex = 22;
-            this.buttonConfig.Text = "一键配置";
-            this.buttonConfig.UseVisualStyleBackColor = true;
-            this.buttonConfig.Click += new System.EventHandler(this.ButtonConfig_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 469);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(127, 15);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "第七步：一键配置";
-            // 
             // buttonViewWorkspace
             // 
             this.buttonViewWorkspace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonViewWorkspace.Location = new System.Drawing.Point(316, 409);
+            this.buttonViewWorkspace.Location = new System.Drawing.Point(461, 127);
             this.buttonViewWorkspace.Margin = new System.Windows.Forms.Padding(4);
             this.buttonViewWorkspace.Name = "buttonViewWorkspace";
             this.buttonViewWorkspace.Size = new System.Drawing.Size(100, 26);
@@ -222,50 +211,17 @@
             // 
             this.textBoxWorkspacePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxWorkspacePath.Location = new System.Drawing.Point(7, 409);
+            this.textBoxWorkspacePath.Location = new System.Drawing.Point(34, 130);
             this.textBoxWorkspacePath.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxWorkspacePath.Name = "textBoxWorkspacePath";
-            this.textBoxWorkspacePath.Size = new System.Drawing.Size(300, 25);
+            this.textBoxWorkspacePath.Size = new System.Drawing.Size(419, 25);
             this.textBoxWorkspacePath.TabIndex = 19;
             this.textBoxWorkspacePath.TextChanged += new System.EventHandler(this.TextBoxWorkspacePath_TextChanged);
-            // 
-            // labelWorkspaceHint
-            // 
-            this.labelWorkspaceHint.AutoSize = true;
-            this.labelWorkspaceHint.Location = new System.Drawing.Point(4, 390);
-            this.labelWorkspaceHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelWorkspaceHint.Name = "labelWorkspaceHint";
-            this.labelWorkspaceHint.Size = new System.Drawing.Size(322, 15);
-            this.labelWorkspaceHint.TabIndex = 18;
-            this.labelWorkspaceHint.Text = "选择一个文件夹，将来您的程序都存放在此处：";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 362);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(172, 15);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "第六步：选择工作文件夹";
-            // 
-            // linkLabelVSCode
-            // 
-            this.linkLabelVSCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabelVSCode.Location = new System.Drawing.Point(317, 270);
-            this.linkLabelVSCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabelVSCode.Name = "linkLabelVSCode";
-            this.linkLabelVSCode.Size = new System.Drawing.Size(91, 15);
-            this.linkLabelVSCode.TabIndex = 16;
-            this.linkLabelVSCode.TabStop = true;
-            this.linkLabelVSCode.Text = "下载地址";
-            this.linkLabelVSCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.linkLabelVSCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelVSCode_LinkClicked);
             // 
             // linkLabelMinGW
             // 
             this.linkLabelMinGW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabelMinGW.Location = new System.Drawing.Point(317, 15);
+            this.linkLabelMinGW.Location = new System.Drawing.Point(476, 55);
             this.linkLabelMinGW.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabelMinGW.Name = "linkLabelMinGW";
             this.linkLabelMinGW.Size = new System.Drawing.Size(91, 15);
@@ -277,480 +233,653 @@
             // 
             // labelMinGWPathHint
             // 
-            this.labelMinGWPathHint.Location = new System.Drawing.Point(4, 57);
+            this.labelMinGWPathHint.Location = new System.Drawing.Point(28, 118);
             this.labelMinGWPathHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelMinGWPathHint.Name = "labelMinGWPathHint";
-            this.labelMinGWPathHint.Size = new System.Drawing.Size(412, 56);
+            this.labelMinGWPathHint.Size = new System.Drawing.Size(446, 56);
             this.labelMinGWPathHint.TabIndex = 14;
             this.labelMinGWPathHint.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // labelExtensionHint
-            // 
-            this.labelExtensionHint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelExtensionHint.Location = new System.Drawing.Point(136, 315);
-            this.labelExtensionHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelExtensionHint.Name = "labelExtensionHint";
-            this.labelExtensionHint.Size = new System.Drawing.Size(275, 36);
-            this.labelExtensionHint.TabIndex = 11;
-            this.labelExtensionHint.Text = "点击左侧按钮，选择 Install 。如失败，请检查 VS Code 是否安装。";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 296);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(127, 15);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "第五步：安装插件";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 270);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(214, 15);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "第四步：下载 VS Code 并安装";
-            // 
-            // buttonExtension
-            // 
-            this.buttonExtension.Location = new System.Drawing.Point(8, 315);
-            this.buttonExtension.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonExtension.Name = "buttonExtension";
-            this.buttonExtension.Size = new System.Drawing.Size(113, 29);
-            this.buttonExtension.TabIndex = 8;
-            this.buttonExtension.Text = "安装插件...";
-            this.buttonExtension.UseVisualStyleBackColor = true;
-            this.buttonExtension.Click += new System.EventHandler(this.ButtonExtension_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 206);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(157, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "第三步：设置环境变量";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 42);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(183, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "第二步：输入 MinGW 路径";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(230, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "第一步：下载 MinGW-w64 并解压";
-            // 
-            // labelMinGWState
-            // 
-            this.labelMinGWState.Location = new System.Drawing.Point(5, 150);
-            this.labelMinGWState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelMinGWState.Name = "labelMinGWState";
-            this.labelMinGWState.Size = new System.Drawing.Size(411, 45);
-            this.labelMinGWState.TabIndex = 4;
-            this.labelMinGWState.Text = "     ";
-            // 
-            // labelPathState
-            // 
-            this.labelPathState.Location = new System.Drawing.Point(129, 231);
-            this.labelPathState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelPathState.Name = "labelPathState";
-            this.labelPathState.Size = new System.Drawing.Size(261, 15);
-            this.labelPathState.TabIndex = 3;
-            this.labelPathState.Text = "     ";
-            // 
-            // buttonSetEnv
-            // 
-            this.buttonSetEnv.Location = new System.Drawing.Point(8, 225);
-            this.buttonSetEnv.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonSetEnv.Name = "buttonSetEnv";
-            this.buttonSetEnv.Size = new System.Drawing.Size(113, 29);
-            this.buttonSetEnv.TabIndex = 2;
-            this.buttonSetEnv.Text = "设置环境变量";
-            this.buttonSetEnv.UseVisualStyleBackColor = true;
-            this.buttonSetEnv.Click += new System.EventHandler(this.ButtonSetEnv_Click);
             // 
             // textBoxMinGWPath
             // 
             this.textBoxMinGWPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxMinGWPath.Location = new System.Drawing.Point(7, 118);
+            this.textBoxMinGWPath.Location = new System.Drawing.Point(28, 192);
             this.textBoxMinGWPath.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxMinGWPath.Name = "textBoxMinGWPath";
-            this.textBoxMinGWPath.Size = new System.Drawing.Size(300, 25);
+            this.textBoxMinGWPath.Size = new System.Drawing.Size(421, 25);
             this.textBoxMinGWPath.TabIndex = 1;
             this.textBoxMinGWPath.TextChanged += new System.EventHandler(this.TextBoxMinGWPath_TextChanged);
             // 
             // buttonViewMinGW
             // 
             this.buttonViewMinGW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonViewMinGW.Location = new System.Drawing.Point(316, 116);
+            this.buttonViewMinGW.Location = new System.Drawing.Point(457, 192);
             this.buttonViewMinGW.Margin = new System.Windows.Forms.Padding(4);
             this.buttonViewMinGW.Name = "buttonViewMinGW";
-            this.buttonViewMinGW.Size = new System.Drawing.Size(100, 26);
+            this.buttonViewMinGW.Size = new System.Drawing.Size(100, 25);
             this.buttonViewMinGW.TabIndex = 0;
             this.buttonViewMinGW.Text = "浏览...";
             this.buttonViewMinGW.UseVisualStyleBackColor = true;
             this.buttonViewMinGW.Click += new System.EventHandler(this.ButtonViewMinGW_Click);
             // 
-            // tabPageHelp
+            // tabControlMain
             // 
-            this.tabPageHelp.Controls.Add(this.linkLabelManual);
-            this.tabPageHelp.Controls.Add(this.labelFAQ);
-            this.tabPageHelp.Controls.Add(this.labelManual);
-            this.tabPageHelp.Controls.Add(this.textBoxHelp);
-            this.tabPageHelp.Controls.Add(this.labelAuthor);
-            this.tabPageHelp.Location = new System.Drawing.Point(4, 25);
-            this.tabPageHelp.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPageHelp.Name = "tabPageHelp";
-            this.tabPageHelp.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageHelp.Size = new System.Drawing.Size(427, 562);
-            this.tabPageHelp.TabIndex = 1;
-            this.tabPageHelp.Text = "帮助";
-            this.tabPageHelp.UseVisualStyleBackColor = true;
-            // 
-            // linkLabelManual
-            // 
-            this.linkLabelManual.AutoSize = true;
-            this.linkLabelManual.Location = new System.Drawing.Point(169, 4);
-            this.linkLabelManual.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabelManual.Name = "linkLabelManual";
-            this.linkLabelManual.Size = new System.Drawing.Size(37, 15);
-            this.linkLabelManual.TabIndex = 4;
-            this.linkLabelManual.TabStop = true;
-            this.linkLabelManual.Text = "此处";
-            this.linkLabelManual.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelManual_LinkClicked);
-            // 
-            // labelFAQ
-            // 
-            this.labelFAQ.AutoSize = true;
-            this.labelFAQ.Location = new System.Drawing.Point(8, 32);
-            this.labelFAQ.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelFAQ.Name = "labelFAQ";
-            this.labelFAQ.Size = new System.Drawing.Size(121, 15);
-            this.labelFAQ.TabIndex = 3;
-            this.labelFAQ.Text = "常见问题（FAQ）";
-            // 
-            // labelManual
-            // 
-            this.labelManual.AutoSize = true;
-            this.labelManual.Location = new System.Drawing.Point(8, 4);
-            this.labelManual.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelManual.Name = "labelManual";
-            this.labelManual.Size = new System.Drawing.Size(157, 15);
-            this.labelManual.TabIndex = 2;
-            this.labelManual.Text = "更详细的使用方法参见";
-            // 
-            // textBoxHelp
-            // 
-            this.textBoxHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxHelp.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxHelp.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxHelp.Location = new System.Drawing.Point(8, 51);
-            this.textBoxHelp.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxHelp.Multiline = true;
-            this.textBoxHelp.Name = "textBoxHelp";
-            this.textBoxHelp.ReadOnly = true;
-            this.textBoxHelp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxHelp.Size = new System.Drawing.Size(407, 484);
-            this.textBoxHelp.TabIndex = 1;
+            this.tabControlMain.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControlMain.Controls.Add(this.tabPageWelcome);
+            this.tabControlMain.Controls.Add(this.tabPageMinGW);
+            this.tabControlMain.Controls.Add(this.tabPageCode);
+            this.tabControlMain.Controls.Add(this.tabPageStyle);
+            this.tabControlMain.Controls.Add(this.tabPageFinish);
+            this.tabControlMain.ItemSize = new System.Drawing.Size(20, 20);
+            this.tabControlMain.Location = new System.Drawing.Point(175, 12);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(594, 345);
+            this.tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlMain.TabIndex = 1;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
-            // labelAuthor
+            // tabPageWelcome
             // 
-            this.labelAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelAuthor.Location = new System.Drawing.Point(5, 540);
-            this.labelAuthor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(414, 15);
-            this.labelAuthor.TabIndex = 0;
+            this.tabPageWelcome.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageWelcome.Controls.Add(this.labelWelcomeTitle);
+            this.tabPageWelcome.Controls.Add(this.buttonWelcomCancel);
+            this.tabPageWelcome.Controls.Add(this.buttonWelcomeNext);
+            this.tabPageWelcome.Controls.Add(this.labelFolderHelp);
+            this.tabPageWelcome.Controls.Add(this.labelFolderHint);
+            this.tabPageWelcome.Controls.Add(this.labelWorkspaceStatus);
+            this.tabPageWelcome.Controls.Add(this.labelWelcomeText);
+            this.tabPageWelcome.Controls.Add(this.buttonViewWorkspace);
+            this.tabPageWelcome.Controls.Add(this.textBoxWorkspacePath);
+            this.tabPageWelcome.Location = new System.Drawing.Point(4, 24);
+            this.tabPageWelcome.Name = "tabPageWelcome";
+            this.tabPageWelcome.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageWelcome.Size = new System.Drawing.Size(586, 317);
+            this.tabPageWelcome.TabIndex = 0;
             // 
-            // tabPageSetting
+            // labelWelcomeTitle
             // 
-            this.tabPageSetting.Controls.Add(this.groupBoxLang);
-            this.tabPageSetting.Controls.Add(this.groupBoxPrivil);
-            this.tabPageSetting.Controls.Add(this.groupBoxArg);
-            this.tabPageSetting.Controls.Add(this.groupBoxMinGWSrc);
-            this.tabPageSetting.Location = new System.Drawing.Point(4, 25);
-            this.tabPageSetting.Name = "tabPageSetting";
-            this.tabPageSetting.Size = new System.Drawing.Size(427, 562);
-            this.tabPageSetting.TabIndex = 2;
-            this.tabPageSetting.Text = "设置";
-            this.tabPageSetting.UseVisualStyleBackColor = true;
+            this.labelWelcomeTitle.AutoSize = true;
+            this.labelWelcomeTitle.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelWelcomeTitle.Location = new System.Drawing.Point(28, 3);
+            this.labelWelcomeTitle.Name = "labelWelcomeTitle";
+            this.labelWelcomeTitle.Size = new System.Drawing.Size(65, 32);
+            this.labelWelcomeTitle.TabIndex = 27;
+            this.labelWelcomeTitle.Text = "欢迎";
             // 
-            // groupBoxLang
+            // buttonWelcomCancel
             // 
-            this.groupBoxLang.Controls.Add(this.radioButtonC);
-            this.groupBoxLang.Controls.Add(this.radioButtonCpp);
-            this.groupBoxLang.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxLang.Name = "groupBoxLang";
-            this.groupBoxLang.Size = new System.Drawing.Size(421, 66);
-            this.groupBoxLang.TabIndex = 3;
-            this.groupBoxLang.TabStop = false;
-            this.groupBoxLang.Text = "配置语言";
+            this.buttonWelcomCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonWelcomCancel.Location = new System.Drawing.Point(480, 282);
+            this.buttonWelcomCancel.Name = "buttonWelcomCancel";
+            this.buttonWelcomCancel.Size = new System.Drawing.Size(100, 29);
+            this.buttonWelcomCancel.TabIndex = 26;
+            this.buttonWelcomCancel.Text = "退出";
+            this.buttonWelcomCancel.UseVisualStyleBackColor = true;
+            this.buttonWelcomCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // radioButtonC
+            // buttonWelcomeNext
             // 
-            this.radioButtonC.AutoSize = true;
-            this.radioButtonC.Location = new System.Drawing.Point(219, 24);
-            this.radioButtonC.Name = "radioButtonC";
-            this.radioButtonC.Size = new System.Drawing.Size(59, 19);
-            this.radioButtonC.TabIndex = 1;
-            this.radioButtonC.Text = "仅 C";
-            this.radioButtonC.UseVisualStyleBackColor = true;
+            this.buttonWelcomeNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonWelcomeNext.Enabled = false;
+            this.buttonWelcomeNext.Location = new System.Drawing.Point(374, 282);
+            this.buttonWelcomeNext.Name = "buttonWelcomeNext";
+            this.buttonWelcomeNext.Size = new System.Drawing.Size(100, 29);
+            this.buttonWelcomeNext.TabIndex = 25;
+            this.buttonWelcomeNext.Text = "下一步";
+            this.buttonWelcomeNext.UseVisualStyleBackColor = true;
+            this.buttonWelcomeNext.Click += new System.EventHandler(this.buttonWelcomeNext_Click);
             // 
-            // radioButtonCpp
+            // labelFolderHelp
             // 
-            this.radioButtonCpp.AutoSize = true;
-            this.radioButtonCpp.Checked = true;
-            this.radioButtonCpp.Location = new System.Drawing.Point(45, 24);
-            this.radioButtonCpp.Name = "radioButtonCpp";
-            this.radioButtonCpp.Size = new System.Drawing.Size(91, 19);
-            this.radioButtonCpp.TabIndex = 1;
-            this.radioButtonCpp.TabStop = true;
-            this.radioButtonCpp.Text = "C++ 和 C";
-            this.radioButtonCpp.UseVisualStyleBackColor = true;
-            this.radioButtonCpp.CheckedChanged += new System.EventHandler(this.radioButtonCpp_CheckedChanged);
+            this.labelFolderHelp.Location = new System.Drawing.Point(31, 194);
+            this.labelFolderHelp.Name = "labelFolderHelp";
+            this.labelFolderHelp.Size = new System.Drawing.Size(424, 38);
+            this.labelFolderHelp.TabIndex = 2;
+            this.labelFolderHelp.Text = "VS Code的配置大多在特定文件夹下生效，方便您为不同的语言和不同的需求个性化配置。点击下一步以继续。";
             // 
-            // groupBoxPrivil
+            // labelFolderHint
             // 
-            this.groupBoxPrivil.Controls.Add(this.buttonAuth);
-            this.groupBoxPrivil.Controls.Add(this.labelAuth);
-            this.groupBoxPrivil.Location = new System.Drawing.Point(6, 171);
-            this.groupBoxPrivil.Name = "groupBoxPrivil";
-            this.groupBoxPrivil.Size = new System.Drawing.Size(421, 132);
-            this.groupBoxPrivil.TabIndex = 6;
-            this.groupBoxPrivil.TabStop = false;
-            this.groupBoxPrivil.Text = "当前权限";
+            this.labelFolderHint.AutoSize = true;
+            this.labelFolderHint.Location = new System.Drawing.Point(31, 111);
+            this.labelFolderHint.Name = "labelFolderHint";
+            this.labelFolderHint.Size = new System.Drawing.Size(427, 15);
+            this.labelFolderHint.TabIndex = 1;
+            this.labelFolderHint.Text = "请选择一个工作文件夹。您将来的程序和代码都将存放在此处：";
             // 
-            // buttonAuth
+            // labelWelcomeText
             // 
-            this.buttonAuth.Location = new System.Drawing.Point(274, 55);
-            this.buttonAuth.Name = "buttonAuth";
-            this.buttonAuth.Size = new System.Drawing.Size(141, 29);
-            this.buttonAuth.TabIndex = 0;
-            this.buttonAuth.Text = "使用管理员身份";
-            this.buttonAuth.UseVisualStyleBackColor = true;
-            this.buttonAuth.Click += new System.EventHandler(this.buttonAuth_Click);
+            this.labelWelcomeText.Location = new System.Drawing.Point(31, 57);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(422, 36);
+            this.labelWelcomeText.TabIndex = 0;
+            this.labelWelcomeText.Text = "欢迎您使用 VS Code C/C++ 配置工具。本工具将帮助您完成 VS Code 的配置。";
             // 
-            // labelAuth
+            // tabPageMinGW
             // 
-            this.labelAuth.Location = new System.Drawing.Point(6, 21);
-            this.labelAuth.Name = "labelAuth";
-            this.labelAuth.Size = new System.Drawing.Size(262, 108);
-            this.labelAuth.TabIndex = 1;
+            this.tabPageMinGW.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageMinGW.Controls.Add(this.labelMinGWTitle);
+            this.tabPageMinGW.Controls.Add(this.panelMinGWTable);
+            this.tabPageMinGW.Controls.Add(this.labelMinGWHint);
+            this.tabPageMinGW.Controls.Add(this.buttonMinGWPrev);
+            this.tabPageMinGW.Controls.Add(this.buttonMinGWCancel);
+            this.tabPageMinGW.Controls.Add(this.buttonMinGWNext);
+            this.tabPageMinGW.Controls.Add(this.labelMinGWPathHint);
+            this.tabPageMinGW.Controls.Add(this.buttonViewMinGW);
+            this.tabPageMinGW.Controls.Add(this.textBoxMinGWPath);
+            this.tabPageMinGW.Controls.Add(this.linkLabelMinGW);
+            this.tabPageMinGW.Controls.Add(this.labelMinGWState);
+            this.tabPageMinGW.Location = new System.Drawing.Point(4, 24);
+            this.tabPageMinGW.Name = "tabPageMinGW";
+            this.tabPageMinGW.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMinGW.Size = new System.Drawing.Size(586, 317);
+            this.tabPageMinGW.TabIndex = 1;
             // 
-            // groupBoxArg
+            // labelMinGWTitle
             // 
-            this.groupBoxArg.Controls.Add(this.buttonArgDefault);
-            this.groupBoxArg.Controls.Add(this.labelArgInstruction);
-            this.groupBoxArg.Controls.Add(this.buttonSaveArgs);
-            this.groupBoxArg.Controls.Add(this.labelArgWarning);
-            this.groupBoxArg.Controls.Add(this.textBoxArgs);
-            this.groupBoxArg.Location = new System.Drawing.Point(3, 309);
-            this.groupBoxArg.Name = "groupBoxArg";
-            this.groupBoxArg.Size = new System.Drawing.Size(421, 224);
-            this.groupBoxArg.TabIndex = 1;
-            this.groupBoxArg.TabStop = false;
-            this.groupBoxArg.Text = "配置 g++ 编译参数";
+            this.labelMinGWTitle.AutoSize = true;
+            this.labelMinGWTitle.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelMinGWTitle.Location = new System.Drawing.Point(28, 3);
+            this.labelMinGWTitle.Name = "labelMinGWTitle";
+            this.labelMinGWTitle.Size = new System.Drawing.Size(162, 32);
+            this.labelMinGWTitle.TabIndex = 33;
+            this.labelMinGWTitle.Text = "配置 MinGW";
             // 
-            // buttonArgDefault
+            // panelMinGWTable
             // 
-            this.buttonArgDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonArgDefault.Location = new System.Drawing.Point(6, 189);
-            this.buttonArgDefault.Name = "buttonArgDefault";
-            this.buttonArgDefault.Size = new System.Drawing.Size(84, 29);
-            this.buttonArgDefault.TabIndex = 2;
-            this.buttonArgDefault.Text = "恢复默认";
-            this.buttonArgDefault.UseVisualStyleBackColor = true;
-            this.buttonArgDefault.Click += new System.EventHandler(this.buttonArgDefault_Click);
-            // 
-            // labelArgInstruction
-            // 
-            this.labelArgInstruction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelArgInstruction.Location = new System.Drawing.Point(186, 188);
-            this.labelArgInstruction.Name = "labelArgInstruction";
-            this.labelArgInstruction.Size = new System.Drawing.Size(226, 30);
-            this.labelArgInstruction.TabIndex = 5;
-            this.labelArgInstruction.Text = "每行一个参数；支持 VS Code 配置变量。";
-            // 
-            // buttonSaveArgs
-            // 
-            this.buttonSaveArgs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSaveArgs.Location = new System.Drawing.Point(96, 189);
-            this.buttonSaveArgs.Name = "buttonSaveArgs";
-            this.buttonSaveArgs.Size = new System.Drawing.Size(84, 29);
-            this.buttonSaveArgs.TabIndex = 4;
-            this.buttonSaveArgs.Text = "保存";
-            this.buttonSaveArgs.UseVisualStyleBackColor = true;
-            this.buttonSaveArgs.Click += new System.EventHandler(this.buttonSaveArgs_Click);
-            // 
-            // labelArgWarning
-            // 
-            this.labelArgWarning.AutoSize = true;
-            this.labelArgWarning.ForeColor = System.Drawing.Color.Red;
-            this.labelArgWarning.Location = new System.Drawing.Point(6, 21);
-            this.labelArgWarning.Name = "labelArgWarning";
-            this.labelArgWarning.Size = new System.Drawing.Size(367, 15);
-            this.labelArgWarning.TabIndex = 3;
-            this.labelArgWarning.Text = "除非您知道自己在做什么，否则不要改动这里的内容。";
-            // 
-            // textBoxArgs
-            // 
-            this.textBoxArgs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelMinGWTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxArgs.Location = new System.Drawing.Point(9, 49);
-            this.textBoxArgs.Multiline = true;
-            this.textBoxArgs.Name = "textBoxArgs";
-            this.textBoxArgs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxArgs.Size = new System.Drawing.Size(406, 134);
-            this.textBoxArgs.TabIndex = 2;
+            this.panelMinGWTable.Controls.Add(this.buttonMinGWAdd);
+            this.panelMinGWTable.Controls.Add(this.listViewMinGW);
+            this.panelMinGWTable.Location = new System.Drawing.Point(26, 100);
+            this.panelMinGWTable.Name = "panelMinGWTable";
+            this.panelMinGWTable.Size = new System.Drawing.Size(541, 182);
+            this.panelMinGWTable.TabIndex = 32;
+            this.panelMinGWTable.Visible = false;
             // 
-            // groupBoxMinGWSrc
+            // buttonMinGWAdd
             // 
-            this.groupBoxMinGWSrc.Controls.Add(this.labelMinGWSrcInstruction);
-            this.groupBoxMinGWSrc.Controls.Add(this.radioButtonOffical);
-            this.groupBoxMinGWSrc.Controls.Add(this.radioButtonPKU);
-            this.groupBoxMinGWSrc.Location = new System.Drawing.Point(3, 75);
-            this.groupBoxMinGWSrc.Name = "groupBoxMinGWSrc";
-            this.groupBoxMinGWSrc.Size = new System.Drawing.Size(421, 90);
-            this.groupBoxMinGWSrc.TabIndex = 0;
-            this.groupBoxMinGWSrc.TabStop = false;
-            this.groupBoxMinGWSrc.Text = "选择 MinGW 下载源";
+            this.buttonMinGWAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonMinGWAdd.Location = new System.Drawing.Point(2, 153);
+            this.buttonMinGWAdd.Name = "buttonMinGWAdd";
+            this.buttonMinGWAdd.Size = new System.Drawing.Size(104, 23);
+            this.buttonMinGWAdd.TabIndex = 32;
+            this.buttonMinGWAdd.Text = "添加...";
+            this.buttonMinGWAdd.UseVisualStyleBackColor = true;
+            this.buttonMinGWAdd.Click += new System.EventHandler(this.buttonMinGWAdd_Click);
             // 
-            // labelMinGWSrcInstruction
+            // listViewMinGW
             // 
-            this.labelMinGWSrcInstruction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.listViewMinGW.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelMinGWSrcInstruction.Location = new System.Drawing.Point(6, 57);
-            this.labelMinGWSrcInstruction.Name = "labelMinGWSrcInstruction";
-            this.labelMinGWSrcInstruction.Size = new System.Drawing.Size(409, 30);
-            this.labelMinGWSrcInstruction.TabIndex = 2;
-            this.labelMinGWSrcInstruction.Text = "北大网盘下载快速稳定，但有可能失效。官方下载长期有效，但速度受网络环境所限制。";
+            this.listViewMinGW.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderName,
+            this.columnHeaderPath,
+            this.columnHeaderVersion});
+            this.listViewMinGW.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewMinGW.FullRowSelect = true;
+            this.listViewMinGW.HideSelection = false;
+            this.listViewMinGW.Location = new System.Drawing.Point(3, 5);
+            this.listViewMinGW.MultiSelect = false;
+            this.listViewMinGW.Name = "listViewMinGW";
+            this.listViewMinGW.ShowItemToolTips = true;
+            this.listViewMinGW.Size = new System.Drawing.Size(528, 142);
+            this.listViewMinGW.TabIndex = 31;
+            this.listViewMinGW.UseCompatibleStateImageBehavior = false;
+            this.listViewMinGW.View = System.Windows.Forms.View.Details;
+            this.listViewMinGW.SelectedIndexChanged += new System.EventHandler(this.listViewMinGW_SelectedIndexChanged);
             // 
-            // radioButtonOffical
+            // columnHeaderName
             // 
-            this.radioButtonOffical.AutoSize = true;
-            this.radioButtonOffical.Location = new System.Drawing.Point(219, 24);
-            this.radioButtonOffical.Name = "radioButtonOffical";
-            this.radioButtonOffical.Size = new System.Drawing.Size(169, 19);
-            this.radioButtonOffical.TabIndex = 1;
-            this.radioButtonOffical.Text = "官方（SourceForge)";
-            this.radioButtonOffical.UseVisualStyleBackColor = true;
+            this.columnHeaderName.Text = "编译环境名称";
+            this.columnHeaderName.Width = 145;
             // 
-            // radioButtonPKU
+            // columnHeaderPath
             // 
-            this.radioButtonPKU.AutoSize = true;
-            this.radioButtonPKU.Checked = true;
-            this.radioButtonPKU.Location = new System.Drawing.Point(45, 24);
-            this.radioButtonPKU.Name = "radioButtonPKU";
-            this.radioButtonPKU.Size = new System.Drawing.Size(88, 19);
-            this.radioButtonPKU.TabIndex = 1;
-            this.radioButtonPKU.TabStop = true;
-            this.radioButtonPKU.Text = "北大网盘";
-            this.radioButtonPKU.UseVisualStyleBackColor = true;
-            this.radioButtonPKU.CheckedChanged += new System.EventHandler(this.radioButtonPKU_CheckedChanged);
+            this.columnHeaderPath.Text = "路径";
+            this.columnHeaderPath.Width = 256;
+            // 
+            // columnHeaderVersion
+            // 
+            this.columnHeaderVersion.Text = "版本信息";
+            this.columnHeaderVersion.Width = 200;
+            // 
+            // labelMinGWHint
+            // 
+            this.labelMinGWHint.Location = new System.Drawing.Point(25, 55);
+            this.labelMinGWHint.Name = "labelMinGWHint";
+            this.labelMinGWHint.Size = new System.Drawing.Size(456, 42);
+            this.labelMinGWHint.TabIndex = 30;
+            this.labelMinGWHint.Text = "您还没有安装 MinGW，请您点击右侧链接下载。";
+            // 
+            // buttonMinGWPrev
+            // 
+            this.buttonMinGWPrev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMinGWPrev.Location = new System.Drawing.Point(268, 282);
+            this.buttonMinGWPrev.Name = "buttonMinGWPrev";
+            this.buttonMinGWPrev.Size = new System.Drawing.Size(100, 29);
+            this.buttonMinGWPrev.TabIndex = 29;
+            this.buttonMinGWPrev.Text = "上一步";
+            this.buttonMinGWPrev.UseVisualStyleBackColor = true;
+            this.buttonMinGWPrev.Click += new System.EventHandler(this.buttonPrev_Click);
+            // 
+            // buttonMinGWCancel
+            // 
+            this.buttonMinGWCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMinGWCancel.Location = new System.Drawing.Point(480, 282);
+            this.buttonMinGWCancel.Name = "buttonMinGWCancel";
+            this.buttonMinGWCancel.Size = new System.Drawing.Size(100, 29);
+            this.buttonMinGWCancel.TabIndex = 28;
+            this.buttonMinGWCancel.Text = "退出";
+            this.buttonMinGWCancel.UseVisualStyleBackColor = true;
+            this.buttonMinGWCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonMinGWNext
+            // 
+            this.buttonMinGWNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMinGWNext.Enabled = false;
+            this.buttonMinGWNext.Location = new System.Drawing.Point(374, 282);
+            this.buttonMinGWNext.Name = "buttonMinGWNext";
+            this.buttonMinGWNext.Size = new System.Drawing.Size(100, 29);
+            this.buttonMinGWNext.TabIndex = 27;
+            this.buttonMinGWNext.Text = "下一步";
+            this.buttonMinGWNext.UseVisualStyleBackColor = true;
+            this.buttonMinGWNext.Click += new System.EventHandler(this.buttonMinGWNext_Click);
+            // 
+            // tabPageCode
+            // 
+            this.tabPageCode.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageCode.Controls.Add(this.labelCodeTitle);
+            this.tabPageCode.Controls.Add(this.labelExtensionHint);
+            this.tabPageCode.Controls.Add(this.buttonRefresh);
+            this.tabPageCode.Controls.Add(this.labelCodeHint);
+            this.tabPageCode.Controls.Add(this.buttonCodePrev);
+            this.tabPageCode.Controls.Add(this.buttonCodeCancel);
+            this.tabPageCode.Controls.Add(this.buttonCodeNext);
+            this.tabPageCode.Controls.Add(this.linkLabelVSCode);
+            this.tabPageCode.Controls.Add(this.buttonExtension);
+            this.tabPageCode.Location = new System.Drawing.Point(4, 24);
+            this.tabPageCode.Name = "tabPageCode";
+            this.tabPageCode.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCode.Size = new System.Drawing.Size(586, 317);
+            this.tabPageCode.TabIndex = 3;
+            // 
+            // labelCodeTitle
+            // 
+            this.labelCodeTitle.AutoSize = true;
+            this.labelCodeTitle.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelCodeTitle.Location = new System.Drawing.Point(28, 3);
+            this.labelCodeTitle.Name = "labelCodeTitle";
+            this.labelCodeTitle.Size = new System.Drawing.Size(255, 32);
+            this.labelCodeTitle.TabIndex = 34;
+            this.labelCodeTitle.Text = "安装 VS Code 和扩展";
+            // 
+            // labelExtensionHint
+            // 
+            this.labelExtensionHint.Location = new System.Drawing.Point(146, 191);
+            this.labelExtensionHint.Name = "labelExtensionHint";
+            this.labelExtensionHint.Size = new System.Drawing.Size(292, 45);
+            this.labelExtensionHint.TabIndex = 33;
+            this.labelExtensionHint.Text = "请点击左侧按钮安装 C/C++ 扩展。";
+            // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Location = new System.Drawing.Point(39, 90);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(100, 29);
+            this.buttonRefresh.TabIndex = 32;
+            this.buttonRefresh.Text = "刷新";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // labelCodeHint
+            // 
+            this.labelCodeHint.Location = new System.Drawing.Point(145, 90);
+            this.labelCodeHint.Name = "labelCodeHint";
+            this.labelCodeHint.Size = new System.Drawing.Size(293, 67);
+            this.labelCodeHint.TabIndex = 31;
+            this.labelCodeHint.Text = "未检测到已安装的 VS Code。请点击右侧地址下载安装。";
+            // 
+            // buttonCodePrev
+            // 
+            this.buttonCodePrev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCodePrev.Location = new System.Drawing.Point(268, 282);
+            this.buttonCodePrev.Name = "buttonCodePrev";
+            this.buttonCodePrev.Size = new System.Drawing.Size(100, 29);
+            this.buttonCodePrev.TabIndex = 29;
+            this.buttonCodePrev.Text = "上一步";
+            this.buttonCodePrev.UseVisualStyleBackColor = true;
+            this.buttonCodePrev.Click += new System.EventHandler(this.buttonPrev_Click);
+            // 
+            // buttonCodeCancel
+            // 
+            this.buttonCodeCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCodeCancel.Location = new System.Drawing.Point(480, 282);
+            this.buttonCodeCancel.Name = "buttonCodeCancel";
+            this.buttonCodeCancel.Size = new System.Drawing.Size(100, 29);
+            this.buttonCodeCancel.TabIndex = 28;
+            this.buttonCodeCancel.Text = "退出";
+            this.buttonCodeCancel.UseVisualStyleBackColor = true;
+            this.buttonCodeCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonCodeNext
+            // 
+            this.buttonCodeNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCodeNext.Enabled = false;
+            this.buttonCodeNext.Location = new System.Drawing.Point(374, 282);
+            this.buttonCodeNext.Name = "buttonCodeNext";
+            this.buttonCodeNext.Size = new System.Drawing.Size(100, 29);
+            this.buttonCodeNext.TabIndex = 27;
+            this.buttonCodeNext.Text = "下一步";
+            this.buttonCodeNext.UseVisualStyleBackColor = true;
+            this.buttonCodeNext.Click += new System.EventHandler(this.buttonCodeNext_Click);
+            // 
+            // tabPageStyle
+            // 
+            this.tabPageStyle.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageStyle.Controls.Add(this.pictureBoxExternal);
+            this.tabPageStyle.Controls.Add(this.pictureBoxInternal);
+            this.tabPageStyle.Controls.Add(this.labelExternalHint);
+            this.tabPageStyle.Controls.Add(this.labelInternalHint);
+            this.tabPageStyle.Controls.Add(this.radioButtonExternal);
+            this.tabPageStyle.Controls.Add(this.radioButtonInternal);
+            this.tabPageStyle.Controls.Add(this.labelStyleTitle);
+            this.tabPageStyle.Controls.Add(this.buttonConfigPrev);
+            this.tabPageStyle.Controls.Add(this.buttonConfigCancel);
+            this.tabPageStyle.Controls.Add(this.buttonConfigNext);
+            this.tabPageStyle.Location = new System.Drawing.Point(4, 24);
+            this.tabPageStyle.Name = "tabPageStyle";
+            this.tabPageStyle.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageStyle.Size = new System.Drawing.Size(586, 317);
+            this.tabPageStyle.TabIndex = 4;
+            // 
+            // pictureBoxExternal
+            // 
+            this.pictureBoxExternal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxExternal.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxExternal.Image")));
+            this.pictureBoxExternal.Location = new System.Drawing.Point(461, 164);
+            this.pictureBoxExternal.Name = "pictureBoxExternal";
+            this.pictureBoxExternal.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxExternal.TabIndex = 41;
+            this.pictureBoxExternal.TabStop = false;
+            // 
+            // pictureBoxInternal
+            // 
+            this.pictureBoxInternal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxInternal.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxInternal.Image")));
+            this.pictureBoxInternal.Location = new System.Drawing.Point(461, 38);
+            this.pictureBoxInternal.Name = "pictureBoxInternal";
+            this.pictureBoxInternal.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxInternal.TabIndex = 40;
+            this.pictureBoxInternal.TabStop = false;
+            // 
+            // labelExternalHint
+            // 
+            this.labelExternalHint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelExternalHint.Location = new System.Drawing.Point(33, 183);
+            this.labelExternalHint.Name = "labelExternalHint";
+            this.labelExternalHint.Size = new System.Drawing.Size(419, 96);
+            this.labelExternalHint.TabIndex = 39;
+            this.labelExternalHint.Text = "弹出窗口说明";
+            // 
+            // labelInternalHint
+            // 
+            this.labelInternalHint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelInternalHint.Location = new System.Drawing.Point(33, 60);
+            this.labelInternalHint.Name = "labelInternalHint";
+            this.labelInternalHint.Size = new System.Drawing.Size(419, 96);
+            this.labelInternalHint.TabIndex = 38;
+            this.labelInternalHint.Text = "内置终端说明";
+            // 
+            // radioButtonExternal
+            // 
+            this.radioButtonExternal.AutoSize = true;
+            this.radioButtonExternal.Location = new System.Drawing.Point(36, 164);
+            this.radioButtonExternal.Name = "radioButtonExternal";
+            this.radioButtonExternal.Size = new System.Drawing.Size(223, 19);
+            this.radioButtonExternal.TabIndex = 37;
+            this.radioButtonExternal.Text = "外部弹窗样式（实验性功能）";
+            this.radioButtonExternal.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonInternal
+            // 
+            this.radioButtonInternal.AutoSize = true;
+            this.radioButtonInternal.Checked = true;
+            this.radioButtonInternal.Location = new System.Drawing.Point(36, 38);
+            this.radioButtonInternal.Name = "radioButtonInternal";
+            this.radioButtonInternal.Size = new System.Drawing.Size(118, 19);
+            this.radioButtonInternal.TabIndex = 36;
+            this.radioButtonInternal.TabStop = true;
+            this.radioButtonInternal.Text = "内部终端样式";
+            this.radioButtonInternal.UseVisualStyleBackColor = true;
+            // 
+            // labelStyleTitle
+            // 
+            this.labelStyleTitle.AutoSize = true;
+            this.labelStyleTitle.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelStyleTitle.Location = new System.Drawing.Point(28, 3);
+            this.labelStyleTitle.Name = "labelStyleTitle";
+            this.labelStyleTitle.Size = new System.Drawing.Size(215, 32);
+            this.labelStyleTitle.TabIndex = 35;
+            this.labelStyleTitle.Text = "选择您喜欢的样式";
+            // 
+            // buttonConfigPrev
+            // 
+            this.buttonConfigPrev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonConfigPrev.Location = new System.Drawing.Point(268, 282);
+            this.buttonConfigPrev.Name = "buttonConfigPrev";
+            this.buttonConfigPrev.Size = new System.Drawing.Size(100, 29);
+            this.buttonConfigPrev.TabIndex = 29;
+            this.buttonConfigPrev.Text = "上一步";
+            this.buttonConfigPrev.UseVisualStyleBackColor = true;
+            this.buttonConfigPrev.Click += new System.EventHandler(this.buttonPrev_Click);
+            // 
+            // buttonConfigCancel
+            // 
+            this.buttonConfigCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonConfigCancel.Location = new System.Drawing.Point(480, 282);
+            this.buttonConfigCancel.Name = "buttonConfigCancel";
+            this.buttonConfigCancel.Size = new System.Drawing.Size(100, 29);
+            this.buttonConfigCancel.TabIndex = 28;
+            this.buttonConfigCancel.Text = "退出";
+            this.buttonConfigCancel.UseVisualStyleBackColor = true;
+            this.buttonConfigCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonConfigNext
+            // 
+            this.buttonConfigNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonConfigNext.Location = new System.Drawing.Point(374, 282);
+            this.buttonConfigNext.Name = "buttonConfigNext";
+            this.buttonConfigNext.Size = new System.Drawing.Size(100, 29);
+            this.buttonConfigNext.TabIndex = 27;
+            this.buttonConfigNext.Text = "下一步";
+            this.buttonConfigNext.UseVisualStyleBackColor = true;
+            this.buttonConfigNext.Click += new System.EventHandler(this.buttonConfigNext_Click);
+            // 
+            // tabPageFinish
+            // 
+            this.tabPageFinish.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageFinish.Controls.Add(this.labelFinishHint);
+            this.tabPageFinish.Controls.Add(this.labelFinishTitle);
+            this.tabPageFinish.Controls.Add(this.checkBoxGenTest);
+            this.tabPageFinish.Controls.Add(this.checkBoxOpen);
+            this.tabPageFinish.Controls.Add(this.buttonFinishAll);
+            this.tabPageFinish.Location = new System.Drawing.Point(4, 24);
+            this.tabPageFinish.Name = "tabPageFinish";
+            this.tabPageFinish.Size = new System.Drawing.Size(586, 317);
+            this.tabPageFinish.TabIndex = 5;
+            // 
+            // labelFinishHint
+            // 
+            this.labelFinishHint.AutoSize = true;
+            this.labelFinishHint.Location = new System.Drawing.Point(25, 53);
+            this.labelFinishHint.Name = "labelFinishHint";
+            this.labelFinishHint.Size = new System.Drawing.Size(217, 15);
+            this.labelFinishHint.TabIndex = 37;
+            this.labelFinishHint.Text = "恭喜您，您已成功完成了配置。";
+            // 
+            // labelFinishTitle
+            // 
+            this.labelFinishTitle.AutoSize = true;
+            this.labelFinishTitle.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelFinishTitle.Location = new System.Drawing.Point(28, 3);
+            this.labelFinishTitle.Name = "labelFinishTitle";
+            this.labelFinishTitle.Size = new System.Drawing.Size(165, 32);
+            this.labelFinishTitle.TabIndex = 36;
+            this.labelFinishTitle.Text = "配置成功完成";
+            // 
+            // buttonFinishAll
+            // 
+            this.buttonFinishAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFinishAll.Location = new System.Drawing.Point(374, 282);
+            this.buttonFinishAll.Name = "buttonFinishAll";
+            this.buttonFinishAll.Size = new System.Drawing.Size(100, 29);
+            this.buttonFinishAll.TabIndex = 30;
+            this.buttonFinishAll.Text = "完成";
+            this.buttonFinishAll.UseVisualStyleBackColor = true;
+            this.buttonFinishAll.Click += new System.EventHandler(this.buttonFinishAll_Click);
+            // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSettings.Location = new System.Drawing.Point(30, 328);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(120, 29);
+            this.buttonSettings.TabIndex = 2;
+            this.buttonSettings.Text = "设置";
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
+            // panelNavigate
+            // 
+            this.panelNavigate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelNavigate.Location = new System.Drawing.Point(30, 157);
+            this.panelNavigate.Name = "panelNavigate";
+            this.panelNavigate.Size = new System.Drawing.Size(120, 165);
+            this.panelNavigate.TabIndex = 5;
+            this.panelNavigate.Paint += new System.Windows.Forms.PaintEventHandler(this.panelNavigate_Paint);
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLogo.Image")));
+            this.pictureBoxLogo.Location = new System.Drawing.Point(30, 12);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(120, 120);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLogo.TabIndex = 6;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 621);
+            this.ClientSize = new System.Drawing.Size(781, 396);
+            this.Controls.Add(this.pictureBoxLogo);
+            this.Controls.Add(this.panelNavigate);
+            this.Controls.Add(this.linkLabelManual);
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.tabControlMain);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Controls.Add(this.labelAuthor);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "VS Code C++配置工具";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControlMain.ResumeLayout(false);
-            this.tabPageStart.ResumeLayout(false);
-            this.tabPageStart.PerformLayout();
-            this.tabPageHelp.ResumeLayout(false);
-            this.tabPageHelp.PerformLayout();
-            this.tabPageSetting.ResumeLayout(false);
-            this.groupBoxLang.ResumeLayout(false);
-            this.groupBoxLang.PerformLayout();
-            this.groupBoxPrivil.ResumeLayout(false);
-            this.groupBoxArg.ResumeLayout(false);
-            this.groupBoxArg.PerformLayout();
-            this.groupBoxMinGWSrc.ResumeLayout(false);
-            this.groupBoxMinGWSrc.PerformLayout();
+            this.tabPageWelcome.ResumeLayout(false);
+            this.tabPageWelcome.PerformLayout();
+            this.tabPageMinGW.ResumeLayout(false);
+            this.tabPageMinGW.PerformLayout();
+            this.panelMinGWTable.ResumeLayout(false);
+            this.tabPageCode.ResumeLayout(false);
+            this.tabPageCode.PerformLayout();
+            this.tabPageStyle.ResumeLayout(false);
+            this.tabPageStyle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExternal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInternal)).EndInit();
+            this.tabPageFinish.ResumeLayout(false);
+            this.tabPageFinish.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.TabPage tabPageStart;
         private System.Windows.Forms.TextBox textBoxMinGWPath;
         private System.Windows.Forms.Button buttonViewMinGW;
-        private System.Windows.Forms.TabPage tabPageHelp;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Button buttonSetEnv;
-        private System.Windows.Forms.Label labelPathState;
         private System.Windows.Forms.Label labelMinGWState;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonExtension;
-        private System.Windows.Forms.Label labelExtensionHint;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelMinGWPathHint;
         private System.Windows.Forms.LinkLabel linkLabelVSCode;
         private System.Windows.Forms.LinkLabel linkLabelMinGW;
-        private System.Windows.Forms.Label labelWorkspaceHint;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonViewWorkspace;
         private System.Windows.Forms.TextBox textBoxWorkspacePath;
-        private System.Windows.Forms.Label labelConfigState;
-        private System.Windows.Forms.Button buttonConfig;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelAuthor;
-        private System.Windows.Forms.TextBox textBoxHelp;
         private System.Windows.Forms.LinkLabel linkLabelManual;
-        private System.Windows.Forms.Label labelFAQ;
-        private System.Windows.Forms.Label labelManual;
         private System.Windows.Forms.Label labelWorkspaceStatus;
-        private System.Windows.Forms.TabPage tabPageSetting;
-        private System.Windows.Forms.GroupBox groupBoxArg;
-        private System.Windows.Forms.GroupBox groupBoxMinGWSrc;
-        private System.Windows.Forms.RadioButton radioButtonOffical;
-        private System.Windows.Forms.RadioButton radioButtonPKU;
-        private System.Windows.Forms.Button buttonSaveArgs;
-        private System.Windows.Forms.Label labelArgWarning;
-        private System.Windows.Forms.TextBox textBoxArgs;
-        private System.Windows.Forms.Label labelMinGWSrcInstruction;
-        private System.Windows.Forms.Label labelArgInstruction;
-        private System.Windows.Forms.Button buttonArgDefault;
         private System.Windows.Forms.CheckBox checkBoxOpen;
-        private System.Windows.Forms.GroupBox groupBoxPrivil;
-        private System.Windows.Forms.Label labelAuth;
-        private System.Windows.Forms.Button buttonAuth;
         private System.Windows.Forms.CheckBox checkBoxGenTest;
-        private System.Windows.Forms.GroupBox groupBoxLang;
-        private System.Windows.Forms.RadioButton radioButtonC;
-        private System.Windows.Forms.RadioButton radioButtonCpp;
+        private System.Windows.Forms.TabControl tabControlMain;
+        private System.Windows.Forms.TabPage tabPageWelcome;
+        private System.Windows.Forms.TabPage tabPageMinGW;
+        private System.Windows.Forms.Label labelFolderHelp;
+        private System.Windows.Forms.Label labelFolderHint;
+        private System.Windows.Forms.Label labelWelcomeText;
+        private System.Windows.Forms.Button buttonWelcomCancel;
+        private System.Windows.Forms.Button buttonWelcomeNext;
+        private System.Windows.Forms.Label labelMinGWHint;
+        private System.Windows.Forms.Button buttonMinGWPrev;
+        private System.Windows.Forms.Button buttonMinGWCancel;
+        private System.Windows.Forms.Button buttonMinGWNext;
+        private System.Windows.Forms.TabPage tabPageCode;
+        private System.Windows.Forms.Button buttonCodePrev;
+        private System.Windows.Forms.Button buttonCodeCancel;
+        private System.Windows.Forms.Button buttonCodeNext;
+        private System.Windows.Forms.TabPage tabPageStyle;
+        private System.Windows.Forms.Button buttonConfigPrev;
+        private System.Windows.Forms.Button buttonConfigCancel;
+        private System.Windows.Forms.Button buttonConfigNext;
+        private System.Windows.Forms.ListView listViewMinGW;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
+        private System.Windows.Forms.ColumnHeader columnHeaderPath;
+        private System.Windows.Forms.ColumnHeader columnHeaderVersion;
+        private System.Windows.Forms.Panel panelMinGWTable;
+        private System.Windows.Forms.Button buttonMinGWAdd;
+        private System.Windows.Forms.Label labelCodeHint;
+        private System.Windows.Forms.TabPage tabPageFinish;
+        private System.Windows.Forms.Button buttonFinishAll;
+        private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Label labelWelcomeTitle;
+        private System.Windows.Forms.Label labelMinGWTitle;
+        private System.Windows.Forms.Label labelExtensionHint;
+        private System.Windows.Forms.Label labelCodeTitle;
+        private System.Windows.Forms.Label labelStyleTitle;
+        private System.Windows.Forms.Label labelFinishHint;
+        private System.Windows.Forms.Label labelFinishTitle;
+        private System.Windows.Forms.Panel panelNavigate;
+        private System.Windows.Forms.RadioButton radioButtonExternal;
+        private System.Windows.Forms.RadioButton radioButtonInternal;
+        private System.Windows.Forms.Label labelExternalHint;
+        private System.Windows.Forms.Label labelInternalHint;
+        private System.Windows.Forms.PictureBox pictureBoxExternal;
+        private System.Windows.Forms.PictureBox pictureBoxInternal;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
     }
 }
 
