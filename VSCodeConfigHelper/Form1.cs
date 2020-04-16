@@ -99,7 +99,7 @@ namespace VSCodeConfigHelper
 
 // 按下 F5（部分设备上可能是 Fn + F5）编译调试。
 // 按下 Ctrl + Shift + B 编译，但不运行。
-// 按下 " + (IsInternal ? "Ctrl + F5（部分设备上可能是 Ctrl +Fn + F5）" : "F6（部分设备上可能是）") + @"编译运行，但不调试。
+// 按下 " + (IsInternal ? "Ctrl + F5（部分设备上可能是 Ctrl + Fn + F5）" : "F6（部分设备上可能是 Fn + F6）") + @"编译运行，但不调试。
 
 #include <iostream>
 
@@ -132,7 +132,7 @@ int main() {
  *
  * 按下 F5（部分设备上可能是 Fn + F5）编译调试。
  * 按下 Ctrl + Shift + B 编译，但不运行。
- * 按下 " + (IsInternal ? "Ctrl + F5（部分设备上可能是 Ctrl +Fn + F5）" : "F6（部分设备上可能是）") + @"编译运行，但不调试。
+ * 按下 " + (IsInternal ? "Ctrl + F5（部分设备上可能是 Ctrl + Fn + F5）" : "F6（部分设备上可能是 Fn + F6）") + @"编译运行，但不调试。
  *
  */
 
@@ -386,7 +386,7 @@ int main(int argc, char** argv) {
             }
             else
             {
-                labelMinGWHint.Text = "您已安装下列编译环境。您也可以点击右侧链接下载推荐的 MinGW-w64 环境。";
+                labelMinGWHint.Text = "您已安装下列编译环境，请选中其中一个作为您的配置。您也可以点击右侧链接下载推荐的 MinGW-w64 环境。";
                 listViewMinGW.Items.Clear();
                 foreach (var i in minGWPathList)
                 {
