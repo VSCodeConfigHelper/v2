@@ -59,6 +59,49 @@ namespace VSCodeConfigHelper
             }
         }
 
+        public static int minGWDistro = 0;
+
+        /*
+         * -MinGW-w64  -64bit   -PKU
+         * -TDM-GCC    -32bit   -Official
+         * -WinLibs
+         */
+        static readonly string[,,] minGWLinks = new string[3,2,2]
+        {
+            {
+                {
+                    @"https://disk.pku.edu.cn:443/link/A866B63467924A54CB7DB67EC386F0B1",
+                    @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z",
+                },
+                {
+                    @"https://disk.pku.edu.cn:443/link/774E14CD00311CCA1A8E2411DDF39288",
+                    @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-win32/dwarf/i686-8.1.0-release-win32-dwarf-rt_v6-rev0.7z",
+                }
+            },
+            {
+                {
+                    @"https://disk.pku.edu.cn:443/link/BA95F5AE50BD2F66CB9BE4CCB1D0B8AC",
+                    @"https://github.com/jmeubank/tdm-gcc/releases/download/v9.2.0-tdm64-1/tdm64-gcc-9.2.0.exe"
+                },
+                {
+                    @"https://disk.pku.edu.cn:443/link/EEEE7B7EB495F6C7FD0441FDEC3FB784",
+                    @"https://github.com/jmeubank/tdm-gcc/releases/download/v9.2.0-tdm-1/tdm-gcc-9.2.0.exe"
+                }
+            },
+            {
+                {
+                    @"https://disk.pku.edu.cn:443/link/C856C793201FF01FFB77BB5A9074D1FD",
+                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/9.3.0-10.0.0-7.0.0-r3/winlibs-x86_64-posix-seh-gcc-9.3.0-llvm-10.0.0-mingw-w64-7.0.0-r3.7z"
+                },
+                {
+                    @"https://disk.pku.edu.cn:443/link/A866B63467924A54CB7DB67EC386F0B1",
+                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/9.3.0-10.0.0-7.0.0-r3/winlibs-i686-posix-dwarf-gcc-9.3.0-llvm-10.0.0-mingw-w64-7.0.0-r3.7z"
+                }
+            }
+        };
+
+
+
         #region 路径们
 
         string workspacePath = string.Empty;
@@ -527,22 +570,8 @@ int main(int argc, char** argv) {
 
         private void LinkLabelMinGW_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string mingwLink;
-            if (IsRunningOn64Bit)
-            {
-                if (isMinGWPku)
-                    mingwLink = @"https://disk.pku.edu.cn:443/link/B897756E8392A02AD20F56C6A17E0655";
-                else
-                    mingwLink = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z";
-            }
-            else
-            {
-                if (isMinGWPku)
-                    mingwLink = @"https://disk.pku.edu.cn:443/link/E9E6D208F9AEC29D7D77BA2A923A6400";
-                else
-                    mingwLink = @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-win32/dwarf/i686-8.1.0-release-win32-dwarf-rt_v6-rev0.7z";
-            }
-            Process.Start(mingwLink);
+            
+            Process.Start(minGWLinks[minGWDistro,Convert.ToInt32(!IsRunningOn64Bit),Convert.ToInt32(!isMinGWPku)]);
         }
 
 

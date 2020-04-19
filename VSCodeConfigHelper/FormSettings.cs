@@ -81,6 +81,20 @@ namespace VSCodeConfigHelper
             if (DateTime.Now.Date > new DateTime(2024, 10, 1)) radioButtonPKU.Enabled = false;
             if (Form1.isMinGWPku) radioButtonPKU.Checked = true;
             else radioButtonOffical.Checked = true;
+
+            switch (Form1.minGWDistro)
+            {
+                case 0:
+                    radioButtonMinGWw64.Checked = true;
+                    break;
+                case 1:
+                    radioButtonTDM.Checked = true;
+                    break;
+                case 2:
+                    radioButtonWinLibs.Checked = true;
+                    break;
+            }
+
             if (Form1.IsAdministrator)
             {
                 labelAuth.Width = 409;
@@ -99,7 +113,9 @@ namespace VSCodeConfigHelper
                 labelAuth.Text += "若要使用系统管理员权限，请点击右侧按钮。";
                 EnableElevateIcon_BCM_SETSHIELD(buttonAuth);
             }
-
+            labelDistroHint.Text = "MinGW-w64 是最稳定、最常用的版本，如果您无特殊需求建议您选择该版本。" + Environment.NewLine +
+                "TDM-GCC 是基于 MinGW 的另一发行版，该版本较 MinGW-w64 做了一定优化，但是所需空间也较大。" + Environment.NewLine +
+                "WinLibs 是开发者 B. Sanders 个人编译的版本，更新较快，并同时包括了 LLVM 等工具。";
             ShowArgs();
         }
 
@@ -171,6 +187,36 @@ namespace VSCodeConfigHelper
         private void pictureGitHub_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/Guyutongxue/VSCodeConfigHelper");
+        }
+
+        private void radioButtonMinGWw64_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonMinGWw64.Checked) Form1.minGWDistro = 0;
+        }
+
+        private void radioButtonTDM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonTDM.Checked) Form1.minGWDistro = 1;
+        }
+
+        private void radioButtonWinLibs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonWinLibs.Checked) Form1.minGWDistro = 2;
+        }
+
+        private void linkLabelMinGWw64_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://sourceforge.net/projects/mingw-w64/");
+        }
+
+        private void linkLabelTDM_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://jmeubank.github.io/tdm-gcc/");
+        }
+
+        private void linkLabelWinLibs_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://winlibs.com/");
         }
     }
 }
