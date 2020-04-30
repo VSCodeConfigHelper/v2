@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VS Code Config Helper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function download() {
+            window.open("https://github.com/Guyutongxue/VSCodeConfigHelper/releases");
+        }
+        function readme() {
+            window.open("https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/README.md");
+        }
+        function trouble() {
+            window.open("https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md");
+        }
+        function faq() {
+            window.open("https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/FAQ.md");
+        }
+        function src() {
+            window.open("https://github.com/Guyutongxue/VSCodeConfigHelper");
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="col-sm-3 center-block">
+                <img src="VSCodeConfigHelper.png">
+            </div>
+            <div class="col-sm-9">
+                <h1>VS Code Config Helper</h1>
+                <p>简单、快捷的 VS Code C++ 配置工具</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-lg center-block" style="font-size:200%" onclick="download()">
+                <span class="glyphicon glyphicon-download-alt"></span>
+                <span style="margin:15px">下载地址</span>
+            </button>
+        </div>
+        <div style="text-align: center;">
+            <div class="btn-group">
+                <button type="button" class="btn btn-lg btn-success" onclick="readme()">使用帮助</button>
+                <button type="button" class="btn btn-lg btn-warning" onclick="trouble()">疑难解答</button>
+                <button type="button" class="btn btn-lg btn-info" onclick="faq()">常见问题</button>
+                <button type="button" class="btn btn-lg btn-default" onclick="src()">查看源码</button>
+            </div>
+        </div>
+        <h3 class="page-header">软件截图</h3>
+        <img class="img-thumbnail center-block" src="Snapshot.png">
+        <h3 class="page-header">软件许可</h3>
+        <p>VS Code Config Helper 是自由软件。你可以基于 <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPLv2</a> 协议进行再分发或修改。</p>
+        <h3 class="page-header">关于作者</h3>
+        <p class="lead">谷雨同学·Guyutongxue</p>
+        <ul>
+            <li><a href="https://github.com/Guyutongxue">GitHub</a></li>
+            <li><a href="https://space.bilibili.com/19275760">Bilibili</a></li>
+            <li><a href="https://www.zhihu.com/people/guyutongxue">Zhihu</a></li>
+            <li>Email: <a href="mailto:guyutongxue@163.com">guyutongxue@163.com</a></li>
+        </ul>
+        对不起实在不会做网页。
+    </div>
+
+</body>
+
+</html>
