@@ -92,7 +92,9 @@ int main(){
 
 -----
 
-如果你使用的是 macOS Catalina ，你的断点调试功能可能[暂时无法使用](https://github.com/microsoft/vscode-cpptools/issues/3829)。请耐心等待 VS Code 更新，或者使用以下解决方案：
+C/C++ 插件 0.27.0 更新已解决此问题。若问题仍存在，以下说明可作为备用方案。
+
+~~如果你使用的是 macOS Catalina ，你的断点调试功能可能[暂时无法使用](https://github.com/microsoft/vscode-cpptools/issues/3829)。请耐心等待 VS Code 更新，或者使用以下解决方案：~~
 
 前往[此处](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)获得 CodeLLDB 插件。
 
