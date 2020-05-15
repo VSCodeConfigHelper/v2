@@ -46,25 +46,32 @@
             this.pictureGitHub = new System.Windows.Forms.PictureBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageDownload = new System.Windows.Forms.TabPage();
+            this.groupBoxMinGWDistro = new System.Windows.Forms.GroupBox();
+            this.linkLabelWinLibs = new System.Windows.Forms.LinkLabel();
+            this.linkLabelTDM = new System.Windows.Forms.LinkLabel();
+            this.linkLabelMinGWw64 = new System.Windows.Forms.LinkLabel();
+            this.labelDistroHint = new System.Windows.Forms.Label();
+            this.radioButtonWinLibs = new System.Windows.Forms.RadioButton();
+            this.radioButtonMinGWw64 = new System.Windows.Forms.RadioButton();
+            this.radioButtonTDM = new System.Windows.Forms.RadioButton();
             this.tabPageInstall = new System.Windows.Forms.TabPage();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
-            this.groupBoxMinGWDistro = new System.Windows.Forms.GroupBox();
-            this.radioButtonTDM = new System.Windows.Forms.RadioButton();
-            this.radioButtonMinGWw64 = new System.Windows.Forms.RadioButton();
-            this.radioButtonWinLibs = new System.Windows.Forms.RadioButton();
-            this.labelDistroHint = new System.Windows.Forms.Label();
-            this.linkLabelMinGWw64 = new System.Windows.Forms.LinkLabel();
-            this.linkLabelTDM = new System.Windows.Forms.LinkLabel();
-            this.linkLabelWinLibs = new System.Windows.Forms.LinkLabel();
+            this.groupBoxStandard = new System.Windows.Forms.GroupBox();
+            this.comboBoxStandard = new System.Windows.Forms.ComboBox();
+            this.comboBoxLang = new System.Windows.Forms.ComboBox();
+            this.labelLang = new System.Windows.Forms.Label();
+            this.labelStandard = new System.Windows.Forms.Label();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.groupBoxPrivil.SuspendLayout();
             this.groupBoxArg.SuspendLayout();
             this.groupBoxMinGWSrc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureGitHub)).BeginInit();
             this.tabControlSettings.SuspendLayout();
             this.tabPageDownload.SuspendLayout();
+            this.groupBoxMinGWDistro.SuspendLayout();
             this.tabPageInstall.SuspendLayout();
             this.tabPageConfig.SuspendLayout();
-            this.groupBoxMinGWDistro.SuspendLayout();
+            this.groupBoxStandard.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxPrivil
@@ -102,9 +109,9 @@
             this.groupBoxArg.Controls.Add(this.buttonSaveArgs);
             this.groupBoxArg.Controls.Add(this.labelArgWarning);
             this.groupBoxArg.Controls.Add(this.textBoxArgs);
-            this.groupBoxArg.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxArg.Location = new System.Drawing.Point(3, 68);
             this.groupBoxArg.Name = "groupBoxArg";
-            this.groupBoxArg.Size = new System.Drawing.Size(411, 234);
+            this.groupBoxArg.Size = new System.Drawing.Size(411, 209);
             this.groupBoxArg.TabIndex = 8;
             this.groupBoxArg.TabStop = false;
             this.groupBoxArg.Text = "配置编译参数";
@@ -112,7 +119,7 @@
             // buttonArgDefault
             // 
             this.buttonArgDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonArgDefault.Location = new System.Drawing.Point(6, 199);
+            this.buttonArgDefault.Location = new System.Drawing.Point(6, 174);
             this.buttonArgDefault.Name = "buttonArgDefault";
             this.buttonArgDefault.Size = new System.Drawing.Size(84, 29);
             this.buttonArgDefault.TabIndex = 2;
@@ -123,7 +130,7 @@
             // labelArgInstruction
             // 
             this.labelArgInstruction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelArgInstruction.Location = new System.Drawing.Point(186, 198);
+            this.labelArgInstruction.Location = new System.Drawing.Point(186, 173);
             this.labelArgInstruction.Name = "labelArgInstruction";
             this.labelArgInstruction.Size = new System.Drawing.Size(226, 30);
             this.labelArgInstruction.TabIndex = 5;
@@ -132,7 +139,7 @@
             // buttonSaveArgs
             // 
             this.buttonSaveArgs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSaveArgs.Location = new System.Drawing.Point(96, 199);
+            this.buttonSaveArgs.Location = new System.Drawing.Point(96, 174);
             this.buttonSaveArgs.Name = "buttonSaveArgs";
             this.buttonSaveArgs.Size = new System.Drawing.Size(84, 29);
             this.buttonSaveArgs.TabIndex = 4;
@@ -159,7 +166,7 @@
             this.textBoxArgs.Multiline = true;
             this.textBoxArgs.Name = "textBoxArgs";
             this.textBoxArgs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxArgs.Size = new System.Drawing.Size(396, 144);
+            this.textBoxArgs.Size = new System.Drawing.Size(396, 119);
             this.textBoxArgs.TabIndex = 2;
             // 
             // groupBoxMinGWSrc
@@ -254,27 +261,6 @@
             this.tabPageDownload.Text = "下载";
             this.tabPageDownload.UseVisualStyleBackColor = true;
             // 
-            // tabPageInstall
-            // 
-            this.tabPageInstall.Controls.Add(this.groupBoxPrivil);
-            this.tabPageInstall.Location = new System.Drawing.Point(4, 25);
-            this.tabPageInstall.Name = "tabPageInstall";
-            this.tabPageInstall.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageInstall.Size = new System.Drawing.Size(417, 326);
-            this.tabPageInstall.TabIndex = 1;
-            this.tabPageInstall.Text = "安装";
-            this.tabPageInstall.UseVisualStyleBackColor = true;
-            // 
-            // tabPageConfig
-            // 
-            this.tabPageConfig.Controls.Add(this.groupBoxArg);
-            this.tabPageConfig.Location = new System.Drawing.Point(4, 25);
-            this.tabPageConfig.Name = "tabPageConfig";
-            this.tabPageConfig.Size = new System.Drawing.Size(417, 326);
-            this.tabPageConfig.TabIndex = 2;
-            this.tabPageConfig.Text = "配置";
-            this.tabPageConfig.UseVisualStyleBackColor = true;
-            // 
             // groupBoxMinGWDistro
             // 
             this.groupBoxMinGWDistro.Controls.Add(this.linkLabelWinLibs);
@@ -291,16 +277,57 @@
             this.groupBoxMinGWDistro.TabStop = false;
             this.groupBoxMinGWDistro.Text = "MinGW 版本";
             // 
-            // radioButtonTDM
+            // linkLabelWinLibs
             // 
-            this.radioButtonTDM.AutoSize = true;
-            this.radioButtonTDM.Location = new System.Drawing.Point(45, 61);
-            this.radioButtonTDM.Name = "radioButtonTDM";
-            this.radioButtonTDM.Size = new System.Drawing.Size(132, 19);
-            this.radioButtonTDM.TabIndex = 9;
-            this.radioButtonTDM.Text = "TDM-GCC 9.2.0";
-            this.radioButtonTDM.UseVisualStyleBackColor = true;
-            this.radioButtonTDM.CheckedChanged += new System.EventHandler(this.radioButtonTDM_CheckedChanged);
+            this.linkLabelWinLibs.AutoSize = true;
+            this.linkLabelWinLibs.Location = new System.Drawing.Point(318, 88);
+            this.linkLabelWinLibs.Name = "linkLabelWinLibs";
+            this.linkLabelWinLibs.Size = new System.Drawing.Size(37, 15);
+            this.linkLabelWinLibs.TabIndex = 15;
+            this.linkLabelWinLibs.TabStop = true;
+            this.linkLabelWinLibs.Text = "官网";
+            this.linkLabelWinLibs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelWinLibs_LinkClicked);
+            // 
+            // linkLabelTDM
+            // 
+            this.linkLabelTDM.AutoSize = true;
+            this.linkLabelTDM.Location = new System.Drawing.Point(318, 63);
+            this.linkLabelTDM.Name = "linkLabelTDM";
+            this.linkLabelTDM.Size = new System.Drawing.Size(37, 15);
+            this.linkLabelTDM.TabIndex = 14;
+            this.linkLabelTDM.TabStop = true;
+            this.linkLabelTDM.Text = "官网";
+            this.linkLabelTDM.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTDM_LinkClicked);
+            // 
+            // linkLabelMinGWw64
+            // 
+            this.linkLabelMinGWw64.AutoSize = true;
+            this.linkLabelMinGWw64.Location = new System.Drawing.Point(318, 38);
+            this.linkLabelMinGWw64.Name = "linkLabelMinGWw64";
+            this.linkLabelMinGWw64.Size = new System.Drawing.Size(37, 15);
+            this.linkLabelMinGWw64.TabIndex = 13;
+            this.linkLabelMinGWw64.TabStop = true;
+            this.linkLabelMinGWw64.Text = "官网";
+            this.linkLabelMinGWw64.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMinGWw64_LinkClicked);
+            // 
+            // labelDistroHint
+            // 
+            this.labelDistroHint.Location = new System.Drawing.Point(6, 122);
+            this.labelDistroHint.Name = "labelDistroHint";
+            this.labelDistroHint.Size = new System.Drawing.Size(399, 93);
+            this.labelDistroHint.TabIndex = 12;
+            this.labelDistroHint.Text = "说明";
+            // 
+            // radioButtonWinLibs
+            // 
+            this.radioButtonWinLibs.AutoSize = true;
+            this.radioButtonWinLibs.Location = new System.Drawing.Point(45, 86);
+            this.radioButtonWinLibs.Name = "radioButtonWinLibs";
+            this.radioButtonWinLibs.Size = new System.Drawing.Size(140, 19);
+            this.radioButtonWinLibs.TabIndex = 11;
+            this.radioButtonWinLibs.Text = "WinLibs 10.1.0";
+            this.radioButtonWinLibs.UseVisualStyleBackColor = true;
+            this.radioButtonWinLibs.CheckedChanged += new System.EventHandler(this.radioButtonWinLibs_CheckedChanged);
             // 
             // radioButtonMinGWw64
             // 
@@ -315,57 +342,103 @@
             this.radioButtonMinGWw64.UseVisualStyleBackColor = true;
             this.radioButtonMinGWw64.CheckedChanged += new System.EventHandler(this.radioButtonMinGWw64_CheckedChanged);
             // 
-            // radioButtonWinLibs
+            // radioButtonTDM
             // 
-            this.radioButtonWinLibs.AutoSize = true;
-            this.radioButtonWinLibs.Location = new System.Drawing.Point(45, 86);
-            this.radioButtonWinLibs.Name = "radioButtonWinLibs";
-            this.radioButtonWinLibs.Size = new System.Drawing.Size(132, 19);
-            this.radioButtonWinLibs.TabIndex = 11;
-            this.radioButtonWinLibs.Text = "WinLibs 9.3.0";
-            this.radioButtonWinLibs.UseVisualStyleBackColor = true;
-            this.radioButtonWinLibs.CheckedChanged += new System.EventHandler(this.radioButtonWinLibs_CheckedChanged);
+            this.radioButtonTDM.AutoSize = true;
+            this.radioButtonTDM.Location = new System.Drawing.Point(45, 61);
+            this.radioButtonTDM.Name = "radioButtonTDM";
+            this.radioButtonTDM.Size = new System.Drawing.Size(132, 19);
+            this.radioButtonTDM.TabIndex = 9;
+            this.radioButtonTDM.Text = "TDM-GCC 9.2.0";
+            this.radioButtonTDM.UseVisualStyleBackColor = true;
+            this.radioButtonTDM.CheckedChanged += new System.EventHandler(this.radioButtonTDM_CheckedChanged);
             // 
-            // labelDistroHint
+            // tabPageInstall
             // 
-            this.labelDistroHint.Location = new System.Drawing.Point(6, 122);
-            this.labelDistroHint.Name = "labelDistroHint";
-            this.labelDistroHint.Size = new System.Drawing.Size(399, 93);
-            this.labelDistroHint.TabIndex = 12;
-            this.labelDistroHint.Text = "说明";
+            this.tabPageInstall.Controls.Add(this.buttonUpdate);
+            this.tabPageInstall.Controls.Add(this.groupBoxPrivil);
+            this.tabPageInstall.Location = new System.Drawing.Point(4, 25);
+            this.tabPageInstall.Name = "tabPageInstall";
+            this.tabPageInstall.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageInstall.Size = new System.Drawing.Size(417, 326);
+            this.tabPageInstall.TabIndex = 1;
+            this.tabPageInstall.Text = "安装";
+            this.tabPageInstall.UseVisualStyleBackColor = true;
             // 
-            // linkLabelMinGWw64
+            // tabPageConfig
             // 
-            this.linkLabelMinGWw64.AutoSize = true;
-            this.linkLabelMinGWw64.Location = new System.Drawing.Point(318, 38);
-            this.linkLabelMinGWw64.Name = "linkLabelMinGWw64";
-            this.linkLabelMinGWw64.Size = new System.Drawing.Size(37, 15);
-            this.linkLabelMinGWw64.TabIndex = 13;
-            this.linkLabelMinGWw64.TabStop = true;
-            this.linkLabelMinGWw64.Text = "官网";
-            this.linkLabelMinGWw64.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMinGWw64_LinkClicked);
+            this.tabPageConfig.Controls.Add(this.groupBoxStandard);
+            this.tabPageConfig.Controls.Add(this.groupBoxArg);
+            this.tabPageConfig.Location = new System.Drawing.Point(4, 25);
+            this.tabPageConfig.Name = "tabPageConfig";
+            this.tabPageConfig.Size = new System.Drawing.Size(417, 326);
+            this.tabPageConfig.TabIndex = 2;
+            this.tabPageConfig.Text = "配置";
+            this.tabPageConfig.UseVisualStyleBackColor = true;
             // 
-            // linkLabelTDM
+            // groupBoxStandard
             // 
-            this.linkLabelTDM.AutoSize = true;
-            this.linkLabelTDM.Location = new System.Drawing.Point(318, 63);
-            this.linkLabelTDM.Name = "linkLabelTDM";
-            this.linkLabelTDM.Size = new System.Drawing.Size(37, 15);
-            this.linkLabelTDM.TabIndex = 14;
-            this.linkLabelTDM.TabStop = true;
-            this.linkLabelTDM.Text = "官网";
-            this.linkLabelTDM.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTDM_LinkClicked);
+            this.groupBoxStandard.Controls.Add(this.labelStandard);
+            this.groupBoxStandard.Controls.Add(this.labelLang);
+            this.groupBoxStandard.Controls.Add(this.comboBoxLang);
+            this.groupBoxStandard.Controls.Add(this.comboBoxStandard);
+            this.groupBoxStandard.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxStandard.Name = "groupBoxStandard";
+            this.groupBoxStandard.Size = new System.Drawing.Size(411, 59);
+            this.groupBoxStandard.TabIndex = 9;
+            this.groupBoxStandard.TabStop = false;
+            this.groupBoxStandard.Text = "设定语言标准";
             // 
-            // linkLabelWinLibs
+            // comboBoxStandard
             // 
-            this.linkLabelWinLibs.AutoSize = true;
-            this.linkLabelWinLibs.Location = new System.Drawing.Point(318, 88);
-            this.linkLabelWinLibs.Name = "linkLabelWinLibs";
-            this.linkLabelWinLibs.Size = new System.Drawing.Size(37, 15);
-            this.linkLabelWinLibs.TabIndex = 15;
-            this.linkLabelWinLibs.TabStop = true;
-            this.linkLabelWinLibs.Text = "官网";
-            this.linkLabelWinLibs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelWinLibs_LinkClicked);
+            this.comboBoxStandard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxStandard.FormattingEnabled = true;
+            this.comboBoxStandard.Location = new System.Drawing.Point(259, 24);
+            this.comboBoxStandard.Name = "comboBoxStandard";
+            this.comboBoxStandard.Size = new System.Drawing.Size(79, 23);
+            this.comboBoxStandard.TabIndex = 0;
+            this.comboBoxStandard.TextChanged += new System.EventHandler(this.comboBoxStandard_TextChanged);
+            // 
+            // comboBoxLang
+            // 
+            this.comboBoxLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLang.FormattingEnabled = true;
+            this.comboBoxLang.Items.AddRange(new object[] {
+            "C++",
+            "C"});
+            this.comboBoxLang.Location = new System.Drawing.Point(105, 24);
+            this.comboBoxLang.Name = "comboBoxLang";
+            this.comboBoxLang.Size = new System.Drawing.Size(54, 23);
+            this.comboBoxLang.TabIndex = 1;
+            this.comboBoxLang.SelectedIndexChanged += new System.EventHandler(this.comboBoxLang_SelectedIndexChanged);
+            // 
+            // labelLang
+            // 
+            this.labelLang.AutoSize = true;
+            this.labelLang.Location = new System.Drawing.Point(62, 28);
+            this.labelLang.Name = "labelLang";
+            this.labelLang.Size = new System.Drawing.Size(37, 15);
+            this.labelLang.TabIndex = 2;
+            this.labelLang.Text = "语言";
+            // 
+            // labelStandard
+            // 
+            this.labelStandard.AutoSize = true;
+            this.labelStandard.Location = new System.Drawing.Point(186, 28);
+            this.labelStandard.Name = "labelStandard";
+            this.labelStandard.Size = new System.Drawing.Size(67, 15);
+            this.labelStandard.TabIndex = 3;
+            this.labelStandard.Text = "标准版本";
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(125, 244);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(280, 29);
+            this.buttonUpdate.TabIndex = 10;
+            this.buttonUpdate.Text = "检查 VS Code Config Helper 更新";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // FormSettings
             // 
@@ -388,10 +461,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureGitHub)).EndInit();
             this.tabControlSettings.ResumeLayout(false);
             this.tabPageDownload.ResumeLayout(false);
-            this.tabPageInstall.ResumeLayout(false);
-            this.tabPageConfig.ResumeLayout(false);
             this.groupBoxMinGWDistro.ResumeLayout(false);
             this.groupBoxMinGWDistro.PerformLayout();
+            this.tabPageInstall.ResumeLayout(false);
+            this.tabPageConfig.ResumeLayout(false);
+            this.groupBoxStandard.ResumeLayout(false);
+            this.groupBoxStandard.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -425,5 +500,11 @@
         private System.Windows.Forms.LinkLabel linkLabelWinLibs;
         private System.Windows.Forms.LinkLabel linkLabelTDM;
         private System.Windows.Forms.LinkLabel linkLabelMinGWw64;
+        private System.Windows.Forms.GroupBox groupBoxStandard;
+        private System.Windows.Forms.ComboBox comboBoxLang;
+        private System.Windows.Forms.ComboBox comboBoxStandard;
+        private System.Windows.Forms.Label labelStandard;
+        private System.Windows.Forms.Label labelLang;
+        private System.Windows.Forms.Button buttonUpdate;
     }
 }

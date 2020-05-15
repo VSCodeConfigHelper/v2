@@ -9,8 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
+        var versionInfo;
         function download() {
-            window.open("https://github.com/Guyutongxue/VSCodeConfigHelper/releases");
+           window.open(versionInfo.link);
         }
         function readme() {
             window.open("https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/README.md");
@@ -41,8 +42,9 @@
             </div>
             <button type="button" class="btn btn-primary btn-lg center-block" style="font-size:200%" onclick="download()">
                 <span class="glyphicon glyphicon-download-alt"></span>
-                <span style="margin:15px">下载地址</span>
+                <span style="margin:15px" id="download-text">立即下载</span>
             </button>
+            <div class="text-center" style="padding-top: 5px" id="version-text">&nbsp;</div>
         </div>
         <div style="text-align: center;">
             <div class="btn-group">
@@ -66,7 +68,13 @@
         </ul>
         对不起实在不会做网页。
     </div>
-
+    <script>
+        $.getJSON("version.json",function(result) {
+            versionInfo = result;
+            console.log(versionInfo);
+            document.getElementById("version-text").innerText = "版本 "+versionInfo.version+" 更新日期 "+versionInfo.date;
+        });
+    </script>
 </body>
 
 </html>

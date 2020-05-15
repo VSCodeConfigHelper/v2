@@ -33,7 +33,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using System.Threading;
 
 namespace VSCodeConfigHelper
 {
@@ -90,12 +90,12 @@ namespace VSCodeConfigHelper
             },
             {
                 {
-                    @"https://disk.pku.edu.cn:443/link/C856C793201FF01FFB77BB5A9074D1FD",
-                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/9.3.0-10.0.0-7.0.0-r3/winlibs-x86_64-posix-seh-gcc-9.3.0-llvm-10.0.0-mingw-w64-7.0.0-r3.7z"
+                    @"https://disk.pku.edu.cn:443/link/C8A0ABD422B29538FCADF1246B484237",
+                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/10.1.0-10.0.0-7.0.0-r1/winlibs-x86_64-posix-seh-gcc-10.1.0-llvm-10.0.0-mingw-w64-7.0.0-r1.7z"
                 },
                 {
-                    @"https://disk.pku.edu.cn:443/link/A866B63467924A54CB7DB67EC386F0B1",
-                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/9.3.0-10.0.0-7.0.0-r3/winlibs-i686-posix-dwarf-gcc-9.3.0-llvm-10.0.0-mingw-w64-7.0.0-r3.7z"
+                    @"https://disk.pku.edu.cn:443/link/8E0DFCD2350031B33B8E31D5FE9C5F13",
+                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/10.1.0-10.0.0-7.0.0-r1/winlibs-i686-posix-dwarf-gcc-10.1.0-llvm-10.0.0-mingw-w64-7.0.0-r1.7z"
                 }
             }
         };
@@ -119,15 +119,15 @@ namespace VSCodeConfigHelper
         bool isMinGWFirstTime = true;
 
         public static bool isSuccess = false;
+        public static bool isCpp = true;
+        public static string standard = "c++17";
         public static JArray args = new JArray {
             "-g",
-            "-std=c++17",
+            new JValue("-std=" + standard),
             "\"${file}\"",
             "-o",
             "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
         };
-
-        public static bool isCpp = true;
         string FileExtension { get { return isCpp ? "cpp" : "c"; } }
         string Compiler { get { return isCpp ? "g++.exe" : "gcc.exe"; } }
 
@@ -345,9 +345,14 @@ int main(int argc, char** argv) {
         private void Form1_Load(object sender, EventArgs e)
         {
             Logging.Clear();
-            Logging.Log("Loading VSCodeConfigHelper...");
+            Logging.Log($"Loading VSCodeConfigHelper, v{Application.ProductVersion}...");
+
+            // 移除 TabPage 标签
             tabControlMain.ItemSize = new Size(0, 1);
             labelAuthor.Text = $"v{Application.ProductVersion} 谷雨同学制作 guyutongxue@163.com";
+
+            // 异步检测更新
+            new Thread(new ThreadStart(() => { FormSettings.CheckUpdate(false); })).Start();
 
             string specify = IsRunningOn64Bit ? "64" : "32";
             Logging.Log("System: " + specify + "bit");
@@ -366,13 +371,32 @@ int main(int argc, char** argv) {
             if (IsAdministrator) Text = "管理员: VS Code C++配置工具";
             Logging.Log("Administrator: " + (IsAdministrator ? "Yes" : "No"));
 
+            // 检测并读取缓存
             if (File.Exists("VSCHcache.txt"))
             {
                 Logging.Log("Cache detected.");
-                StreamReader sr = new StreamReader("VSCHcache.txt");
-                textBoxMinGWPath.Text = sr.ReadLine();
-                textBoxWorkspacePath.Text = sr.ReadLine();
-                sr.Close();
+                    StreamReader sr = new StreamReader("VSCHcache.txt");
+                try
+                {
+                    JArray cache = (JArray)JsonConvert.DeserializeObject(sr.ReadToEnd());
+                    if (cache == null) throw new Exception("JSON object is null.");
+                    textBoxMinGWPath.Text = (string)cache[0];
+                    textBoxWorkspacePath.Text = (string)cache[1];
+                    isMinGWPku = (bool)cache[2];
+                    minGWDistro = (int)cache[3];
+                    isCpp = (bool)cache[4];
+                    standard = (string)cache[5];
+                    args = (JArray)cache[6];
+                    Logging.Log("Cache reading done.");
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log($"Cache reading failed. Message: {ex.Message}", LogType.Error);
+                }
+                finally
+                {
+                    sr.Close();
+                }
             }
             Logging.Log("VSCodeConfigHelper main form loaded successfully.");
         }
@@ -754,7 +778,8 @@ int main(int argc, char** argv) {
             return new JObject
             {
                 {"C_Cpp.default.intelliSenseMode", "gcc-x" + (IsRunningOn64Bit ? "64" : "86")},
-                {"C_Cpp.default.compilerPath", minGWPath + "\\bin\\" + Compiler}
+                {"C_Cpp.default.compilerPath", minGWPath + "\\bin\\" + Compiler},
+                {"C_Cpp.default."+(isCpp?"cpp":"c")+"Standard", standard}
             };
         }
 
@@ -894,12 +919,31 @@ int main(int argc, char** argv) {
                     return;
                 }
                 Logging.Log("Saving cache of this configure...");
-                StreamWriter sw = new StreamWriter("VSCHcache.txt");
-                sw.WriteLine(minGWPath);
-                sw.WriteLine(workspacePath);
-                sw.Flush();
-                sw.Close();
-                Logging.Log("Cache saved. Program will exit.");
+                    StreamWriter sw = new StreamWriter("VSCHcache.txt");
+                try
+                {
+                    JArray cache = new JArray
+                    {
+                        minGWPath,
+                        workspacePath,
+                        isMinGWPku,
+                        minGWDistro,
+                        isCpp,
+                        standard,
+                        args
+                    };
+                    sw.WriteLine(cache.ToString(Formatting.Indented));
+                    sw.Flush();
+                    Logging.Log("Cache saved. Program will exit.");
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log($"Cache saving failed. Message:{ex.Message}", LogType.Error);
+                }
+                finally
+                {
+                    sw.Close();
+                }
             }
             else
             {
@@ -1026,14 +1070,13 @@ int main(int argc, char** argv) {
                 while (!proc.StandardOutput.EndOfStream)
                 {
                     string line = proc.StandardOutput.ReadLine();
-                    if ( line == "ms-vscode.cpptools")
+                    if (line == "ms-vscode.cpptools")
                     {
                         isExtensionOk = true;
-                        break;
                     }
                     result += line + Environment.NewLine;
                 }
-                Logging.Log($"Execute finished. Exit code is {proc.ExitCode.ToString()}, while output:");
+                Logging.Log($"Execute finished. Exit code is {proc.ExitCode}, while output:");
                 Logging.Log(result, LogType.Multiline);
                 Logging.Log("C/C++ Extension" + (isExtensionOk ? " " : " not ") + "installed.");
                 proc.Close();

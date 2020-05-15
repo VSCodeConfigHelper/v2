@@ -31,6 +31,8 @@ using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.Cache;
+using System.Net;
 
 namespace VSCodeConfigHelper
 {
@@ -79,8 +81,10 @@ namespace VSCodeConfigHelper
         private void FormSettings_Load(object sender, EventArgs e)
         {
             if (DateTime.Now.Date > new DateTime(2024, 10, 1)) radioButtonPKU.Enabled = false;
-            if (Form1.isMinGWPku) radioButtonPKU.Checked = true;
-            else radioButtonOffical.Checked = true;
+            if (Form1.isMinGWPku)
+                radioButtonPKU.Checked = true;
+            else
+                radioButtonOffical.Checked = true;
 
             switch (Form1.minGWDistro)
             {
@@ -94,7 +98,13 @@ namespace VSCodeConfigHelper
                     radioButtonWinLibs.Checked = true;
                     break;
             }
-
+            string tempStandard = Form1.standard;
+            if (Form1.isCpp)
+                comboBoxLang.SelectedIndex = 0;
+            else
+                comboBoxLang.SelectedIndex = 1;
+            LoadStandardComboBox();
+            comboBoxStandard.Text = tempStandard;
             if (Form1.IsAdministrator)
             {
                 labelAuth.Width = 409;
@@ -117,6 +127,39 @@ namespace VSCodeConfigHelper
                 "TDM-GCC 是基于 MinGW 的另一发行版，该版本较 MinGW-w64 做了一定优化，但是所需空间也较大。" + Environment.NewLine +
                 "WinLibs 是开发者 B. Sanders 个人编译的版本，更新较快，并同时包括了 LLVM 等工具。";
             ShowArgs();
+        }
+
+        private void LoadStandardComboBox()
+        {
+            if (comboBoxLang.SelectedIndex == 0)
+            {
+                comboBoxStandard.Items.Clear();
+                comboBoxStandard.Items.AddRange(new string[]
+                {
+                    "c++98",
+                    "c++03",
+                    "c++11",
+                    "c++14",
+                    "c++17",
+                    "c++20"
+                });
+                comboBoxStandard.SelectedIndex = 4;
+                // WinLibs (g++10.1) supports C++20 partly
+                if (radioButtonWinLibs.Checked)
+                    comboBoxStandard.SelectedIndex = 5;
+            }
+            else
+            {
+                comboBoxStandard.Items.Clear();
+                comboBoxStandard.Items.AddRange(new string[]
+                {
+                    "c89",
+                    "c99",
+                    "c11",
+                    "c18"
+                });
+                comboBoxStandard.SelectedIndex = 3;
+            }
         }
 
         private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -163,10 +206,9 @@ namespace VSCodeConfigHelper
 
         private void SetDefaultArgs()
         {
-            groupBoxArg.Text = "配置编译参数";
             Form1.args = new JArray {
                 "-g",
-                Form1.isCpp ? "-std=c++17" : "-std=c17",
+                "-std="+Form1.standard,
                 "\"${file}\"",
                 "-o",
                 "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
@@ -177,6 +219,47 @@ namespace VSCodeConfigHelper
         private void buttonArgDefault_Click(object sender, EventArgs e)
         {
             SetDefaultArgs();
+        }
+
+        /// <summary>
+        /// 检测更新。
+        /// </summary>
+        /// <param name="show">是否在未检测到更新或出现错误时提示</param>
+        public static void CheckUpdate(bool show)
+        {
+            try
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                HttpWebRequest request = WebRequest.CreateHttp("https://guyutongxue.github.io/VSCodeConfigHelper/version.json");
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 Edg/81.0.416.72";
+                request.Method = "GET";
+                request.Timeout = 10000;
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                JObject versionInfo = (JObject)JsonConvert.DeserializeObject(sr.ReadToEnd());
+                sr.Close();
+                response.Close();
+                string latest = (string)versionInfo["version"];
+                if (new Version(latest) > new Version(Application.ProductVersion))
+                {
+                    DialogResult result = MessageBox.Show(
+                        $"检测到新版本。{Environment.NewLine}最新版本：{latest}{Environment.NewLine}当前版本：{Application.ProductVersion}{Environment.NewLine}是否前往下载？",
+                        "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information
+                    );
+                    if (result == DialogResult.Yes) Process.Start((string)versionInfo["link"]);
+                }
+                else if (show)
+                {
+                    MessageBox.Show($"当前版本 {Application.ProductVersion} 已是最新。", "提示", MessageBoxButtons.OK);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (show) MessageBox.Show("检测更新时发生异常：" + ex.Message);
+            }
+            finally
+            {
+            }
         }
 
         private void linkLabelLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -202,6 +285,7 @@ namespace VSCodeConfigHelper
         private void radioButtonWinLibs_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonWinLibs.Checked) Form1.minGWDistro = 2;
+            LoadStandardComboBox();
         }
 
         private void linkLabelMinGWw64_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -217,6 +301,28 @@ namespace VSCodeConfigHelper
         private void linkLabelWinLibs_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("http://winlibs.com/");
+        }
+
+        private void comboBoxLang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Form1.isCpp = comboBoxLang.SelectedIndex == 0;
+            LoadStandardComboBox();
+        }
+
+
+        private void comboBoxStandard_TextChanged(object sender, EventArgs e)
+        {
+            Form1.standard = comboBoxStandard.Text;
+            SetDefaultArgs();
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            buttonUpdate.Enabled = false;
+            buttonUpdate.Text = "正在连接服务器，请稍候……";
+            CheckUpdate(true);
+            buttonUpdate.Enabled = true;
+            buttonUpdate.Text = "检查 VS Code Config Helper 更新";
         }
     }
 }
