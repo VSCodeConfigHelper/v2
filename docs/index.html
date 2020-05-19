@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
     <script>
+        const lanzousLink = "https://ww.lanzous.com/b01bf37ha";
+        const lanzousCode = "gei7";
         var versionInfo;
         function download() {
             window.open(versionInfo.link);
@@ -42,12 +45,22 @@
                     <p>简单、快捷的 VS Code C++ 配置工具</p>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-lg center-block" style="font-size:200%"
-                onclick="download()">
-                <span class="glyphicon glyphicon-download-alt"></span>
-                <span style="margin:15px" id="download-text">立即下载</span>
-            </button>
-            <div class="text-center" style="padding-top: 5px" id="version-text">&nbsp;</div>
+            <div class="row">
+                <button type="button" class="btn btn-primary btn-lg center-block" style="font-size:200%"
+                    onclick="download()">
+                    <span class="glyphicon glyphicon-download-alt"></span>
+                    <span style="margin:15px" id="download-text">立即下载</span>
+                </button>
+            </div>
+
+            <div class="text-center" style="padding-top: 5px">
+                <span id="version-text"></span>
+                <a href="javascript:void(0);" class="bind_hover_card" data-toggle="popover" data-placement="bottom" data-trigger="hover"
+                    style="vertical-align:bottom;">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                    无法下载？
+                </a>
+            </div>
         </div>
         <div style="text-align: center;">
             <div class="btn-group">
@@ -73,11 +86,39 @@
         对不起实在不会做网页。
     </div>
     <script>
+
         $.getJSON("version.json", function (result) {
             versionInfo = result;
             console.log(versionInfo);
-            document.getElementById("version-text").innerText = "版本 " + versionInfo.version + " 更新日期 " + versionInfo.date;
+            $("#version-text").text("版本 " + versionInfo.version + " 更新日期 " + versionInfo.date);
         });
+
+        $("[data-toggle='popover']").popover({
+            html: true,
+            title: "使用蓝奏云下载",
+            trigger: "click",
+            content: function () {
+                return lanzousPopup();
+            }
+        });
+
+        function lanzousPopup() {
+            var data = $("" +
+                "<span class='label label-info'>链接</span>" +
+                "<button class='btn btn-link' onclick='window.open(lanzousLink);'>" + lanzousLink +
+                "</button><br>" +
+                "<span class='label label-info'>密码</span>" +
+                "<div class='input-group input-group-sm'>" +
+                "    <input type='text' class='form-control' id='passcode' value='" + lanzousCode + "' readonly></input>" +
+                "    <span class='input-group-btn'>" +
+                "        <button class='btn btn-default' id='copybtn' data-clipboard-target='#passcode' type='submit'>复制</button>  " +
+                "    </span>" +
+                " </div>");
+
+            return data;
+        }
+
+        var clipboard = new ClipboardJS('#copybtn');
     </script>
 </body>
 
