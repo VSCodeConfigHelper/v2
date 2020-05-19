@@ -84,13 +84,13 @@
             this.buttonConfigCancel = new System.Windows.Forms.Button();
             this.buttonConfigNext = new System.Windows.Forms.Button();
             this.tabPageFinish = new System.Windows.Forms.TabPage();
+            this.checkBoxDesktopShortcut = new System.Windows.Forms.CheckBox();
             this.labelFinishHint = new System.Windows.Forms.Label();
             this.labelFinishTitle = new System.Windows.Forms.Label();
             this.buttonFinishAll = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.panelNavigate = new System.Windows.Forms.Panel();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
-            this.checkBoxDesktopShortcut = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageWelcome.SuspendLayout();
             this.tabPageMinGW.SuspendLayout();
@@ -719,6 +719,16 @@
             this.tabPageFinish.Size = new System.Drawing.Size(586, 317);
             this.tabPageFinish.TabIndex = 5;
             // 
+            // checkBoxDesktopShortcut
+            // 
+            this.checkBoxDesktopShortcut.AutoSize = true;
+            this.checkBoxDesktopShortcut.Location = new System.Drawing.Point(34, 158);
+            this.checkBoxDesktopShortcut.Name = "checkBoxDesktopShortcut";
+            this.checkBoxDesktopShortcut.Size = new System.Drawing.Size(299, 19);
+            this.checkBoxDesktopShortcut.TabIndex = 38;
+            this.checkBoxDesktopShortcut.Text = "创建桌面快捷方式（建议“小白”勾选）";
+            this.checkBoxDesktopShortcut.UseVisualStyleBackColor = true;
+            // 
             // labelFinishHint
             // 
             this.labelFinishHint.AutoSize = true;
@@ -779,16 +789,6 @@
             this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxLogo.TabIndex = 6;
             this.pictureBoxLogo.TabStop = false;
-            // 
-            // checkBoxDesktopShortcut
-            // 
-            this.checkBoxDesktopShortcut.AutoSize = true;
-            this.checkBoxDesktopShortcut.Location = new System.Drawing.Point(34, 158);
-            this.checkBoxDesktopShortcut.Name = "checkBoxDesktopShortcut";
-            this.checkBoxDesktopShortcut.Size = new System.Drawing.Size(299, 19);
-            this.checkBoxDesktopShortcut.TabIndex = 38;
-            this.checkBoxDesktopShortcut.Text = "创建桌面快捷方式（建议“小白”勾选）";
-            this.checkBoxDesktopShortcut.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

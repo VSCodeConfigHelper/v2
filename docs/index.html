@@ -11,7 +11,7 @@
     <script>
         var versionInfo;
         function download() {
-           window.open(versionInfo.link);
+            window.open(versionInfo.link);
         }
         function readme() {
             window.open("https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/README.md");
@@ -33,14 +33,17 @@
 
     <div class="container">
         <div class="jumbotron">
-            <div class="col-sm-3 center-block">
-                <img src="VSCodeConfigHelper.png">
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <img src="assets/VSCodeConfigHelper.png" style="width: 150px;">
+                </div>
+                <div class="col-sm-9">
+                    <h1>VS Code Config Helper</h1>
+                    <p>简单、快捷的 VS Code C++ 配置工具</p>
+                </div>
             </div>
-            <div class="col-sm-9">
-                <h1>VS Code Config Helper</h1>
-                <p>简单、快捷的 VS Code C++ 配置工具</p>
-            </div>
-            <button type="button" class="btn btn-primary btn-lg center-block" style="font-size:200%" onclick="download()">
+            <button type="button" class="btn btn-primary btn-lg center-block" style="font-size:200%"
+                onclick="download()">
                 <span class="glyphicon glyphicon-download-alt"></span>
                 <span style="margin:15px" id="download-text">立即下载</span>
             </button>
@@ -55,9 +58,10 @@
             </div>
         </div>
         <h3 class="page-header">软件截图</h3>
-        <img class="img-thumbnail center-block" src="Snapshot.png">
+        <img class="img-thumbnail center-block" src="assets/Snapshot.png">
         <h3 class="page-header">软件许可</h3>
-        <p>VS Code Config Helper 是自由软件。你可以基于 <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPLv2</a> 协议进行再分发或修改。</p>
+        <p>VS Code Config Helper 是自由软件。你可以基于 <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPLv2</a> 协议进行再分发或修改。
+        </p>
         <h3 class="page-header">关于作者</h3>
         <p class="lead">谷雨同学·Guyutongxue</p>
         <ul>
@@ -69,10 +73,10 @@
         对不起实在不会做网页。
     </div>
     <script>
-        $.getJSON("version.json",function(result) {
+        $.getJSON("version.json", function (result) {
             versionInfo = result;
             console.log(versionInfo);
-            document.getElementById("version-text").innerText = "版本 "+versionInfo.version+" 更新日期 "+versionInfo.date;
+            document.getElementById("version-text").innerText = "版本 " + versionInfo.version + " 更新日期 " + versionInfo.date;
         });
     </script>
 </body>

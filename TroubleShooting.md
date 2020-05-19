@@ -32,7 +32,7 @@ g++.exe (x86_64-win32-seh-rev0, Built by MinGW-W64 Project) 8.1.0
 'g++.exe' 不是内部或外部命令，也不是可运行的程序或批处理文件。
 ```
 
-字样，则检查您的环境变量配置是否成功执行。您可以重新执行本工具的第二步、第三步完成此项操作。
+字样，则检查您的环境变量配置。您应当检查本工具的“配置  MinGW”页面，选择或添加您的 MinGW。
 
 ## Unable to start debugging. Program path '*\<path to executable\>*' is missing or invalid.
 
@@ -44,9 +44,7 @@ g++.exe (x86_64-win32-seh-rev0, Built by MinGW-W64 Project) 8.1.0
 
 若问题仍存在，请检查您使用的 MinGW-w64 版本是否正确。某些版本的 MinGW 可能不包含 64 位编译工具从而导致此错误的发生。请您尝试删除您正在使用的 MinGW-w64，然后通过**此工具提供的下载链接**重新下载 MinGW-w64。
 
-如果您曾经配置过其它版本的 MinGW，您可能需要移除它们，并从 `Path` 环境变量中删除。
-
-删除环境变量：控制面板->系统和安全->系统->高级系统设置->环境变量(N)...，检查用户和系统的 Path，将对应的路径删除。
+如果您曾经配置过其它版本的 MinGW，您可能需要移除它们。您只需要在本工具的“配置 MinGW”界面选择或添加您想保留的 MinGW 版本，工具将自动为您删除其它 MinGW。
 
 ## 检测到 #include 错误。请更新 includePath。已为此翻译单元(*\<path to file\>*)禁用波形曲线……
 
@@ -63,6 +61,17 @@ g++.exe (x86_64-win32-seh-rev0, Built by MinGW-W64 Project) 8.1.0
 ## 代码高亮出现问题
 
 [重新安装](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) `C/C++` 扩展即可。
+
+
+## 使用外部弹窗样式时，调试时黑窗一闪而过
+
+这个是正常现象，因为调试的时候不会在程序运行结束的时候停住；也就是说，当处于调试状态时，程序运行完毕后就会直接退出。因此这时只能看到一个一闪而过的窗口。
+
+这里给出的建议是，只有在需要调试的时候调试，同时调试的时候加上断点。如果实在需要调试后暂停看输出的话，也可以结尾加上
+```C++
+system("pause"); // 需 #include <cstdlib>
+```
+之类的语句来防止窗口退出。
 
 ## 上述疑难解答未能解决我的问题 / 遇到了其它问题
 
