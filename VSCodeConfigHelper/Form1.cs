@@ -375,7 +375,7 @@ int main(int argc, char** argv) {
             if (File.Exists("VSCHcache.txt"))
             {
                 Logging.Log("Cache detected.");
-                    StreamReader sr = new StreamReader("VSCHcache.txt");
+                StreamReader sr = new StreamReader("VSCHcache.txt");
                 try
                 {
                     JArray cache = (JArray)JsonConvert.DeserializeObject(sr.ReadToEnd());
@@ -473,6 +473,7 @@ int main(int argc, char** argv) {
                     listViewMinGW.Items.Add(lvi);
                     Logging.Log(lvi.Text + "\t" + lvi.SubItems[1].Text + "\t" + lvi.SubItems[2].Text);
                 }
+                if (listViewMinGW.Items.Count == 1) listViewMinGW.Items[0].Selected = true;
                 buttonMinGWNext.Enabled = listViewMinGW.SelectedItems.Count == 1;
             }
         }
@@ -919,7 +920,7 @@ int main(int argc, char** argv) {
                     return;
                 }
                 Logging.Log("Saving cache of this configure...");
-                    StreamWriter sw = new StreamWriter("VSCHcache.txt");
+                StreamWriter sw = new StreamWriter("VSCHcache.txt");
                 try
                 {
                     JArray cache = new JArray
