@@ -33,7 +33,7 @@ namespace VSCodeConfigHelper
             Log(adj + " error occured. ", LogType.Error);
             string detail = "Type: " + ex.GetType().Name + Environment.NewLine
                 + "Info: " + ex.Message + Environment.NewLine
-                + "StackTrace: " + ex.StackTrace;
+                + "StackTrace: " + Environment.NewLine + ex.StackTrace;
             Log(detail, LogType.Multiline);
         }
         public static void Log(string message, LogType type = LogType.Info)
