@@ -27,6 +27,15 @@ namespace VSCodeConfigHelper
         {
             if (File.Exists(LogFilePath)) File.Delete(LogFilePath);
         }
+
+        public static void Log(Exception ex, string adj = "")
+        {
+            Log(adj + " error occured. ", LogType.Error);
+            string detail = "Type: " + ex.GetType().Name + Environment.NewLine
+                + "Info: " + ex.Message + Environment.NewLine
+                + "StackTrace: " + ex.StackTrace;
+            Log(detail, LogType.Multiline);
+        }
         public static void Log(string message, LogType type = LogType.Info)
         {
             StreamWriter sw = new StreamWriter(LogFilePath, true);

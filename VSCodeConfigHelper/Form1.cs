@@ -838,37 +838,27 @@ int main(int argc, char** argv) {
 
         private void LoadVSCode(string folderpath, string filepath = null)
         {
-            try
+            using (Process proc = new Process())
             {
-                using (Process proc = new Process())
+                // proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                proc.StartInfo.CreateNoWindow = true;
+                // proc.StartInfo.UseShellExecute = true;
+                if (string.IsNullOrEmpty(vsCodePath))
+                    throw new Exception("VS Code path not found.");
+                proc.StartInfo.FileName = vsCodePath;
+                if (string.IsNullOrEmpty(filepath))
                 {
-                    // proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    proc.StartInfo.CreateNoWindow = true;
-                    // proc.StartInfo.UseShellExecute = true;
-                    if (string.IsNullOrEmpty(vsCodePath))
-                        throw new Exception("VS Code path not found.");
-                    proc.StartInfo.FileName = vsCodePath;
-                    if (string.IsNullOrEmpty(filepath))
-                    {
-                        proc.StartInfo.Arguments = $"\"{folderpath}\"";
-                    }
-                    else
-                    {
-                        proc.StartInfo.Arguments = $" -g \"{filepath}:1\" \"{folderpath}\"";
-                    }
-                    Logging.Log("Launching VS Code by the following command:");
-                    Logging.Log($"\"{vsCodePath}\" {proc.StartInfo.Arguments}");
-                    proc.Start();
-                    // proc.WaitForExit();
-                    proc.Close();
+                    proc.StartInfo.Arguments = $"\"{folderpath}\"";
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("暂时无法启动 VS Code。" + Environment.NewLine +
-                    "这可能是您没有完整安装 VS Code 导致的。请尝试通过本工具重新安装。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Logging.Log($"Catch Exception: {ex.Message}", LogType.Error);
-                throw new Exception("启动 VS Code 失败。");
+                else
+                {
+                    proc.StartInfo.Arguments = $" -g \"{filepath}:1\" \"{folderpath}\"";
+                }
+                Logging.Log("Launching VS Code by the following command:");
+                Logging.Log($"\"{vsCodePath}\" {proc.StartInfo.Arguments}");
+                proc.Start();
+                // proc.WaitForExit();
+                proc.Close();
             }
         }
 
@@ -1042,6 +1032,17 @@ int main(int argc, char** argv) {
                     }
                 }
                 tabControlMain.SelectedIndex++;
+            }
+            catch(Exception)
+            {
+                Logging.Log("Seems that error occurs when adding PATH.", LogType.Error);
+                Logging.Log(@"Try with following steps to skip this:
+1. 启动控制面板 -> 系统和安全 -> 系统；
+2. 点击左侧“高级系统设置”，点击“环境变量(N)...”按钮；
+3. 选中" + (IsAdministrator ? "下方系统变量中" : "上方用户变量中") + @"的 Path 项，点击对应的“编辑”按钮；
+4. 将您的 MinGW 路径添加到结尾。如果您使用 Windows 7，请在路径之间用分号 ';' 分隔。
+5. 保存全部设置，重新启动本工具。", LogType.Multiline);
+                throw;
             }
             finally
             {
@@ -1298,6 +1299,7 @@ int main(int argc, char** argv) {
             catch (Exception ex)
             {
                 Logging.Log("Catch exception. Aborted: " + ex.Message);
+                MessageBox.Show("配置时发生错误：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
