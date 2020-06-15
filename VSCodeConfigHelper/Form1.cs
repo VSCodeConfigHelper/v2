@@ -696,25 +696,12 @@ int main(int argc, char** argv) {
             };
             JObject presentation = new JObject
             {
-                {"echo", true},
-                {"reveal", "always"},
+                {"echo", false},
+                {"reveal", "silent"},
                 {"focus", false},
                 {"panel", "shared"},
-                {"showReuseMessage", true},
-                {"clear", false}
-            };
-            JObject problemMatcher = new JObject
-            {
-                { "owner", "cpp" },
-                { "fileLocation", "absolute"},
-                { "pattern",new JObject{
-                    {"regexp", "^(.*):(\\d+):(\\d+):\\s+(error):\\s+(.*)$"},
-                    {"file", 1},
-                    {"line", 2},
-                    {"column", 3},
-                    {"severity", 4},
-                    {"message", 5}
-                } }
+                {"showReuseMessage", false},
+                {"clear", true}
             };
 
             JArray taskList = new JArray
@@ -727,7 +714,7 @@ int main(int argc, char** argv) {
                         {"args",args},
                         {"group",group},
                         {"presentation",presentation},
-                        {"problemMatcher",problemMatcher}
+                        {"problemMatcher",new JArray{ "$gcc" } }
                     }
             };
             // Add another task for external running
@@ -780,7 +767,8 @@ int main(int argc, char** argv) {
             {
                 {"C_Cpp.default.intelliSenseMode", "gcc-x" + (IsRunningOn64Bit ? "64" : "86")},
                 {"C_Cpp.default.compilerPath", minGWPath + "\\bin\\" + Compiler},
-                {"C_Cpp.default."+(isCpp?"cpp":"c")+"Standard", standard}
+                {"C_Cpp.default."+(isCpp?"cpp":"c")+"Standard", standard},
+                {"debug.onTaskErrors", "abort" }
             };
         }
 
