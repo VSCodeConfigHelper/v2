@@ -607,6 +607,7 @@
             this.pictureBoxExternal.Location = new System.Drawing.Point(461, 164);
             this.pictureBoxExternal.Name = "pictureBoxExternal";
             this.pictureBoxExternal.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxExternal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxExternal.TabIndex = 41;
             this.pictureBoxExternal.TabStop = false;
             // 
@@ -617,6 +618,7 @@
             this.pictureBoxInternal.Location = new System.Drawing.Point(461, 38);
             this.pictureBoxInternal.Name = "pictureBoxInternal";
             this.pictureBoxInternal.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxInternal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxInternal.TabIndex = 40;
             this.pictureBoxInternal.TabStop = false;
             // 
@@ -624,9 +626,9 @@
             // 
             this.labelExternalHint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelExternalHint.Location = new System.Drawing.Point(33, 183);
+            this.labelExternalHint.Location = new System.Drawing.Point(33, 186);
             this.labelExternalHint.Name = "labelExternalHint";
-            this.labelExternalHint.Size = new System.Drawing.Size(419, 96);
+            this.labelExternalHint.Size = new System.Drawing.Size(419, 93);
             this.labelExternalHint.TabIndex = 39;
             this.labelExternalHint.Text = "弹出窗口说明";
             // 
@@ -636,7 +638,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelInternalHint.Location = new System.Drawing.Point(33, 60);
             this.labelInternalHint.Name = "labelInternalHint";
-            this.labelInternalHint.Size = new System.Drawing.Size(419, 96);
+            this.labelInternalHint.Size = new System.Drawing.Size(419, 101);
             this.labelInternalHint.TabIndex = 38;
             this.labelInternalHint.Text = "内置终端说明";
             // 
