@@ -91,6 +91,7 @@
             this.buttonSettings = new System.Windows.Forms.Button();
             this.panelNavigate = new System.Windows.Forms.Panel();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControlMain.SuspendLayout();
             this.tabPageWelcome.SuspendLayout();
             this.tabPageMinGW.SuspendLayout();
@@ -895,6 +896,7 @@
         private System.Windows.Forms.PictureBox pictureBoxInternal;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.CheckBox checkBoxDesktopShortcut;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

@@ -609,7 +609,7 @@ int main(int argc, char** argv) {
                 Logging.Log($"\"{proc.StartInfo.FileName}\" {proc.StartInfo.Arguments}");
                 proc.WaitForExit(30000);
                 proc.Close();
-                Logging.Log("Execute finished. Exit code is:" + proc.ExitCode.ToString());
+                Logging.Log("Execute finished.");
             }
             CheckExtension();
         }
@@ -1162,8 +1162,28 @@ int main(int argc, char** argv) {
         }
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            CheckCodeAndExtension();
+            if(ModifierKeys == Keys.Shift)
+            {
+                DialogResult dr = MessageBox.Show("您正在手动选择 VS Code 路径。此设置是临时的，将不会保留。是否继续？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Cancel) return;
+                Logging.Log("User try to select VS Code path manually.");
+                openFileDialog1.Filter = "VS Code Executable(code.exe)|code.exe";
+                openFileDialog1.Title = "选择 code.exe 路径";
+                openFileDialog1.DefaultExt = ".exe";
+                if(openFileDialog1.ShowDialog()==DialogResult.OK)
+                {
+                    vsCodePath = openFileDialog1.FileName;
+                    labelCodeHint.Text = "用户选择的 VS Code 路径：" + vsCodePath + "（临时）";
+                    Logging.Log("User selected VS Code Path: " + vsCodePath);
+                    labelCodeHint.ForeColor = Color.Red;
+                    CheckExtension();
+                }
+            } else
+            {
+                CheckCodeAndExtension();
+            }
         }
+
 
         private void buttonCodeNext_Click(object sender, EventArgs e)
         {
@@ -1316,7 +1336,7 @@ int main(int argc, char** argv) {
             }
             catch (Exception ex)
             {
-                Logging.Log($"Failed while creating short cut. Exception: " + ex.Message);
+                Logging.Log($"Failed while creating shortcut. Exception: " + ex.Message);
                 return false;
             }
         }
@@ -1359,5 +1379,6 @@ int main(int argc, char** argv) {
                 TextRenderer.DrawText(e.Graphics, texts[i] + Environment.NewLine, new Font(FontFamily.GenericSerif, 9, FontStyle.Regular), pt, Color.Gray);
             }
         }
+
     }
 }
