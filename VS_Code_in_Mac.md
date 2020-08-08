@@ -92,7 +92,47 @@ int main(){
 
 -----
 
-C/C++ 插件 0.27.0 更新已解决此问题。若问题仍存在，以下说明可作为备用方案。
+**重要提示** VS Code 在 macOS 上调试仍然存在问题：可能无法弹出调试窗口。
+
+暂时的解决方案如下：
+
+将 `tasks.json` 修改为：
+```JSON
+// tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with Clang",
+            "type": "shell",
+            "command": "clang++",
+            "args": [
+                "-std=c++17",
+                "-stdlib=libc++",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.out",
+                "--debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Open Terminal",
+            "type": "shell",
+            "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend        tell'",
+            "problemMatcher": []
+        }
+    ]
+}
+```
+
+每次启动 VS Code 后，先按 ⌘+⇧+P，键入 `Run Tasks` 并选中，选择 `Open Terminal` 运行一次即可。
+
+
+<!-- C/C++ 插件 0.27.0 更新已解决此问题。若问题仍存在，以下说明可作为备用方案。
 
 ~~如果你使用的是 macOS Catalina ，你的断点调试功能可能[暂时无法使用](https://github.com/microsoft/vscode-cpptools/issues/3829)。请耐心等待 VS Code 更新，或者使用以下解决方案：~~
 
@@ -114,4 +154,4 @@ C/C++ 插件 0.27.0 更新已解决此问题。若问题仍存在，以下说明
         }
     ]
 }
-```
+``` -->
