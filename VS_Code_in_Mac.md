@@ -131,6 +131,7 @@ int main(){
 
 每次启动 VS Code 后，先按 ⌘+⇧+P，键入 `Run Tasks` 并选中，选择 `Open Terminal` 运行一次即可。
 
+相关 Issue 参见[此处](https://github.com/microsoft/vscode-cpptools/issues/5079)。
 
 <!-- C/C++ 插件 0.27.0 更新已解决此问题。若问题仍存在，以下说明可作为备用方案。
 
