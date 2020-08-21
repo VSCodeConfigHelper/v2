@@ -271,7 +271,7 @@ namespace VSCodeConfigHelper
             {
                 // Logging.Log("Hit a count.");
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-                HttpWebRequest request = WebRequest.CreateHttp("https://api.countapi.xyz/hit/gutongxue.github.io/b54f2252-e54a-4bd0-b4c2-33b47db6aa98");
+                HttpWebRequest request = WebRequest.CreateHttp("https://api.countapi.xyz/hit/guyutongxue.github.io/b54f2252-e54a-4bd0-b4c2-33b47db6aa98");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 Edg/81.0.416.72";
                 request.Method = "GET";
                 request.Timeout = 5000;
