@@ -84,6 +84,7 @@
             this.buttonConfigCancel = new System.Windows.Forms.Button();
             this.buttonConfigNext = new System.Windows.Forms.Button();
             this.tabPageFinish = new System.Windows.Forms.TabPage();
+            this.checkBoxHitCount = new System.Windows.Forms.CheckBox();
             this.checkBoxDesktopShortcut = new System.Windows.Forms.CheckBox();
             this.labelFinishHint = new System.Windows.Forms.Label();
             this.labelFinishTitle = new System.Windows.Forms.Label();
@@ -200,10 +201,10 @@
             // buttonViewWorkspace
             // 
             this.buttonViewWorkspace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonViewWorkspace.Location = new System.Drawing.Point(461, 127);
+            this.buttonViewWorkspace.Location = new System.Drawing.Point(461, 130);
             this.buttonViewWorkspace.Margin = new System.Windows.Forms.Padding(4);
             this.buttonViewWorkspace.Name = "buttonViewWorkspace";
-            this.buttonViewWorkspace.Size = new System.Drawing.Size(100, 26);
+            this.buttonViewWorkspace.Size = new System.Drawing.Size(100, 25);
             this.buttonViewWorkspace.TabIndex = 20;
             this.buttonViewWorkspace.Text = "浏览...";
             this.buttonViewWorkspace.UseVisualStyleBackColor = true;
@@ -711,6 +712,7 @@
             // tabPageFinish
             // 
             this.tabPageFinish.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageFinish.Controls.Add(this.checkBoxHitCount);
             this.tabPageFinish.Controls.Add(this.checkBoxDesktopShortcut);
             this.tabPageFinish.Controls.Add(this.labelFinishHint);
             this.tabPageFinish.Controls.Add(this.labelFinishTitle);
@@ -721,6 +723,18 @@
             this.tabPageFinish.Name = "tabPageFinish";
             this.tabPageFinish.Size = new System.Drawing.Size(586, 317);
             this.tabPageFinish.TabIndex = 5;
+            // 
+            // checkBoxHitCount
+            // 
+            this.checkBoxHitCount.AutoSize = true;
+            this.checkBoxHitCount.Checked = true;
+            this.checkBoxHitCount.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxHitCount.Location = new System.Drawing.Point(34, 288);
+            this.checkBoxHitCount.Name = "checkBoxHitCount";
+            this.checkBoxHitCount.Size = new System.Drawing.Size(119, 19);
+            this.checkBoxHitCount.TabIndex = 39;
+            this.checkBoxHitCount.Text = "发送统计数据";
+            this.checkBoxHitCount.UseVisualStyleBackColor = true;
             // 
             // checkBoxDesktopShortcut
             // 
@@ -897,6 +911,7 @@
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.CheckBox checkBoxDesktopShortcut;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.CheckBox checkBoxHitCount;
     }
 }
 

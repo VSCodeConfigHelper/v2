@@ -90,12 +90,12 @@ namespace VSCodeConfigHelper
             },
             {
                 {
-                    @"https://disk.pku.edu.cn:443/link/C8A0ABD422B29538FCADF1246B484237",
-                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/10.1.0-10.0.0-7.0.0-r1/winlibs-x86_64-posix-seh-gcc-10.1.0-llvm-10.0.0-mingw-w64-7.0.0-r1.7z"
+                    @"https://disk.pku.edu.cn:443/link/0B17D4E8B534BAA6221FD57A7FD29184",
+                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-7.0.0-r3/winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-10.0.1-mingw-w64-7.0.0-r3.7z"
                 },
                 {
-                    @"https://disk.pku.edu.cn:443/link/8E0DFCD2350031B33B8E31D5FE9C5F13",
-                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/10.1.0-10.0.0-7.0.0-r1/winlibs-i686-posix-dwarf-gcc-10.1.0-llvm-10.0.0-mingw-w64-7.0.0-r1.7z"
+                    @"https://disk.pku.edu.cn:443/link/4926F906D5A0937B66E310AEB96A976F",
+                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-7.0.0-r3/winlibs-i686-posix-dwarf-gcc-10.2.0-llvm-10.0.1-mingw-w64-7.0.0-r3.7z"
                 }
             }
         };
@@ -152,7 +152,6 @@ namespace VSCodeConfigHelper
 int main() {
     // 在标准输出中打印 ""Hello, world!""
     std::cout << ""Hello, world!"" << std::endl;
-    return 0;
 }
 
 // 此文件编译运行将输出 ""Hello, world!""。
@@ -1343,6 +1342,14 @@ int main(int argc, char** argv) {
 
         private void buttonFinishAll_Click(object sender, EventArgs e)
         {
+            buttonFinishAll.Text = "请稍候…";
+            buttonFinishAll.Enabled = false;
+            Thread hitting = null;
+            if (checkBoxHitCount.Checked)
+            {
+                hitting = new Thread(new ThreadStart(() => { FormSettings.HitCount(); }));
+                hitting.Start();
+            }
             if (checkBoxGenTest.Checked)
             {
                 string filepath = GenerateTestFile(workspacePath);
@@ -1350,9 +1357,17 @@ int main(int argc, char** argv) {
             }
             else if (checkBoxOpen.Checked) LoadVSCode(workspacePath);
             if (checkBoxDesktopShortcut.Checked) CreateDesktopShortcut();
+            if (checkBoxHitCount.Checked)
+                hitting.Join();
             Close();
         }
 
+
+        /// <summary>
+        /// 绘制左侧“导航”栏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panelNavigate_Paint(object sender, PaintEventArgs e)
         {
             string[] texts =

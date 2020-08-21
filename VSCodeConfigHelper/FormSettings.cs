@@ -262,6 +262,30 @@ namespace VSCodeConfigHelper
             }
         }
 
+
+        // https://countapi.xyz/
+        // with namespace 'guyutongxue.github.io', key: b54f2252-e54a-4bd0-b4c2-33b47db6aa98
+        public static string HitCount()
+        {
+            try
+            {
+                // Logging.Log("Hit a count.");
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                HttpWebRequest request = WebRequest.CreateHttp("https://api.countapi.xyz/hit/gutongxue.github.io/b54f2252-e54a-4bd0-b4c2-33b47db6aa98");
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 Edg/81.0.416.72";
+                request.Method = "GET";
+                request.Timeout = 5000;
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                return sr.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                Logging.Log($"Error occured while hitting counts: {ex.Message}", LogType.Error);
+                return null;
+            }
+        }
+
         private void linkLabelLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("http://www.gnu.org/licenses/gpl-2.0.html");

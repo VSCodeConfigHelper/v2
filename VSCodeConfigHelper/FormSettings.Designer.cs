@@ -55,13 +55,13 @@
             this.radioButtonMinGWw64 = new System.Windows.Forms.RadioButton();
             this.radioButtonTDM = new System.Windows.Forms.RadioButton();
             this.tabPageInstall = new System.Windows.Forms.TabPage();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
             this.groupBoxStandard = new System.Windows.Forms.GroupBox();
-            this.comboBoxStandard = new System.Windows.Forms.ComboBox();
-            this.comboBoxLang = new System.Windows.Forms.ComboBox();
-            this.labelLang = new System.Windows.Forms.Label();
             this.labelStandard = new System.Windows.Forms.Label();
-            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.labelLang = new System.Windows.Forms.Label();
+            this.comboBoxLang = new System.Windows.Forms.ComboBox();
+            this.comboBoxStandard = new System.Windows.Forms.ComboBox();
             this.groupBoxPrivil.SuspendLayout();
             this.groupBoxArg.SuspendLayout();
             this.groupBoxMinGWSrc.SuspendLayout();
@@ -325,7 +325,7 @@
             this.radioButtonWinLibs.Name = "radioButtonWinLibs";
             this.radioButtonWinLibs.Size = new System.Drawing.Size(140, 19);
             this.radioButtonWinLibs.TabIndex = 11;
-            this.radioButtonWinLibs.Text = "WinLibs 10.1.0";
+            this.radioButtonWinLibs.Text = "WinLibs 10.2.0";
             this.radioButtonWinLibs.UseVisualStyleBackColor = true;
             this.radioButtonWinLibs.CheckedChanged += new System.EventHandler(this.radioButtonWinLibs_CheckedChanged);
             // 
@@ -365,6 +365,16 @@
             this.tabPageInstall.Text = "安装";
             this.tabPageInstall.UseVisualStyleBackColor = true;
             // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(125, 244);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(280, 29);
+            this.buttonUpdate.TabIndex = 10;
+            this.buttonUpdate.Text = "检查 VS Code Config Helper 更新";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
             // tabPageConfig
             // 
             this.tabPageConfig.Controls.Add(this.groupBoxStandard);
@@ -389,15 +399,23 @@
             this.groupBoxStandard.TabStop = false;
             this.groupBoxStandard.Text = "设定语言标准";
             // 
-            // comboBoxStandard
+            // labelStandard
             // 
-            this.comboBoxStandard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxStandard.FormattingEnabled = true;
-            this.comboBoxStandard.Location = new System.Drawing.Point(259, 24);
-            this.comboBoxStandard.Name = "comboBoxStandard";
-            this.comboBoxStandard.Size = new System.Drawing.Size(79, 23);
-            this.comboBoxStandard.TabIndex = 0;
-            this.comboBoxStandard.TextChanged += new System.EventHandler(this.comboBoxStandard_TextChanged);
+            this.labelStandard.AutoSize = true;
+            this.labelStandard.Location = new System.Drawing.Point(186, 28);
+            this.labelStandard.Name = "labelStandard";
+            this.labelStandard.Size = new System.Drawing.Size(67, 15);
+            this.labelStandard.TabIndex = 3;
+            this.labelStandard.Text = "标准版本";
+            // 
+            // labelLang
+            // 
+            this.labelLang.AutoSize = true;
+            this.labelLang.Location = new System.Drawing.Point(62, 28);
+            this.labelLang.Name = "labelLang";
+            this.labelLang.Size = new System.Drawing.Size(37, 15);
+            this.labelLang.TabIndex = 2;
+            this.labelLang.Text = "语言";
             // 
             // comboBoxLang
             // 
@@ -412,33 +430,15 @@
             this.comboBoxLang.TabIndex = 1;
             this.comboBoxLang.SelectedIndexChanged += new System.EventHandler(this.comboBoxLang_SelectedIndexChanged);
             // 
-            // labelLang
+            // comboBoxStandard
             // 
-            this.labelLang.AutoSize = true;
-            this.labelLang.Location = new System.Drawing.Point(62, 28);
-            this.labelLang.Name = "labelLang";
-            this.labelLang.Size = new System.Drawing.Size(37, 15);
-            this.labelLang.TabIndex = 2;
-            this.labelLang.Text = "语言";
-            // 
-            // labelStandard
-            // 
-            this.labelStandard.AutoSize = true;
-            this.labelStandard.Location = new System.Drawing.Point(186, 28);
-            this.labelStandard.Name = "labelStandard";
-            this.labelStandard.Size = new System.Drawing.Size(67, 15);
-            this.labelStandard.TabIndex = 3;
-            this.labelStandard.Text = "标准版本";
-            // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.Location = new System.Drawing.Point(125, 244);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(280, 29);
-            this.buttonUpdate.TabIndex = 10;
-            this.buttonUpdate.Text = "检查 VS Code Config Helper 更新";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            this.comboBoxStandard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxStandard.FormattingEnabled = true;
+            this.comboBoxStandard.Location = new System.Drawing.Point(259, 24);
+            this.comboBoxStandard.Name = "comboBoxStandard";
+            this.comboBoxStandard.Size = new System.Drawing.Size(79, 23);
+            this.comboBoxStandard.TabIndex = 0;
+            this.comboBoxStandard.TextChanged += new System.EventHandler(this.comboBoxStandard_TextChanged);
             // 
             // FormSettings
             // 
