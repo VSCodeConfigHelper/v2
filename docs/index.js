@@ -1,10 +1,3 @@
-const lanzousLink = "https://ww.lanzous.com/b01bf37ha";
-const lanzousCode = "gei7";
-var versionInfo;
-function download() {
-    window.open(versionInfo.link);
-}
-
 $.getJSON("version.json", function (result) {
     versionInfo = result;
     console.log(versionInfo);
