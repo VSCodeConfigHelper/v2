@@ -7,18 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
     <script>
-        const lanzousLink = "https://ww.lanzous.com/b01bf37ha";
-        const lanzousCode = "gei7";
-        var versionInfo;
-        function download() {
-            window.open(versionInfo.link);
+        if (document.documentMode) {
+            alert('由于您使用的是 IE，将为您直接跳转到下载链接。密码：gei7');
+            window.open('https://ww.lanzous.com/b01bf37ha');
         }
     </script>
-
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/countup.js/2.0.6/countUp.umd.min.js"></script>
+    <style>
+        .number {
+            font-size: 5em;
+        }
+    </style>
 </head>
 
 <body>
@@ -61,6 +64,20 @@
                     href="https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/FAQ.md">常见问题</a>
             </div>
         </div>
+        <div class="row text-center" style="padding-top: 2em;">
+            <div class="col-sm-4" style="cursor: help;" title="根据下载量和配置成功的统计数据估计">
+                <b>已成功配置</b><br>
+                <span class="text-info number" id="successCount"></span> 次
+            </div>
+            <div class="col-sm-4">
+                <b>初次配置耗时</b><br>
+                <span class="text-info number" id="successCount"><10</span> 分
+            </div>
+            <div class="col-sm-4">
+                <b>再次配置耗时</b><br>
+                <span class="text-info number" id="successCount">≈15</span> 秒
+            </div>
+        </div>
         <h3 class="page-header">软件截图</h3>
         <img class="img-thumbnail center-block" src="assets/Snapshot.png">
         <h3 class="page-header">软件许可</h3>
@@ -69,13 +86,6 @@
         </p>
         <h3 class="page-header">关于作者</h3>
         <p class="lead"><a target="_blank" href="https://guyutongxue.github.io">谷雨同学</a> | Guyutongxue</p>
-        <ul>
-            <li><a target="_blank" href="https://github.com/Guyutongxue">GitHub</a></li>
-            <li><a target="_blank" href="https://space.bilibili.com/19275760">Bilibili</a></li>
-            <li><a target="_blank" href="https://www.zhihu.com/people/guyutongxue">Zhihu</a></li>
-            <li>Email: <a href="mailto:guyutongxue@163.com">guyutongxue@163.com</a></li>
-        </ul>
-        对不起实在不会做网页。
     </div>
     <!-- GitHub Corner -->
     <a target="_blank" href="https://github.com/Guyutongxue/VSCodeConfigHelper" class="github-corner"
@@ -123,40 +133,7 @@
         }
     </style>
     <!-- -->
-    <script>
-
-        $.getJSON("version.json", function (result) {
-            versionInfo = result;
-            console.log(versionInfo);
-            $("#version-text").text("版本 " + versionInfo.version + " 更新日期 " + versionInfo.date);
-        });
-
-        $("[data-toggle='popover']").popover({
-            html: true,
-            title: "使用蓝奏云下载",
-            trigger: "click",
-            content: function () {
-                return lanzousPopup();
-            }
-        });
-
-        function lanzousPopup() {
-            var data = $("" +
-                "<span class='label label-info'>链接</span>" +
-                "<button class='btn btn-link' onclick='window.open(lanzousLink);'>" + lanzousLink +
-                "</button><br>" +
-                "<span class='label label-info'>密码</span>" +
-                "<div class='input-group input-group-sm'>" +
-                "    <input type='text' class='form-control' id='passcode' value='" + lanzousCode + "' readonly></input>" +
-                "    <span class='input-group-btn'>" +
-                "        <button class='btn btn-default' id='copybtn' data-clipboard-target='#passcode' type='submit'>复制</button>  " +
-                "    </span>" +
-                " </div>");
-
-            return data;
-        }
-
-        var clipboard = new ClipboardJS('#copybtn');
+    <script src="index.js" type="module">
     </script>
 </body>
 
