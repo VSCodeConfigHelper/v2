@@ -41,18 +41,17 @@
             this.groupBoxMinGWSrc = new System.Windows.Forms.GroupBox();
             this.labelMinGWSrcInstruction = new System.Windows.Forms.Label();
             this.radioButtonOffical = new System.Windows.Forms.RadioButton();
-            this.radioButtonPKU = new System.Windows.Forms.RadioButton();
+            this.radioButtonDisk = new System.Windows.Forms.RadioButton();
             this.linkLabelLicense = new System.Windows.Forms.LinkLabel();
             this.pictureGitHub = new System.Windows.Forms.PictureBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageDownload = new System.Windows.Forms.TabPage();
             this.groupBoxMinGWDistro = new System.Windows.Forms.GroupBox();
-            this.linkLabelWinLibs = new System.Windows.Forms.LinkLabel();
             this.linkLabelTDM = new System.Windows.Forms.LinkLabel();
             this.linkLabelMinGWw64 = new System.Windows.Forms.LinkLabel();
             this.labelDistroHint = new System.Windows.Forms.Label();
-            this.radioButtonWinLibs = new System.Windows.Forms.RadioButton();
-            this.radioButtonMinGWw64 = new System.Windows.Forms.RadioButton();
+            this.radioButtonOfficial = new System.Windows.Forms.RadioButton();
+            this.radioButtonGytx = new System.Windows.Forms.RadioButton();
             this.radioButtonTDM = new System.Windows.Forms.RadioButton();
             this.tabPageInstall = new System.Windows.Forms.TabPage();
             this.buttonUpdate = new System.Windows.Forms.Button();
@@ -173,7 +172,7 @@
             // 
             this.groupBoxMinGWSrc.Controls.Add(this.labelMinGWSrcInstruction);
             this.groupBoxMinGWSrc.Controls.Add(this.radioButtonOffical);
-            this.groupBoxMinGWSrc.Controls.Add(this.radioButtonPKU);
+            this.groupBoxMinGWSrc.Controls.Add(this.radioButtonDisk);
             this.groupBoxMinGWSrc.Location = new System.Drawing.Point(3, 6);
             this.groupBoxMinGWSrc.Name = "groupBoxMinGWSrc";
             this.groupBoxMinGWSrc.Size = new System.Drawing.Size(411, 90);
@@ -189,29 +188,29 @@
             this.labelMinGWSrcInstruction.Name = "labelMinGWSrcInstruction";
             this.labelMinGWSrcInstruction.Size = new System.Drawing.Size(399, 30);
             this.labelMinGWSrcInstruction.TabIndex = 2;
-            this.labelMinGWSrcInstruction.Text = "北大网盘下载快速稳定，但有可能失效。官方下载长期有效，但速度受网络环境所限制。";
+            this.labelMinGWSrcInstruction.Text = "网盘下载快速稳定，但有可能失效。官方下载长期有效，但速度受网络环境所限制。";
             // 
             // radioButtonOffical
             // 
             this.radioButtonOffical.AutoSize = true;
             this.radioButtonOffical.Location = new System.Drawing.Point(219, 24);
             this.radioButtonOffical.Name = "radioButtonOffical";
-            this.radioButtonOffical.Size = new System.Drawing.Size(118, 19);
+            this.radioButtonOffical.Size = new System.Drawing.Size(58, 19);
             this.radioButtonOffical.TabIndex = 1;
-            this.radioButtonOffical.Text = "官方下载地址";
+            this.radioButtonOffical.Text = "官方";
             this.radioButtonOffical.UseVisualStyleBackColor = true;
             // 
-            // radioButtonPKU
+            // radioButtonDisk
             // 
-            this.radioButtonPKU.AutoSize = true;
-            this.radioButtonPKU.Checked = true;
-            this.radioButtonPKU.Location = new System.Drawing.Point(45, 24);
-            this.radioButtonPKU.Name = "radioButtonPKU";
-            this.radioButtonPKU.Size = new System.Drawing.Size(88, 19);
-            this.radioButtonPKU.TabIndex = 1;
-            this.radioButtonPKU.TabStop = true;
-            this.radioButtonPKU.Text = "北大网盘";
-            this.radioButtonPKU.UseVisualStyleBackColor = true;
+            this.radioButtonDisk.AutoSize = true;
+            this.radioButtonDisk.Checked = true;
+            this.radioButtonDisk.Location = new System.Drawing.Point(45, 24);
+            this.radioButtonDisk.Name = "radioButtonDisk";
+            this.radioButtonDisk.Size = new System.Drawing.Size(58, 19);
+            this.radioButtonDisk.TabIndex = 1;
+            this.radioButtonDisk.TabStop = true;
+            this.radioButtonDisk.Text = "网盘";
+            this.radioButtonDisk.UseVisualStyleBackColor = true;
             // 
             // linkLabelLicense
             // 
@@ -263,12 +262,11 @@
             // 
             // groupBoxMinGWDistro
             // 
-            this.groupBoxMinGWDistro.Controls.Add(this.linkLabelWinLibs);
             this.groupBoxMinGWDistro.Controls.Add(this.linkLabelTDM);
             this.groupBoxMinGWDistro.Controls.Add(this.linkLabelMinGWw64);
             this.groupBoxMinGWDistro.Controls.Add(this.labelDistroHint);
-            this.groupBoxMinGWDistro.Controls.Add(this.radioButtonWinLibs);
-            this.groupBoxMinGWDistro.Controls.Add(this.radioButtonMinGWw64);
+            this.groupBoxMinGWDistro.Controls.Add(this.radioButtonOfficial);
+            this.groupBoxMinGWDistro.Controls.Add(this.radioButtonGytx);
             this.groupBoxMinGWDistro.Controls.Add(this.radioButtonTDM);
             this.groupBoxMinGWDistro.Location = new System.Drawing.Point(3, 102);
             this.groupBoxMinGWDistro.Name = "groupBoxMinGWDistro";
@@ -276,17 +274,6 @@
             this.groupBoxMinGWDistro.TabIndex = 8;
             this.groupBoxMinGWDistro.TabStop = false;
             this.groupBoxMinGWDistro.Text = "MinGW 版本";
-            // 
-            // linkLabelWinLibs
-            // 
-            this.linkLabelWinLibs.AutoSize = true;
-            this.linkLabelWinLibs.Location = new System.Drawing.Point(318, 88);
-            this.linkLabelWinLibs.Name = "linkLabelWinLibs";
-            this.linkLabelWinLibs.Size = new System.Drawing.Size(37, 15);
-            this.linkLabelWinLibs.TabIndex = 15;
-            this.linkLabelWinLibs.TabStop = true;
-            this.linkLabelWinLibs.Text = "官网";
-            this.linkLabelWinLibs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelWinLibs_LinkClicked);
             // 
             // linkLabelTDM
             // 
@@ -302,7 +289,7 @@
             // linkLabelMinGWw64
             // 
             this.linkLabelMinGWw64.AutoSize = true;
-            this.linkLabelMinGWw64.Location = new System.Drawing.Point(318, 38);
+            this.linkLabelMinGWw64.Location = new System.Drawing.Point(318, 88);
             this.linkLabelMinGWw64.Name = "linkLabelMinGWw64";
             this.linkLabelMinGWw64.Size = new System.Drawing.Size(37, 15);
             this.linkLabelMinGWw64.TabIndex = 13;
@@ -312,35 +299,35 @@
             // 
             // labelDistroHint
             // 
-            this.labelDistroHint.Location = new System.Drawing.Point(6, 122);
+            this.labelDistroHint.Location = new System.Drawing.Point(6, 139);
             this.labelDistroHint.Name = "labelDistroHint";
-            this.labelDistroHint.Size = new System.Drawing.Size(399, 93);
+            this.labelDistroHint.Size = new System.Drawing.Size(399, 76);
             this.labelDistroHint.TabIndex = 12;
             this.labelDistroHint.Text = "说明";
             // 
-            // radioButtonWinLibs
+            // radioButtonOfficial
             // 
-            this.radioButtonWinLibs.AutoSize = true;
-            this.radioButtonWinLibs.Location = new System.Drawing.Point(45, 86);
-            this.radioButtonWinLibs.Name = "radioButtonWinLibs";
-            this.radioButtonWinLibs.Size = new System.Drawing.Size(140, 19);
-            this.radioButtonWinLibs.TabIndex = 11;
-            this.radioButtonWinLibs.Text = "WinLibs 10.2.0";
-            this.radioButtonWinLibs.UseVisualStyleBackColor = true;
-            this.radioButtonWinLibs.CheckedChanged += new System.EventHandler(this.radioButtonWinLibs_CheckedChanged);
+            this.radioButtonOfficial.AutoSize = true;
+            this.radioButtonOfficial.Location = new System.Drawing.Point(45, 86);
+            this.radioButtonOfficial.Name = "radioButtonOfficial";
+            this.radioButtonOfficial.Size = new System.Drawing.Size(106, 19);
+            this.radioButtonOfficial.TabIndex = 11;
+            this.radioButtonOfficial.Text = "官方 8.1.0";
+            this.radioButtonOfficial.UseVisualStyleBackColor = true;
+            this.radioButtonOfficial.CheckedChanged += new System.EventHandler(this.radioButtonWinLibs_CheckedChanged);
             // 
-            // radioButtonMinGWw64
+            // radioButtonGytx
             // 
-            this.radioButtonMinGWw64.AutoSize = true;
-            this.radioButtonMinGWw64.Checked = true;
-            this.radioButtonMinGWw64.Location = new System.Drawing.Point(45, 36);
-            this.radioButtonMinGWw64.Name = "radioButtonMinGWw64";
-            this.radioButtonMinGWw64.Size = new System.Drawing.Size(148, 19);
-            this.radioButtonMinGWw64.TabIndex = 10;
-            this.radioButtonMinGWw64.TabStop = true;
-            this.radioButtonMinGWw64.Text = "MinGW-w64 8.1.0";
-            this.radioButtonMinGWw64.UseVisualStyleBackColor = true;
-            this.radioButtonMinGWw64.CheckedChanged += new System.EventHandler(this.radioButtonMinGWw64_CheckedChanged);
+            this.radioButtonGytx.AutoSize = true;
+            this.radioButtonGytx.Checked = true;
+            this.radioButtonGytx.Location = new System.Drawing.Point(45, 36);
+            this.radioButtonGytx.Name = "radioButtonGytx";
+            this.radioButtonGytx.Size = new System.Drawing.Size(144, 19);
+            this.radioButtonGytx.TabIndex = 10;
+            this.radioButtonGytx.TabStop = true;
+            this.radioButtonGytx.Text = "谷雨同学 10.2.0";
+            this.radioButtonGytx.UseVisualStyleBackColor = true;
+            this.radioButtonGytx.CheckedChanged += new System.EventHandler(this.radioButtonMinGWw64_CheckedChanged);
             // 
             // radioButtonTDM
             // 
@@ -485,19 +472,18 @@
         private System.Windows.Forms.GroupBox groupBoxMinGWSrc;
         private System.Windows.Forms.Label labelMinGWSrcInstruction;
         private System.Windows.Forms.RadioButton radioButtonOffical;
-        private System.Windows.Forms.RadioButton radioButtonPKU;
+        private System.Windows.Forms.RadioButton radioButtonDisk;
         private System.Windows.Forms.LinkLabel linkLabelLicense;
         private System.Windows.Forms.PictureBox pictureGitHub;
         private System.Windows.Forms.TabControl tabControlSettings;
         private System.Windows.Forms.TabPage tabPageDownload;
         private System.Windows.Forms.GroupBox groupBoxMinGWDistro;
-        private System.Windows.Forms.RadioButton radioButtonWinLibs;
-        private System.Windows.Forms.RadioButton radioButtonMinGWw64;
+        private System.Windows.Forms.RadioButton radioButtonOfficial;
+        private System.Windows.Forms.RadioButton radioButtonGytx;
         private System.Windows.Forms.RadioButton radioButtonTDM;
         private System.Windows.Forms.TabPage tabPageInstall;
         private System.Windows.Forms.TabPage tabPageConfig;
         private System.Windows.Forms.Label labelDistroHint;
-        private System.Windows.Forms.LinkLabel linkLabelWinLibs;
         private System.Windows.Forms.LinkLabel linkLabelTDM;
         private System.Windows.Forms.LinkLabel linkLabelMinGWw64;
         private System.Windows.Forms.GroupBox groupBoxStandard;

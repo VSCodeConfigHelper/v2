@@ -80,22 +80,22 @@ namespace VSCodeConfigHelper
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now.Date > new DateTime(2024, 10, 1)) radioButtonPKU.Enabled = false;
-            if (Form1.isMinGWPku)
-                radioButtonPKU.Checked = true;
+            if (DateTime.Now.Date > new DateTime(2024, 10, 1)) radioButtonDisk.Enabled = false;
+            if (Form1.isMinGWDisk)
+                radioButtonDisk.Checked = true;
             else
                 radioButtonOffical.Checked = true;
 
             switch (Form1.minGWDistro)
             {
                 case 0:
-                    radioButtonMinGWw64.Checked = true;
+                    radioButtonGytx.Checked = true;
                     break;
                 case 1:
                     radioButtonTDM.Checked = true;
                     break;
                 case 2:
-                    radioButtonWinLibs.Checked = true;
+                    radioButtonOfficial.Checked = true;
                     break;
             }
             string tempStandard = Form1.standard;
@@ -123,9 +123,10 @@ namespace VSCodeConfigHelper
                 labelAuth.Text += "若要使用系统管理员权限，请点击右侧按钮。";
                 EnableElevateIcon_BCM_SETSHIELD(buttonAuth);
             }
-            labelDistroHint.Text = "MinGW-w64 是最稳定、最常用的版本，如果您无特殊需求建议您选择该版本。" + Environment.NewLine +
-                "TDM-GCC 是基于 MinGW 的另一发行版，该版本较 MinGW-w64 做了一定优化，但是所需空间也较大。" + Environment.NewLine +
-                "WinLibs 是开发者 B. Sanders 个人编译的版本，更新较快，并同时包括了 LLVM 等工具。";
+            labelDistroHint.Text =
+                "谷雨同学个人搭建的版本集成了最新版本的编译器。"+ Environment.NewLine +
+                "TDM-GCC 是基于 MinGW 的另一发行版，提供了一些优化。"+ Environment.NewLine +
+                "官方版本是最稳定、最常用的版本，但是长期未更新。";
             ShowArgs();
         }
 
@@ -143,10 +144,11 @@ namespace VSCodeConfigHelper
                     "c++17",
                     "c++20"
                 });
-                comboBoxStandard.SelectedIndex = 4;
-                // WinLibs (g++10.1) supports C++20 partly
-                if (radioButtonWinLibs.Checked)
-                    comboBoxStandard.SelectedIndex = 5;
+                comboBoxStandard.Text = Form1.ChosenMinGW.standard;
+                //comboBoxStandard.SelectedIndex = 4;
+                //// WinLibs (g++10.1) supports C++20 partly
+                //if (radioButtonOfficial.Checked)
+                //    comboBoxStandard.SelectedIndex = 5;
             }
             else
             {
@@ -164,7 +166,7 @@ namespace VSCodeConfigHelper
 
         private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Form1.isMinGWPku = radioButtonPKU.Checked;
+            Form1.isMinGWDisk = radioButtonDisk.Checked;
         }
 
         private void buttonAuth_Click(object sender, EventArgs e)
@@ -298,17 +300,19 @@ namespace VSCodeConfigHelper
 
         private void radioButtonMinGWw64_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButtonMinGWw64.Checked) Form1.minGWDistro = 0;
+            if (radioButtonGytx.Checked) Form1.minGWDistro = 0;
+            LoadStandardComboBox();
         }
 
         private void radioButtonTDM_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonTDM.Checked) Form1.minGWDistro = 1;
+            LoadStandardComboBox();
         }
 
         private void radioButtonWinLibs_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButtonWinLibs.Checked) Form1.minGWDistro = 2;
+            if (radioButtonOfficial.Checked) Form1.minGWDistro = 2;
             LoadStandardComboBox();
         }
 

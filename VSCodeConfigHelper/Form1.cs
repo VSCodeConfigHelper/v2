@@ -60,47 +60,18 @@ namespace VSCodeConfigHelper
         }
 
         public static int minGWDistro = 0;
-
-        /*
-         * -MinGW-w64  -64bit   -PKU
-         * -TDM-GCC    -32bit   -Official
-         * -WinLibs
-         */
-        static readonly string[,,] minGWLinks = new string[3, 2, 2]
-        {
-            {
-                {
-                    @"https://disk.pku.edu.cn:443/link/A866B63467924A54CB7DB67EC386F0B1",
-                    @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z",
-                },
-                {
-                    @"https://disk.pku.edu.cn:443/link/774E14CD00311CCA1A8E2411DDF39288",
-                    @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-win32/dwarf/i686-8.1.0-release-win32-dwarf-rt_v6-rev0.7z",
-                }
-            },
-            {
-                {
-                    @"https://disk.pku.edu.cn:443/link/BA95F5AE50BD2F66CB9BE4CCB1D0B8AC",
-                    @"https://github.com/jmeubank/tdm-gcc/releases/download/v9.2.0-tdm64-1/tdm64-gcc-9.2.0.exe"
-                },
-                {
-                    @"https://disk.pku.edu.cn:443/link/EEEE7B7EB495F6C7FD0441FDEC3FB784",
-                    @"https://github.com/jmeubank/tdm-gcc/releases/download/v9.2.0-tdm-1/tdm-gcc-9.2.0.exe"
-                }
-            },
-            {
-                {
-                    @"https://disk.pku.edu.cn:443/link/0B17D4E8B534BAA6221FD57A7FD29184",
-                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-7.0.0-r3/winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-10.0.1-mingw-w64-7.0.0-r3.7z"
-                },
-                {
-                    @"https://disk.pku.edu.cn:443/link/4926F906D5A0937B66E310AEB96A976F",
-                    @"https://github.com/brechtsanders/winlibs_mingw/releases/download/10.2.0-7.0.0-r3/winlibs-i686-posix-dwarf-gcc-10.2.0-llvm-10.0.1-mingw-w64-7.0.0-r3.7z"
-                }
+        public static MinGWLink ChosenMinGW {
+            get{
+                return minGWLinks[minGWDistro];
             }
+        }
+
+        static readonly MinGWLink[] minGWLinks = new MinGWLink[3]
+        {
+            MinGWLink.gytx,
+            MinGWLink.tdm,
+            MinGWLink.official
         };
-
-
 
         #region 路径们
 
@@ -115,12 +86,12 @@ namespace VSCodeConfigHelper
         /// </summary>
         List<string> minGWPathList = new List<string>();
 
-        public static bool isMinGWPku = true;
+        public static bool isMinGWDisk = true;
         bool isMinGWFirstTime = true;
 
         public static bool isSuccess = false;
         public static bool isCpp = true;
-        public static string standard = "c++17";
+        public static string standard = "c++20";
         public static JArray args = new JArray {
             "-g",
             new JValue("-std=" + standard),
@@ -364,8 +335,7 @@ int main(int argc, char** argv) {
                 "程序将在运行结束后暂停，但调试结束时不会暂停。这种方式方便您查看长输出以及代码运行的时间。" + Environment.NewLine +
                 "这种样式会改变您的全局快捷键设置，因此可能导致冲突。请谨慎使用。";
 
-            // 北大网盘有效期截止至此
-            isMinGWPku = DateTime.Now.Date < new DateTime(2024, 10, 1);
+            // isMinGWDisk = DateTime.Now.Date < new DateTime(2024, 10, 1);
 
             if (IsAdministrator) Text = "管理员: VS Code C++配置工具";
             Logging.Log("Administrator: " + (IsAdministrator ? "Yes" : "No"));
@@ -381,7 +351,7 @@ int main(int argc, char** argv) {
                     if (cache == null) throw new Exception("JSON object is null.");
                     textBoxMinGWPath.Text = (string)cache[0];
                     textBoxWorkspacePath.Text = (string)cache[1];
-                    isMinGWPku = (bool)cache[2];
+                    isMinGWDisk = (bool)cache[2];
                     minGWDistro = (int)cache[3];
                     isCpp = (bool)cache[4];
                     standard = (string)cache[5];
@@ -536,8 +506,8 @@ int main(int argc, char** argv) {
             else
             {
                 string longVersion = GetGxxVersion(path, true);
-                distribute = Regex.Match(longVersion, "(?<=Target: ).*$", RegexOptions.Multiline).Value.Split('-').Last();
-                distribute = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(distribute);
+                distribute = Regex.Match(longVersion, "(?<=Target: ).*$", RegexOptions.Multiline).Value;
+                // distribute = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(distribute);
             }
             if (int.Parse(versionNumber.Split('.').First()) < 5)
             {
@@ -615,7 +585,7 @@ int main(int argc, char** argv) {
 
         private void LinkLabelMinGW_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string link = minGWLinks[minGWDistro, Convert.ToInt32(!IsRunningOn64Bit), Convert.ToInt32(!isMinGWPku)];
+            string link = ChosenMinGW.getLink(IsRunningOn64Bit, isMinGWDisk);
             Logging.Log("User clicked MinGW download link: " + link);
             Process.Start(link);
         }
@@ -904,7 +874,7 @@ int main(int argc, char** argv) {
                     {
                         minGWPath,
                         workspacePath,
-                        isMinGWPku,
+                        isMinGWDisk,
                         minGWDistro,
                         isCpp,
                         standard,
