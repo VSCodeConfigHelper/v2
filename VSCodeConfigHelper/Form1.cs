@@ -396,7 +396,7 @@ int main(int argc, char** argv) {
                     labelMinGWState.ForeColor = Color.Red;
                     labelMinGWState.Text = "请保证路径中不包含中文和特殊字符。";
                 }
-                if (Directory.Exists(minGWPath) && File.Exists(minGWPath + "\\bin\\g++.exe"))
+                else if (Directory.Exists(minGWPath) && File.Exists(minGWPath + "\\bin\\g++.exe"))
                 {
                     labelMinGWState.ForeColor = Color.Green;
                     labelMinGWState.Text = "检测到编译器：";
