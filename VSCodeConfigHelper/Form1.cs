@@ -128,6 +128,8 @@ int main() {
 // 此文件编译运行将输出 ""Hello, world!""。
 // 按下 " + (IsInternal ? "F5 后，您将在下方弹出的终端（Terminal）" : "F6 后，您将在弹出的") + @"窗口中看到这一行字。
 
+// ** 重要提示：您以后编写其它代码时，请务必确保文件名不包含中文和特殊字符，切记！**
+
 // 如果遇到了问题，请您浏览
 // https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md 
 // 获取帮助。如果问题未能得到解决，请联系开发者。";
@@ -164,6 +166,8 @@ int main(void) {
 /**
  * 此文件编译运行将输出 ""Hello, world!""。
  * 按下 " + (IsInternal ? "F5 后，您将在下方弹出的终端（Terminal）" : "F6 后，您将在弹出的") + @"窗口中看到这一行字。
+ *
+ * ** 重要提示：您以后编写其它代码时，请务必确保文件名不包含中文和特殊字符，切记！**
  *
  * 如果遇到了问题，请您浏览
  * https://github.com/Guyutongxue/VSCodeConfigHelper/blob/master/TroubleShooting.md
@@ -387,6 +391,11 @@ int main(int argc, char** argv) {
             minGWPath = textBoxMinGWPath.Text;
             if (!string.IsNullOrWhiteSpace(minGWPath))
             {
+                if (!Regex.IsMatch(minGWPath, "^[ -~]*$"))
+                {
+                    labelMinGWState.ForeColor = Color.Red;
+                    labelMinGWState.Text = "请保证路径中不包含中文和特殊字符。";
+                }
                 if (Directory.Exists(minGWPath) && File.Exists(minGWPath + "\\bin\\g++.exe"))
                 {
                     labelMinGWState.ForeColor = Color.Green;
@@ -512,6 +521,11 @@ int main(int argc, char** argv) {
             if (int.Parse(versionNumber.Split('.').First()) < 5)
             {
                 hint = "编译器版本较老，可能无法正常工作。";
+            }
+            // Fix standard specification for older version of GCC
+            if (int.Parse(versionNumber.Split('.').First()) < 10)
+            {
+                standard = "c++17";
             }
             return distribute + " " + versionNumber;
         }
