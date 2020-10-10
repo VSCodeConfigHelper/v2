@@ -208,13 +208,7 @@ namespace VSCodeConfigHelper
 
         private void SetDefaultArgs()
         {
-            Form1.args = new JArray {
-                "-g",
-                "-std="+Form1.standard,
-                "\"${file}\"",
-                "-o",
-                "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
-            };
+            Form1.args = Form1.GetDefaultArgs();
             ShowArgs();
         }
 

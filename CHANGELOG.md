@@ -1,10 +1,16 @@
 # 版本更新记录
 
+## 2.2.8
+
+*2020.10.10*
+
+- 再次修复 [#5](https://github.com/Guyutongxue/VSCodeConfigHelper/issues/5)
+
 ## 2.2.7
 
 *2020.9.20*
 
-- 尝试修复 #5
+- 尝试修复 [#5](https://github.com/Guyutongxue/VSCodeConfigHelper/issues/5)
 - 限制 MinGW 路径不含中文
 
 ## 2.2.6

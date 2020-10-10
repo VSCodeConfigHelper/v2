@@ -92,13 +92,17 @@ namespace VSCodeConfigHelper
         public static bool isSuccess = false;
         public static bool isCpp = true;
         public static string standard = "c++20";
-        public static JArray args = new JArray {
+        public static JArray args = GetDefaultArgs();
+        public static JArray GetDefaultArgs()
+        {
+            return new JArray {
             "-g",
-            new JValue("-std=" + standard),
+            "-std=" + standard,
             "\"${file}\"",
             "-o",
             "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
         };
+}
         string FileExtension { get { return isCpp ? "cpp" : "c"; } }
         string Compiler { get { return isCpp ? "g++.exe" : "gcc.exe"; } }
 
@@ -526,6 +530,7 @@ int main(int argc, char** argv) {
             if (int.Parse(versionNumber.Split('.').First()) < 10)
             {
                 standard = "c++17";
+                args = GetDefaultArgs();
             }
             return distribute + " " + versionNumber;
         }
