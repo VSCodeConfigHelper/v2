@@ -740,7 +740,7 @@ int main(int argc, char** argv) {
                     { {
                         "shell", new JObject
                         {
-                            { "executable", "cmd.exe" },
+                            { "executable", "${env:SystemRoot}\\System32\\cmd.exe" },
                             { "args", new JArray("/c") }
                         }
                     } }
@@ -914,11 +914,11 @@ int main(int argc, char** argv) {
             }
             else
             {
-                if (File.Exists("VSCHcache.txt"))
-                {
-                    File.Delete("VSCHcache.txt");
-                }
-                Logging.Log("User has successfully configured, and the form is closing. Cache deleted.");
+                //if (File.Exists("VSCHcache.txt"))
+                //{
+                //    File.Delete("VSCHcache.txt");
+                //}
+                Logging.Log("User has successfully configured, and the form is closing.");
             }
         }
 

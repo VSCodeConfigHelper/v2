@@ -1,5 +1,12 @@
 # 版本更新记录
 
+## 2.2.9
+
+*2020.11.30*
+
+- 配置成功后不再移除缓存文件（[#6](https://github.com/Guyutongxue/VSCodeConfigHelper/issues/6)）
+- 尝试修复许多 Win7 用户 `cmd.exe` 不在环境变量 `Path` 内导致的错误
+
 ## 2.2.8
 
 *2020.10.10*
