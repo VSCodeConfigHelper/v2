@@ -698,7 +698,7 @@ int main(int argc, char** argv) {
                     {
                         {"type", "shell"},
                         {"label", Compiler + " build active file"},
-                        {"command", Compiler},
+                        {"command", minGWPath + "\\bin\\" + Compiler},
                         {"args",args},
                         {"group",group},
                         {"presentation",presentation},

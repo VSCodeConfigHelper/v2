@@ -1,5 +1,11 @@
 # 版本更新记录
 
+## 2.2.10
+
+*2021.1.5*
+
+- 尝试修复可能需要重启才能成功编译的问题（[#7](https://github.com/Guyutongxue/VSCodeConfigHelper/issues/7)）
+
 ## 2.2.9
 
 *2020.11.30*
