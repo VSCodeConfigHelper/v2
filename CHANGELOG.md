@@ -6,6 +6,12 @@
 
 - 尝试修复可能需要重启才能成功编译的问题（[#7](https://github.com/Guyutongxue/VSCodeConfigHelper/issues/7)）
 
+### 2.2.10.1
+
+*2021.1.6*
+
+- 尽量避免 MinGW 路径中空格带来的潜在问题（[#8](https://github.com/Guyutongxue/VSCodeConfigHelper/issues/8)）
+
 ## 2.2.9
 
 *2020.11.30*

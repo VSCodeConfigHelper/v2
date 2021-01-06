@@ -395,10 +395,10 @@ int main(int argc, char** argv) {
             minGWPath = textBoxMinGWPath.Text;
             if (!string.IsNullOrWhiteSpace(minGWPath))
             {
-                if (!Regex.IsMatch(minGWPath, "^[ -~]*$"))
+                if (!Regex.IsMatch(minGWPath, "^[!-~]*$"))
                 {
                     labelMinGWState.ForeColor = Color.Red;
-                    labelMinGWState.Text = "请保证路径中不包含中文和特殊字符。";
+                    labelMinGWState.Text = "请保证路径中不包含空格、中文和特殊字符。";
                 }
                 else if (Directory.Exists(minGWPath) && File.Exists(minGWPath + "\\bin\\g++.exe"))
                 {
@@ -855,7 +855,7 @@ int main(int argc, char** argv) {
                 labelWorkspaceStatus.Visible = false;
                 return;
             }
-            if (!Regex.IsMatch(workspacePath, "^[ -~]*$"))
+            if (!Regex.IsMatch(workspacePath, "^[!-~]*$"))
             {
                 buttonWelcomeNext.Enabled = false;
                 labelWorkspaceStatus.Visible = true;

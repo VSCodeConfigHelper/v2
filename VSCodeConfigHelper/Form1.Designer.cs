@@ -195,7 +195,7 @@
             this.labelWorkspaceStatus.Name = "labelWorkspaceStatus";
             this.labelWorkspaceStatus.Size = new System.Drawing.Size(277, 15);
             this.labelWorkspaceStatus.TabIndex = 24;
-            this.labelWorkspaceStatus.Text = "路径中不能包含中文或者其它特殊字符。";
+            this.labelWorkspaceStatus.Text = "路径中不能包含空格、中文或者其它特殊字符。";
             this.labelWorkspaceStatus.Visible = false;
             // 
             // buttonViewWorkspace
