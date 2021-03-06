@@ -471,7 +471,7 @@ int main(int argc, char** argv) {
                 lvi.ToolTipText = hint;
             }
             lvi.SubItems.Add(path.Substring(0, path.Length - 4));
-            lvi.SubItems.Add(GetGxxVersion(path + "\\" + Compiler));
+            lvi.SubItems.Add(GetGxxVersion(path + "\\" + Compiler) ?? "");
             return lvi;
         }
 
@@ -484,6 +484,11 @@ int main(int argc, char** argv) {
         private string GuessDescription(string path, out string hint)
         {
             string shortVersion = GetGxxVersion(path);
+            if (shortVersion is null)
+            {
+                hint = null;
+                return "Unknown";
+            }
             string distribute;
             string versionNumber = Regex.Match(shortVersion, " [^ ]+$").Value;
             hint = null;
@@ -538,7 +543,7 @@ int main(int argc, char** argv) {
         private static string GetGxxVersion(string path, bool verbose = false)
         {
 
-            string result = string.Empty;
+            string result = null;
             using (Process proc = new Process())
             {
                 proc.StartInfo.CreateNoWindow = true;
@@ -737,13 +742,20 @@ int main(int argc, char** argv) {
                 { "tasks",taskList },
                 // https://github.com/microsoft/vscode/issues/70509
                 { "options",new JObject
-                    { {
-                        "shell", new JObject
+                    { 
                         {
-                            { "executable", "${env:SystemRoot}\\System32\\cmd.exe" },
-                            { "args", new JArray("/c") }
+                            "shell", new JObject
+                            {
+                                { "executable", "${env:SystemRoot}\\System32\\cmd.exe" },
+                                { "args", new JArray("/c") }
+                            }
+                        
+                        }, { "env", new JObject
+                            {
+                                {"Path", minGWPath + "\\bin:${env:Path}" }
+                            } 
                         }
-                    } }
+                    }
                 }
             };
             return tasks;
@@ -1231,17 +1243,19 @@ int main(int argc, char** argv) {
                 JObject tasksJson = GetTasksJson();
                 JObject settingsJson = GetSettingsJson();
 
-                Logging.Log("Killing the vscode process...");
-                // Kill VS Code process to apply PATH env and prevent occupy
-                Process[] processList = Process.GetProcesses();
-                foreach (var process in processList)
-                {
-                    if (process.ProcessName.ToLower() == "code")
-                    {
-                        process.Kill();
-                        Logging.Log($"PID {process.Id} killed.");
-                    }
-                }
+                // Since 2.2.11, applying env is not necessary.
+                //
+                //Logging.Log("Killing the vscode process...");
+                //// Kill VS Code process to apply PATH env and prevent occupy
+                //Process[] processList = Process.GetProcesses();
+                //foreach (var process in processList)
+                //{
+                //    if (process.ProcessName.ToLower() == "code")
+                //    {
+                //        process.Kill();
+                //        Logging.Log($"PID {process.Id} killed.");
+                //    }
+                //}
 
                 if (!IsInternal)
                 {

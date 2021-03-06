@@ -1,5 +1,12 @@
 # 版本更新记录
 
+## 2.2.11
+
+*2021.3.6*
+
+- 修复环境变量未应用导致的“退出代码1”错误（[#9](https://github.com/Guyutongxue/VSCodeConfigHelper/issues/9)）
+- 当由于未知原因无法获取编译器版本时不再导致程序停止工作（[#12](https://github.com/Guyutongxue/VSCodeConfigHelper/issues/12)）
+
 ## 2.2.10
 
 *2021.1.5*
