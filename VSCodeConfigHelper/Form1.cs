@@ -544,7 +544,7 @@ int main(int argc, char** argv) {
             {
                 // who cares?
             }
-            if (Regex.IsMatch(path, "^[!-~]*$"))
+            if (!Regex.IsMatch(path, "^[!-~]*$"))
             {
                 hint = "此 MinGW 存放路径包含空格、中文或特殊符号，可能导致出现问题。";
             }
