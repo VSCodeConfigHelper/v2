@@ -71,10 +71,10 @@ namespace VSCodeConfigHelper
         );
 
         public static readonly MinGWLink gytx = new MinGWLink(
-            @"https://github.com/Guyutongxue/mingw-release/releases/download/v10.2.0/gytx_i686-10.2.0-posix-dwarf.7z",
-            @"https://wws.lanzous.com/iubxqge4ffe",
-            @"https://github.com/Guyutongxue/mingw-release/releases/download/v10.2.0/gytx_x86_64-10.2.0-posix-seh.7z",
-            @"https://wws.lanzous.com/iAj1Zge4fyd",
+            @"https://github.com/Guyutongxue/mingw-release/releases/download/v10.3.0/gytx_i686-10.3.0-posix-dwarf.7z",
+            @"https://gytx.lanzous.com/iXSBXnv5mef",
+            @"https://github.com/Guyutongxue/mingw-release/releases/download/v10.3.0/gytx_x86_64-10.3.0-posix-seh.7z",
+            @"https://gytx.lanzous.com/iKnbunupb7g",
             "c++20"
         );
 

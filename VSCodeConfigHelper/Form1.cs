@@ -527,15 +527,26 @@ int main(int argc, char** argv) {
                 distribute = Regex.Match(longVersion, "(?<=Target: ).*$", RegexOptions.Multiline).Value;
                 // distribute = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(distribute);
             }
-            if (int.Parse(versionNumber.Split('.').First()) < 5)
+            try
             {
-                hint = "编译器版本较老，可能无法正常工作。";
+                if (int.Parse(versionNumber.Split('.').First()) < 5)
+                {
+                    hint = "编译器版本较老，可能无法正常工作。";
+                }
+                // Fix standard specification for older version of GCC
+                if (int.Parse(versionNumber.Split('.').First()) < 10)
+                {
+                    standard = "c++17";
+                    args = GetDefaultArgs();
+                }
             }
-            // Fix standard specification for older version of GCC
-            if (int.Parse(versionNumber.Split('.').First()) < 10)
+            catch (Exception)
             {
-                standard = "c++17";
-                args = GetDefaultArgs();
+                // who cares?
+            }
+            if (Regex.IsMatch(path, "^[!-~]*$"))
+            {
+                hint = "此 MinGW 存放路径包含空格、中文或特殊符号，可能导致出现问题。";
             }
             return distribute + " " + versionNumber;
         }
