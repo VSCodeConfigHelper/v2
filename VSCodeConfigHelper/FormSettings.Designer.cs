@@ -78,9 +78,9 @@
             this.groupBoxPrivil.Controls.Add(this.buttonAuth);
             this.groupBoxPrivil.Controls.Add(this.labelAuth);
             this.groupBoxPrivil.Location = new System.Drawing.Point(2, 5);
-            this.groupBoxPrivil.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxPrivil.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxPrivil.Name = "groupBoxPrivil";
-            this.groupBoxPrivil.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxPrivil.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxPrivil.Size = new System.Drawing.Size(308, 132);
             this.groupBoxPrivil.TabIndex = 9;
             this.groupBoxPrivil.TabStop = false;
@@ -89,7 +89,7 @@
             // buttonAuth
             // 
             this.buttonAuth.Location = new System.Drawing.Point(196, 58);
-            this.buttonAuth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAuth.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAuth.Name = "buttonAuth";
             this.buttonAuth.Size = new System.Drawing.Size(106, 23);
             this.buttonAuth.TabIndex = 0;
@@ -113,9 +113,9 @@
             this.groupBoxArg.Controls.Add(this.labelArgWarning);
             this.groupBoxArg.Controls.Add(this.textBoxArgs);
             this.groupBoxArg.Location = new System.Drawing.Point(2, 54);
-            this.groupBoxArg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxArg.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxArg.Name = "groupBoxArg";
-            this.groupBoxArg.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxArg.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxArg.Size = new System.Drawing.Size(308, 167);
             this.groupBoxArg.TabIndex = 8;
             this.groupBoxArg.TabStop = false;
@@ -125,7 +125,7 @@
             // 
             this.buttonArgDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonArgDefault.Location = new System.Drawing.Point(4, 139);
-            this.buttonArgDefault.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonArgDefault.Margin = new System.Windows.Forms.Padding(2);
             this.buttonArgDefault.Name = "buttonArgDefault";
             this.buttonArgDefault.Size = new System.Drawing.Size(63, 23);
             this.buttonArgDefault.TabIndex = 2;
@@ -147,7 +147,7 @@
             // 
             this.buttonSaveArgs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonSaveArgs.Location = new System.Drawing.Point(72, 139);
-            this.buttonSaveArgs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSaveArgs.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSaveArgs.Name = "buttonSaveArgs";
             this.buttonSaveArgs.Size = new System.Drawing.Size(63, 23);
             this.buttonSaveArgs.TabIndex = 4;
@@ -172,7 +172,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxArgs.Location = new System.Drawing.Point(7, 39);
-            this.textBoxArgs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxArgs.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxArgs.Multiline = true;
             this.textBoxArgs.Name = "textBoxArgs";
             this.textBoxArgs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -185,9 +185,9 @@
             this.groupBoxMinGWSrc.Controls.Add(this.radioButtonOffical);
             this.groupBoxMinGWSrc.Controls.Add(this.radioButtonDisk);
             this.groupBoxMinGWSrc.Location = new System.Drawing.Point(2, 5);
-            this.groupBoxMinGWSrc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxMinGWSrc.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxMinGWSrc.Name = "groupBoxMinGWSrc";
-            this.groupBoxMinGWSrc.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxMinGWSrc.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxMinGWSrc.Size = new System.Drawing.Size(308, 72);
             this.groupBoxMinGWSrc.TabIndex = 7;
             this.groupBoxMinGWSrc.TabStop = false;
@@ -208,7 +208,7 @@
             // 
             this.radioButtonOffical.AutoSize = true;
             this.radioButtonOffical.Location = new System.Drawing.Point(164, 19);
-            this.radioButtonOffical.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButtonOffical.Margin = new System.Windows.Forms.Padding(2);
             this.radioButtonOffical.Name = "radioButtonOffical";
             this.radioButtonOffical.Size = new System.Drawing.Size(47, 16);
             this.radioButtonOffical.TabIndex = 1;
@@ -220,7 +220,7 @@
             this.radioButtonDisk.AutoSize = true;
             this.radioButtonDisk.Checked = true;
             this.radioButtonDisk.Location = new System.Drawing.Point(34, 19);
-            this.radioButtonDisk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButtonDisk.Margin = new System.Windows.Forms.Padding(2);
             this.radioButtonDisk.Name = "radioButtonDisk";
             this.radioButtonDisk.Size = new System.Drawing.Size(47, 16);
             this.radioButtonDisk.TabIndex = 1;
@@ -247,7 +247,7 @@
             this.pictureGitHub.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureGitHub.Image = ((System.Drawing.Image)(resources.GetObject("pictureGitHub.Image")));
             this.pictureGitHub.Location = new System.Drawing.Point(287, 299);
-            this.pictureGitHub.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureGitHub.Margin = new System.Windows.Forms.Padding(2);
             this.pictureGitHub.Name = "pictureGitHub";
             this.pictureGitHub.Size = new System.Drawing.Size(38, 40);
             this.pictureGitHub.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -261,7 +261,7 @@
             this.tabControlSettings.Controls.Add(this.tabPageInstall);
             this.tabControlSettings.Controls.Add(this.tabPageConfig);
             this.tabControlSettings.Location = new System.Drawing.Point(9, 10);
-            this.tabControlSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControlSettings.Margin = new System.Windows.Forms.Padding(2);
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
             this.tabControlSettings.Size = new System.Drawing.Size(319, 284);
@@ -272,9 +272,9 @@
             this.tabPageDownload.Controls.Add(this.groupBoxMinGWDistro);
             this.tabPageDownload.Controls.Add(this.groupBoxMinGWSrc);
             this.tabPageDownload.Location = new System.Drawing.Point(4, 22);
-            this.tabPageDownload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageDownload.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageDownload.Name = "tabPageDownload";
-            this.tabPageDownload.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageDownload.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageDownload.Size = new System.Drawing.Size(311, 258);
             this.tabPageDownload.TabIndex = 0;
             this.tabPageDownload.Text = "下载";
@@ -289,9 +289,9 @@
             this.groupBoxMinGWDistro.Controls.Add(this.radioButtonGytx);
             this.groupBoxMinGWDistro.Controls.Add(this.radioButtonTDM);
             this.groupBoxMinGWDistro.Location = new System.Drawing.Point(2, 82);
-            this.groupBoxMinGWDistro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxMinGWDistro.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxMinGWDistro.Name = "groupBoxMinGWDistro";
-            this.groupBoxMinGWDistro.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxMinGWDistro.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxMinGWDistro.Size = new System.Drawing.Size(308, 174);
             this.groupBoxMinGWDistro.TabIndex = 8;
             this.groupBoxMinGWDistro.TabStop = false;
@@ -334,7 +334,7 @@
             // 
             this.radioButtonOfficial.AutoSize = true;
             this.radioButtonOfficial.Location = new System.Drawing.Point(34, 69);
-            this.radioButtonOfficial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButtonOfficial.Margin = new System.Windows.Forms.Padding(2);
             this.radioButtonOfficial.Name = "radioButtonOfficial";
             this.radioButtonOfficial.Size = new System.Drawing.Size(83, 16);
             this.radioButtonOfficial.TabIndex = 11;
@@ -347,12 +347,12 @@
             this.radioButtonGytx.AutoSize = true;
             this.radioButtonGytx.Checked = true;
             this.radioButtonGytx.Location = new System.Drawing.Point(34, 29);
-            this.radioButtonGytx.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButtonGytx.Margin = new System.Windows.Forms.Padding(2);
             this.radioButtonGytx.Name = "radioButtonGytx";
             this.radioButtonGytx.Size = new System.Drawing.Size(113, 16);
             this.radioButtonGytx.TabIndex = 10;
             this.radioButtonGytx.TabStop = true;
-            this.radioButtonGytx.Text = "谷雨同学 10.3.0";
+            this.radioButtonGytx.Text = "谷雨同学 11.1.0";
             this.radioButtonGytx.UseVisualStyleBackColor = true;
             this.radioButtonGytx.CheckedChanged += new System.EventHandler(this.radioButtonMinGWw64_CheckedChanged);
             // 
@@ -360,7 +360,7 @@
             // 
             this.radioButtonTDM.AutoSize = true;
             this.radioButtonTDM.Location = new System.Drawing.Point(34, 49);
-            this.radioButtonTDM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButtonTDM.Margin = new System.Windows.Forms.Padding(2);
             this.radioButtonTDM.Name = "radioButtonTDM";
             this.radioButtonTDM.Size = new System.Drawing.Size(101, 16);
             this.radioButtonTDM.TabIndex = 9;
@@ -373,9 +373,9 @@
             this.tabPageInstall.Controls.Add(this.buttonUpdate);
             this.tabPageInstall.Controls.Add(this.groupBoxPrivil);
             this.tabPageInstall.Location = new System.Drawing.Point(4, 22);
-            this.tabPageInstall.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageInstall.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageInstall.Name = "tabPageInstall";
-            this.tabPageInstall.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageInstall.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageInstall.Size = new System.Drawing.Size(311, 258);
             this.tabPageInstall.TabIndex = 1;
             this.tabPageInstall.Text = "安装";
@@ -384,7 +384,7 @@
             // buttonUpdate
             // 
             this.buttonUpdate.Location = new System.Drawing.Point(94, 195);
-            this.buttonUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(210, 23);
             this.buttonUpdate.TabIndex = 10;
@@ -397,7 +397,7 @@
             this.tabPageConfig.Controls.Add(this.groupBoxStandard);
             this.tabPageConfig.Controls.Add(this.groupBoxArg);
             this.tabPageConfig.Location = new System.Drawing.Point(4, 22);
-            this.tabPageConfig.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageConfig.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageConfig.Name = "tabPageConfig";
             this.tabPageConfig.Size = new System.Drawing.Size(311, 258);
             this.tabPageConfig.TabIndex = 2;
@@ -411,9 +411,9 @@
             this.groupBoxStandard.Controls.Add(this.comboBoxLang);
             this.groupBoxStandard.Controls.Add(this.comboBoxStandard);
             this.groupBoxStandard.Location = new System.Drawing.Point(2, 2);
-            this.groupBoxStandard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxStandard.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxStandard.Name = "groupBoxStandard";
-            this.groupBoxStandard.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxStandard.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxStandard.Size = new System.Drawing.Size(308, 47);
             this.groupBoxStandard.TabIndex = 9;
             this.groupBoxStandard.TabStop = false;
@@ -447,7 +447,7 @@
             "C++",
             "C"});
             this.comboBoxLang.Location = new System.Drawing.Point(79, 19);
-            this.comboBoxLang.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxLang.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxLang.Name = "comboBoxLang";
             this.comboBoxLang.Size = new System.Drawing.Size(42, 20);
             this.comboBoxLang.TabIndex = 1;
@@ -458,7 +458,7 @@
             this.comboBoxStandard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxStandard.FormattingEnabled = true;
             this.comboBoxStandard.Location = new System.Drawing.Point(194, 19);
-            this.comboBoxStandard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxStandard.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxStandard.Name = "comboBoxStandard";
             this.comboBoxStandard.Size = new System.Drawing.Size(60, 20);
             this.comboBoxStandard.TabIndex = 0;
@@ -473,7 +473,7 @@
             this.Controls.Add(this.pictureGitHub);
             this.Controls.Add(this.linkLabelLicense);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormSettings";
             this.Text = "设置";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
