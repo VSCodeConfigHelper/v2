@@ -58,23 +58,23 @@ namespace VSCodeConfigHelper
 
         public static readonly MinGWLink official = new MinGWLink(
             @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-posix/dwarf/i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z",
-            @"https://wws.lanzous.com/iVdwNge4cde",
+            @"https://wws.lanzoux.com/iVdwNge4cde",
             @"https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/seh/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z",
-            @"https://wws.lanzous.com/iuRLbge4bni"
+            @"https://wws.lanzoux.com/iuRLbge4bni"
         );
 
         public static readonly MinGWLink tdm = new MinGWLink(
             @"https://github.com/jmeubank/tdm-gcc/releases/download/v9.2.0-tdm-1/tdm-gcc-9.2.0.exe",
-            @"https://wws.lanzous.com/iRpRjge4r4f",
+            @"https://wws.lanzoux.com/iRpRjge4r4f",
             @"https://github.com/jmeubank/tdm-gcc/releases/download/v9.2.0-tdm64-1/tdm64-gcc-9.2.0.exe",
-            @"https://wws.lanzous.com/iMhd6ge4qkf"
+            @"https://wws.lanzoux.com/iMhd6ge4qkf"
         );
 
         public static readonly MinGWLink gytx = new MinGWLink(
             @"https://github.com/Guyutongxue/mingw-release/releases/download/v11.1.0/gytx_i686-11.1.0-posix-dwarf.7z",
-            @"https://gytx.lanzous.com/iqHIxol004j",
+            @"https://gytx.lanzoux.com/iqHIxol004j",
             @"https://github.com/Guyutongxue/mingw-release/releases/download/v11.1.0/gytx_x86_64-11.1.0-posix-seh.7z",
-            @"https://gytx.lanzous.com/ibibbokvokj",
+            @"https://gytx.lanzoux.com/ibibbokvokj",
             "c++20"
         );
 
