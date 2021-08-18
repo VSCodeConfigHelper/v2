@@ -1,8 +1,12 @@
-# VSCodeConfigHelper
+# VSCodeConfigHelper (v1.x and v2.x)
+
+## ⚠️ Warning
+
+**此仓库用于存放 1.x 和 2.x 旧版工具的代码。旧版工具将不再接受功能更新，请前往 [VSCodeConfigHelper3](https://github.com/Guyutongxue/VSCodeConfigHelper3) 了解关于新版 3.x 的信息。**
 
 VSCodeConfigHelper 是一个配置 Visual Studio Code C++ 环境的工具。它专为编程新手打造，致力于让学生专注于编程的学习而非环境的配置工作上。
 
-**[下载地址](https://github.com/Guyutongxue/VSCodeConfigHelper/releases)**
+**[旧版工具下载地址](https://github.com/Guyutongxue/VSCodeConfigHelper/releases)**
 
 ## 使用方法
 
