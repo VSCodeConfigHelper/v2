@@ -763,7 +763,7 @@ int main(int argc, char** argv) {
                         
                         }, { "env", new JObject
                             {
-                                {"Path", minGWPath + "\\bin:${env:Path}" }
+                                {"Path", minGWPath + "\\bin;${env:Path}" }
                             } 
                         }
                     }
