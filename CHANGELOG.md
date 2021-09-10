@@ -1,5 +1,14 @@
 # 版本更新记录
 
+## [3.x](https://github.com/Guyutongxue/VSCodeConfigHelper3/blob/main/CHANGELOG.md)
+
+## 2.2.14
+
+*2021.9.10*
+
+- 更新默认 MinGW 到 GCC 11.2.0
+- 检查更新或首次运行时提示更新到 v3
+
 ## 2.2.13
 
 *2021.4.30*

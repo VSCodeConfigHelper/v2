@@ -226,7 +226,7 @@ namespace VSCodeConfigHelper
             try
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-                HttpWebRequest request = WebRequest.CreateHttp("https://guyutongxue.github.io/VSCodeConfigHelper/version.json");
+                HttpWebRequest request = WebRequest.CreateHttp("https://api.github.com/repos/Guyutongxue/VSCodeConfigHelper3/releases/latest");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 Edg/81.0.416.72";
                 request.Method = "GET";
                 request.Timeout = 10000;
@@ -235,18 +235,14 @@ namespace VSCodeConfigHelper
                 JObject versionInfo = (JObject)JsonConvert.DeserializeObject(sr.ReadToEnd());
                 sr.Close();
                 response.Close();
-                string latest = (string)versionInfo["version"];
-                if (new Version(latest) > new Version(Application.ProductVersion))
+                string latest = ((string)versionInfo["tag_name"]).Substring(1);
+                if (show || !File.Exists("VSCHcache.txt"))
                 {
                     DialogResult result = MessageBox.Show(
                         $"检测到新版本。{Environment.NewLine}最新版本：{latest}{Environment.NewLine}当前版本：{Application.ProductVersion}{Environment.NewLine}是否前往下载？",
                         "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information
                     );
-                    if (result == DialogResult.Yes) Process.Start((string)versionInfo["link"]);
-                }
-                else if (show)
-                {
-                    MessageBox.Show($"当前版本 {Application.ProductVersion} 已是最新。", "提示", MessageBoxButtons.OK);
+                    if (result == DialogResult.Yes) Process.Start("https://vscch3.vercel.app");
                 }
             }
             catch (Exception ex)
